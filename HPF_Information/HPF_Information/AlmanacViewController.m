@@ -39,6 +39,8 @@
     _scrollView.backgroundColor = [UIColor colorWithRed:255/255.0 green:251/255.0 blue:232/255.0 alpha:1];
     [self.view addSubview:_scrollView];
     return _scrollView;
+    
+   
 
 }
 - (void)viewDidLoad {
@@ -49,7 +51,7 @@
     [self setTimeTitle];
     
    
-    
+     NSLog(@"修改");
     
     
 }
