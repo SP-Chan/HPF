@@ -43,58 +43,61 @@
 		3F1D61B01CD8CF20006D5A5C /* WeatherAndCity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1D61AF1CD8CF20006D5A5C /* WeatherAndCity.m */; };
 		3F1D61B21CD8CF64006D5A5C /* WeatherAndCity.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F1D61B11CD8CF64006D5A5C /* WeatherAndCity.xib */; };
 		3F1D61B51CD8E068006D5A5C /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1D61B41CD8E068006D5A5C /* SettingViewController.m */; };
-		3F3270241CD9A1D900926CFA /* nightBackgroundView.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3F3270231CD9A1D900926CFA /* nightBackgroundView.jpg */; settings = {ASSET_TAGS = (); }; };
-		3F32702A1CD9A6B000926CFA /* LeftViewBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3F3270291CD9A6B000926CFA /* LeftViewBackground.jpg */; settings = {ASSET_TAGS = (); }; };
-		3F3270341CD9E99200926CFA /* TripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270331CD9E99200926CFA /* TripViewController.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270371CD9E9E100926CFA /* AirAndHumidity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270361CD9E9E100926CFA /* AirAndHumidity.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270391CD9EA0F00926CFA /* AirAndHumidity.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F3270381CD9EA0F00926CFA /* AirAndHumidity.xib */; settings = {ASSET_TAGS = (); }; };
-		3F32703C1CD9ED9900926CFA /* CurrentWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32703B1CD9ED9900926CFA /* CurrentWeather.m */; settings = {ASSET_TAGS = (); }; };
-		3F32703E1CD9EDF700926CFA /* CurrentWeather.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F32703D1CD9EDF700926CFA /* CurrentWeather.xib */; settings = {ASSET_TAGS = (); }; };
-		3F3270411CD9F0C400926CFA /* HourForWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270401CD9F0C400926CFA /* HourForWeather.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270441CD9F26E00926CFA /* TwentyFourHoursWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270431CD9F26E00926CFA /* TwentyFourHoursWeather.m */; settings = {ASSET_TAGS = (); }; };
-		3F32704E1CDA109A00926CFA /* CommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270461CDA109A00926CFA /* CommonCell.m */; settings = {ASSET_TAGS = (); }; };
-		3F32704F1CDA109A00926CFA /* CommonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F3270471CDA109A00926CFA /* CommonCell.xib */; settings = {ASSET_TAGS = (); }; };
-		3F3270501CDA109A00926CFA /* ThreeImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270491CDA109A00926CFA /* ThreeImageCell.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270511CDA109A00926CFA /* ThreeImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F32704A1CDA109A00926CFA /* ThreeImageCell.xib */; settings = {ASSET_TAGS = (); }; };
-		3F3270521CDA109A00926CFA /* OneImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32704C1CDA109A00926CFA /* OneImageCell.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270531CDA109A00926CFA /* OneImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F32704D1CDA109A00926CFA /* OneImageCell.xib */; settings = {ASSET_TAGS = (); }; };
-		3F32706D1CDA112000926CFA /* LocalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270561CDA112000926CFA /* LocalViewController.m */; settings = {ASSET_TAGS = (); }; };
-		3F32706E1CDA112000926CFA /* AmusementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270581CDA112000926CFA /* AmusementViewController.m */; settings = {ASSET_TAGS = (); }; };
-		3F32706F1CDA112000926CFA /* SportsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32705A1CDA112000926CFA /* SportsViewController.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270701CDA112000926CFA /* ScienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32705C1CDA112000926CFA /* ScienceViewController.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270711CDA112000926CFA /* CarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32705E1CDA112000926CFA /* CarViewController.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270721CDA112000926CFA /* VogueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270601CDA112000926CFA /* VogueViewController.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270731CDA112000926CFA /* HouseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270621CDA112000926CFA /* HouseViewController.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270741CDA112000926CFA /* MilitaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270641CDA112000926CFA /* MilitaryViewController.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270751CDA112000926CFA /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270661CDA112000926CFA /* HistoryViewController.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270761CDA112000926CFA /* PhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270681CDA112000926CFA /* PhoneViewController.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270771CDA112000926CFA /* EmotionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32706A1CDA112000926CFA /* EmotionViewController.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270781CDA112000926CFA /* EducationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32706C1CDA112000926CFA /* EducationViewController.m */; settings = {ASSET_TAGS = (); }; };
-		3F32707B1CDA13D000926CFA /* AlmanacViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32707A1CDA13D000926CFA /* AlmanacViewController.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270861CDA13DB00926CFA /* TimeSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32707D1CDA13DB00926CFA /* TimeSelector.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270871CDA13DB00926CFA /* AlmanacImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32707F1CDA13DB00926CFA /* AlmanacImage.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270881CDA13DB00926CFA /* AlmanacContentThree.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270811CDA13DB00926CFA /* AlmanacContentThree.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270891CDA13DB00926CFA /* AlmanacContentOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270831CDA13DB00926CFA /* AlmanacContentOne.m */; settings = {ASSET_TAGS = (); }; };
-		3F32708A1CDA13DB00926CFA /* AlmanacContentTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270851CDA13DB00926CFA /* AlmanacContentTwo.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270AD1CDA142A00926CFA /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32708D1CDA142A00926CFA /* MKAnnotationView+WebCache.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270AE1CDA142A00926CFA /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32708F1CDA142A00926CFA /* NSData+ImageContentType.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270AF1CDA142A00926CFA /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270911CDA142A00926CFA /* SDImageCache.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270B01CDA142A00926CFA /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270931CDA142A00926CFA /* SDWebImageCompat.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270B11CDA142A00926CFA /* SDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270951CDA142A00926CFA /* SDWebImageDecoder.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270B21CDA142A00926CFA /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270971CDA142A00926CFA /* SDWebImageDownloader.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270B31CDA142A00926CFA /* SDWebImageDownloaderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270991CDA142A00926CFA /* SDWebImageDownloaderOperation.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270B41CDA142A00926CFA /* SDWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32709B1CDA142A00926CFA /* SDWebImageManager.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270B51CDA142A00926CFA /* SDWebImagePrefetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32709E1CDA142A00926CFA /* SDWebImagePrefetcher.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270B61CDA142A00926CFA /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270A01CDA142A00926CFA /* UIButton+WebCache.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270B71CDA142A00926CFA /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270A21CDA142A00926CFA /* UIImage+GIF.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270B81CDA142A00926CFA /* UIImage+MultiFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270A41CDA142A00926CFA /* UIImage+MultiFormat.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270B91CDA142A00926CFA /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270A61CDA142A00926CFA /* UIImage+WebP.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270BA1CDA142A00926CFA /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270A81CDA142A00926CFA /* UIImageView+HighlightedWebCache.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270BB1CDA142A00926CFA /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270AA1CDA142A00926CFA /* UIImageView+WebCache.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270BC1CDA142A00926CFA /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270AC1CDA142A00926CFA /* UIView+WebCacheOperation.m */; settings = {ASSET_TAGS = (); }; };
-		3F3270C01CDA145900926CFA /* Unknown-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3270BD1CDA145900926CFA /* Unknown-1.png */; settings = {ASSET_TAGS = (); }; };
-		3F3270C11CDA145900926CFA /* queding.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3270BE1CDA145900926CFA /* queding.png */; settings = {ASSET_TAGS = (); }; };
-		3F3270C21CDA145900926CFA /* 2008111385229728_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3270BF1CDA145900926CFA /* 2008111385229728_2.png */; settings = {ASSET_TAGS = (); }; };
+		3F3270241CD9A1D900926CFA /* nightBackgroundView.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3F3270231CD9A1D900926CFA /* nightBackgroundView.jpg */; };
+		3F32702A1CD9A6B000926CFA /* LeftViewBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3F3270291CD9A6B000926CFA /* LeftViewBackground.jpg */; };
+		3F3270341CD9E99200926CFA /* TripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270331CD9E99200926CFA /* TripViewController.m */; };
+		3F3270371CD9E9E100926CFA /* AirAndHumidity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270361CD9E9E100926CFA /* AirAndHumidity.m */; };
+		3F3270391CD9EA0F00926CFA /* AirAndHumidity.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F3270381CD9EA0F00926CFA /* AirAndHumidity.xib */; };
+		3F32703C1CD9ED9900926CFA /* CurrentWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32703B1CD9ED9900926CFA /* CurrentWeather.m */; };
+		3F32703E1CD9EDF700926CFA /* CurrentWeather.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F32703D1CD9EDF700926CFA /* CurrentWeather.xib */; };
+		3F3270411CD9F0C400926CFA /* HourForWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270401CD9F0C400926CFA /* HourForWeather.m */; };
+		3F3270441CD9F26E00926CFA /* TwentyFourHoursWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270431CD9F26E00926CFA /* TwentyFourHoursWeather.m */; };
+		3F32704E1CDA109A00926CFA /* CommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270461CDA109A00926CFA /* CommonCell.m */; };
+		3F32704F1CDA109A00926CFA /* CommonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F3270471CDA109A00926CFA /* CommonCell.xib */; };
+		3F3270501CDA109A00926CFA /* ThreeImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270491CDA109A00926CFA /* ThreeImageCell.m */; };
+		3F3270511CDA109A00926CFA /* ThreeImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F32704A1CDA109A00926CFA /* ThreeImageCell.xib */; };
+		3F3270521CDA109A00926CFA /* OneImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32704C1CDA109A00926CFA /* OneImageCell.m */; };
+		3F3270531CDA109A00926CFA /* OneImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F32704D1CDA109A00926CFA /* OneImageCell.xib */; };
+		3F32706D1CDA112000926CFA /* LocalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270561CDA112000926CFA /* LocalViewController.m */; };
+		3F32706E1CDA112000926CFA /* AmusementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270581CDA112000926CFA /* AmusementViewController.m */; };
+		3F32706F1CDA112000926CFA /* SportsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32705A1CDA112000926CFA /* SportsViewController.m */; };
+		3F3270701CDA112000926CFA /* ScienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32705C1CDA112000926CFA /* ScienceViewController.m */; };
+		3F3270711CDA112000926CFA /* CarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32705E1CDA112000926CFA /* CarViewController.m */; };
+		3F3270721CDA112000926CFA /* VogueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270601CDA112000926CFA /* VogueViewController.m */; };
+		3F3270731CDA112000926CFA /* HouseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270621CDA112000926CFA /* HouseViewController.m */; };
+		3F3270741CDA112000926CFA /* MilitaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270641CDA112000926CFA /* MilitaryViewController.m */; };
+		3F3270751CDA112000926CFA /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270661CDA112000926CFA /* HistoryViewController.m */; };
+		3F3270761CDA112000926CFA /* PhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270681CDA112000926CFA /* PhoneViewController.m */; };
+		3F3270771CDA112000926CFA /* EmotionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32706A1CDA112000926CFA /* EmotionViewController.m */; };
+		3F3270781CDA112000926CFA /* EducationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32706C1CDA112000926CFA /* EducationViewController.m */; };
+		3F32707B1CDA13D000926CFA /* AlmanacViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32707A1CDA13D000926CFA /* AlmanacViewController.m */; };
+		3F3270861CDA13DB00926CFA /* TimeSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32707D1CDA13DB00926CFA /* TimeSelector.m */; };
+		3F3270871CDA13DB00926CFA /* AlmanacImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32707F1CDA13DB00926CFA /* AlmanacImage.m */; };
+		3F3270881CDA13DB00926CFA /* AlmanacContentThree.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270811CDA13DB00926CFA /* AlmanacContentThree.m */; };
+		3F3270891CDA13DB00926CFA /* AlmanacContentOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270831CDA13DB00926CFA /* AlmanacContentOne.m */; };
+		3F32708A1CDA13DB00926CFA /* AlmanacContentTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270851CDA13DB00926CFA /* AlmanacContentTwo.m */; };
+		3F3270AD1CDA142A00926CFA /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32708D1CDA142A00926CFA /* MKAnnotationView+WebCache.m */; };
+		3F3270AE1CDA142A00926CFA /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32708F1CDA142A00926CFA /* NSData+ImageContentType.m */; };
+		3F3270AF1CDA142A00926CFA /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270911CDA142A00926CFA /* SDImageCache.m */; };
+		3F3270B01CDA142A00926CFA /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270931CDA142A00926CFA /* SDWebImageCompat.m */; };
+		3F3270B11CDA142A00926CFA /* SDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270951CDA142A00926CFA /* SDWebImageDecoder.m */; };
+		3F3270B21CDA142A00926CFA /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270971CDA142A00926CFA /* SDWebImageDownloader.m */; };
+		3F3270B31CDA142A00926CFA /* SDWebImageDownloaderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270991CDA142A00926CFA /* SDWebImageDownloaderOperation.m */; };
+		3F3270B41CDA142A00926CFA /* SDWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32709B1CDA142A00926CFA /* SDWebImageManager.m */; };
+		3F3270B51CDA142A00926CFA /* SDWebImagePrefetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F32709E1CDA142A00926CFA /* SDWebImagePrefetcher.m */; };
+		3F3270B61CDA142A00926CFA /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270A01CDA142A00926CFA /* UIButton+WebCache.m */; };
+		3F3270B71CDA142A00926CFA /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270A21CDA142A00926CFA /* UIImage+GIF.m */; };
+		3F3270B81CDA142A00926CFA /* UIImage+MultiFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270A41CDA142A00926CFA /* UIImage+MultiFormat.m */; };
+		3F3270B91CDA142A00926CFA /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270A61CDA142A00926CFA /* UIImage+WebP.m */; };
+		3F3270BA1CDA142A00926CFA /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270A81CDA142A00926CFA /* UIImageView+HighlightedWebCache.m */; };
+		3F3270BB1CDA142A00926CFA /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270AA1CDA142A00926CFA /* UIImageView+WebCache.m */; };
+		3F3270BC1CDA142A00926CFA /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3270AC1CDA142A00926CFA /* UIView+WebCacheOperation.m */; };
+		3F3270C01CDA145900926CFA /* Unknown-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3270BD1CDA145900926CFA /* Unknown-1.png */; };
+		3F3270C11CDA145900926CFA /* queding.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3270BE1CDA145900926CFA /* queding.png */; };
+		3F3270C21CDA145900926CFA /* 2008111385229728_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3270BF1CDA145900926CFA /* 2008111385229728_2.png */; };
+		977A145F1CDA200700F5879A /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 977A145A1CDA200700F5879A /* placeholder.png */; };
+		977A14601CDA200700F5879A /* DFCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = 977A145C1CDA200700F5879A /* DFCarouselView.m */; };
+		977A14611CDA200700F5879A /* ScrollViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 977A145E1CDA200700F5879A /* ScrollViewCell.m */; };
 		E11A05591CD971C600FA2559 /* WeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E11A05581CD971C600FA2559 /* WeatherViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -271,6 +274,11 @@
 		3F3270BD1CDA145900926CFA /* Unknown-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Unknown-1.png"; path = "../Unknown-1.png"; sourceTree = "<group>"; };
 		3F3270BE1CDA145900926CFA /* queding.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = queding.png; path = ../queding.png; sourceTree = "<group>"; };
 		3F3270BF1CDA145900926CFA /* 2008111385229728_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 2008111385229728_2.png; path = ../2008111385229728_2.png; sourceTree = "<group>"; };
+		977A145A1CDA200700F5879A /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
+		977A145B1CDA200700F5879A /* DFCarouselView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCarouselView.h; sourceTree = "<group>"; };
+		977A145C1CDA200700F5879A /* DFCarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCarouselView.m; sourceTree = "<group>"; };
+		977A145D1CDA200700F5879A /* ScrollViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollViewCell.h; sourceTree = "<group>"; };
+		977A145E1CDA200700F5879A /* ScrollViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollViewCell.m; sourceTree = "<group>"; };
 		E11A05571CD971C600FA2559 /* WeatherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherViewController.h; sourceTree = "<group>"; };
 		E11A05581CD971C600FA2559 /* WeatherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -464,6 +472,7 @@
 		3F19A4481CD3305600C3D532 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				977A14621CDA201200F5879A /* DFCarouselView */,
 				3F3270451CDA109A00926CFA /* CommonCell.h */,
 				3F3270461CDA109A00926CFA /* CommonCell.m */,
 				3F3270471CDA109A00926CFA /* CommonCell.xib */,
@@ -727,6 +736,18 @@
 			name = SDWebImage;
 			sourceTree = "<group>";
 		};
+		977A14621CDA201200F5879A /* DFCarouselView */ = {
+			isa = PBXGroup;
+			children = (
+				977A145A1CDA200700F5879A /* placeholder.png */,
+				977A145B1CDA200700F5879A /* DFCarouselView.h */,
+				977A145C1CDA200700F5879A /* DFCarouselView.m */,
+				977A145D1CDA200700F5879A /* ScrollViewCell.h */,
+				977A145E1CDA200700F5879A /* ScrollViewCell.m */,
+			);
+			name = DFCarouselView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -855,6 +876,7 @@
 				3F1D61991CD89E04006D5A5C /* LeftViewTop.xib in Resources */,
 				3F1D61B21CD8CF64006D5A5C /* WeatherAndCity.xib in Resources */,
 				3F3270531CDA109A00926CFA /* OneImageCell.xib in Resources */,
+				977A145F1CDA200700F5879A /* placeholder.png in Resources */,
 				3F3270C21CDA145900926CFA /* 2008111385229728_2.png in Resources */,
 				3F3270391CD9EA0F00926CFA /* AirAndHumidity.xib in Resources */,
 			);
@@ -906,11 +928,13 @@
 				3F19A3EF1CD311C300C3D532 /* ViewController.m in Sources */,
 				3F3270731CDA112000926CFA /* HouseViewController.m in Sources */,
 				3F1D61971CD89DDA006D5A5C /* LeftViewTop.m in Sources */,
+				977A14611CDA200700F5879A /* ScrollViewCell.m in Sources */,
 				3F19A46C1CD334CC00C3D532 /* VideoViewController.m in Sources */,
 				3F3270BB1CDA142A00926CFA /* UIImageView+WebCache.m in Sources */,
 				3F3270B81CDA142A00926CFA /* UIImage+MultiFormat.m in Sources */,
 				3F3270701CDA112000926CFA /* ScienceViewController.m in Sources */,
 				3F3270B61CDA142A00926CFA /* UIButton+WebCache.m in Sources */,
+				977A14601CDA200700F5879A /* DFCarouselView.m in Sources */,
 				3F1D61B51CD8E068006D5A5C /* SettingViewController.m in Sources */,
 				3F3270B51CDA142A00926CFA /* SDWebImagePrefetcher.m in Sources */,
 				3F19A4691CD334BE00C3D532 /* LeftViewController.m in Sources */,
