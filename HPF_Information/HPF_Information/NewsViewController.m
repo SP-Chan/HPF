@@ -43,6 +43,10 @@
     [self createLefBarButton];
     [self createTitleScrollView];
     [self creareNewsScrollview];
+    
+    NSLog(@"邓方修改");
+    
+    
 }
 
 //主页scrollview
