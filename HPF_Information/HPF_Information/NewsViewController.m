@@ -24,13 +24,12 @@
 
 
 @interface NewsViewController ()<UIScrollViewDelegate>
+
 @property(nonatomic,strong)HPFBaseButton *leftButton;
 @property(nonatomic,assign)BOOL isShowLeftView;
-
 @property(nonatomic,strong)UIScrollView *titleSc;
 @property(nonatomic,strong)UIScrollView *newsSc;
 @property(nonatomic,strong)NSMutableArray *btnArray;
-
 
 @end
 
@@ -38,21 +37,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.navigationItem.title = @"首页";
     self.view.backgroundColor = [UIColor redColor];
     [self createLefBarButton];
     [self createTitleScrollView];
     [self creareNewsScrollview];
     
-    NSLog(@"邓方修改");
-    
+      
     
 }
 
 //主页scrollview
 -(void)creareNewsScrollview
 {
-    
     
     LocalViewController *local = [[LocalViewController alloc]init];
     AmusementViewController *amusement = [[AmusementViewController alloc]init];
@@ -80,10 +78,8 @@
     [self addChildViewController:emotion];
     [self addChildViewController:education];
     
-    
     _newsSc = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 35, kSCREEN_WIDTH, kSCREEN_HEIGHT-35-110)];
     [self.view addSubview:_newsSc];
-    _newsSc.backgroundColor = [UIColor redColor];
     _newsSc.contentSize = CGSizeMake(kSCREEN_WIDTH*12, 0);
     
     _newsSc.pagingEnabled = YES;
@@ -95,8 +91,6 @@
         viewController.view.tag = i;
         [_newsSc addSubview:viewController.view];
     }
-    
-    
     
 }
 
@@ -119,6 +113,11 @@
         [button setTitle:array[i] forState:UIControlStateNormal];
         button.backgroundColor = [UIColor greenColor];
         button.tag = i;
+        
+        if (button.tag == 0) {
+            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        }
+        
         [_btnArray addObject:button];
         [_titleSc addSubview:button];
         

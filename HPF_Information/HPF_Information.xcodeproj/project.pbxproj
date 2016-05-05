@@ -98,6 +98,8 @@
 		977A145F1CDA200700F5879A /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 977A145A1CDA200700F5879A /* placeholder.png */; };
 		977A14601CDA200700F5879A /* DFCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = 977A145C1CDA200700F5879A /* DFCarouselView.m */; };
 		977A14611CDA200700F5879A /* ScrollViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 977A145E1CDA200700F5879A /* ScrollViewCell.m */; };
+		97B0A7D91CDAD6AD0008A2F7 /* NewsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B0A7D81CDAD6AD0008A2F7 /* NewsModel.m */; };
+		97B0A8121CDB62020008A2F7 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B0A8111CDB62020008A2F7 /* WebViewController.m */; };
 		E11A05591CD971C600FA2559 /* WeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E11A05581CD971C600FA2559 /* WeatherViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -279,6 +281,11 @@
 		977A145C1CDA200700F5879A /* DFCarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCarouselView.m; sourceTree = "<group>"; };
 		977A145D1CDA200700F5879A /* ScrollViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollViewCell.h; sourceTree = "<group>"; };
 		977A145E1CDA200700F5879A /* ScrollViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollViewCell.m; sourceTree = "<group>"; };
+		97B0A7D71CDAD6AD0008A2F7 /* NewsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsModel.h; sourceTree = "<group>"; };
+		97B0A7D81CDAD6AD0008A2F7 /* NewsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsModel.m; sourceTree = "<group>"; };
+		97B0A80C1CDB2CC30008A2F7 /* UrlHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UrlHeader.h; sourceTree = "<group>"; };
+		97B0A8101CDB62020008A2F7 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		97B0A8111CDB62020008A2F7 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		E11A05571CD971C600FA2559 /* WeatherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherViewController.h; sourceTree = "<group>"; };
 		E11A05581CD971C600FA2559 /* WeatherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -405,6 +412,7 @@
 				3F19A4581CD331C200C3D532 /* NetworkRequestManager.h */,
 				3F19A4591CD331C200C3D532 /* NetworkRequestManager.m */,
 				3F19A45B1CD331EE00C3D532 /* PrefixHeader.pch */,
+				97B0A80C1CDB2CC30008A2F7 /* UrlHeader.h */,
 				3F19A45C1CD3328800C3D532 /* General.h */,
 				3F32708B1CDA141800926CFA /* SDWebImage */,
 			);
@@ -464,6 +472,8 @@
 			children = (
 				3F19A45D1CD3343900C3D532 /* NewsViewController.h */,
 				3F19A45E1CD3343900C3D532 /* NewsViewController.m */,
+				97B0A8101CDB62020008A2F7 /* WebViewController.h */,
+				97B0A8111CDB62020008A2F7 /* WebViewController.m */,
 				3F3270541CDA10FB00926CFA /* Viewcontroller */,
 			);
 			name = controller;
@@ -489,6 +499,8 @@
 		3F19A4491CD3305800C3D532 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				97B0A7D71CDAD6AD0008A2F7 /* NewsModel.h */,
+				97B0A7D81CDAD6AD0008A2F7 /* NewsModel.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -914,8 +926,10 @@
 				3F3270B11CDA142A00926CFA /* SDWebImageDecoder.m in Sources */,
 				3F3270721CDA112000926CFA /* VogueViewController.m in Sources */,
 				3F3270B91CDA142A00926CFA /* UIImage+WebP.m in Sources */,
+				97B0A8121CDB62020008A2F7 /* WebViewController.m in Sources */,
 				3F3270AD1CDA142A00926CFA /* MKAnnotationView+WebCache.m in Sources */,
 				3F19A43D1CD3139B00C3D532 /* HPFBaseTabBarController.m in Sources */,
+				97B0A7D91CDAD6AD0008A2F7 /* NewsModel.m in Sources */,
 				3F3270861CDA13DB00926CFA /* TimeSelector.m in Sources */,
 				3F19A45F1CD3343900C3D532 /* NewsViewController.m in Sources */,
 				3F32706E1CDA112000926CFA /* AmusementViewController.m in Sources */,

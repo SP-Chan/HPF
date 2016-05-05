@@ -75,6 +75,7 @@
     //更新背景色
     [self setBackgroundViewColor];
 }
+
 //设定背景色
 -(void)setBackgroundViewColor
 {
