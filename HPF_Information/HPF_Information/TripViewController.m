@@ -8,6 +8,7 @@
 
 #import "TripViewController.h"
 #import "NetworkRequestManager.h"
+
 @interface TripViewController ()
 
 @end
@@ -18,8 +19,8 @@
     [super viewDidLoad];
 //    self.view.backgroundColor = [UIColor whiteColor];
     
-    
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

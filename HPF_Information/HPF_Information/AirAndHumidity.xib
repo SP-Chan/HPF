@@ -56,7 +56,6 @@
                 </label>
             </subviews>
             <animations/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="YCg-HR-8DK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="5mp-w4-GEY"/>
                 <constraint firstItem="ZIV-Ds-ObB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="BlE-rK-ohv"/>
