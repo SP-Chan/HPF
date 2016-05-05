@@ -51,8 +51,8 @@
     [self setTimeTitle];
     
    
-     NSLog(@"修改");
-    NSLog(@"再来修改");
+  
+    
     
     
 }
