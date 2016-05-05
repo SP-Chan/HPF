@@ -77,7 +77,6 @@
                 </imageView>
             </subviews>
             <animations/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="bml-7i-Va8" secondAttribute="bottom" constant="9" id="1Qn-6D-f00"/>
                 <constraint firstItem="NbW-ES-gY1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="44Z-wz-qRh"/>
@@ -93,7 +92,15 @@
                 <constraint firstItem="wBq-Zk-6kf" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="jdZ-ci-DrS"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="496.5" y="147"/>
+            <connections>
+                <outlet property="currentCity" destination="fqO-nJ-g6L" id="fux-wH-Rh4"/>
+                <outlet property="currentDateLabel" destination="NbW-ES-gY1" id="olf-dz-7B6"/>
+                <outlet property="currentImageView" destination="kZx-Mz-97A" id="EHf-Dx-bui"/>
+                <outlet property="currentMaxAndMinLabel" destination="ioe-Gp-4HS" id="qQz-MA-QpS"/>
+                <outlet property="currentWeatherLabel" destination="wBq-Zk-6kf" id="akV-5o-nOy"/>
+                <outlet property="updateLabel" destination="bml-7i-Va8" id="3ED-4m-ru2"/>
+            </connections>
+            <point key="canvasLocation" x="286.5" y="213"/>
         </view>
     </objects>
 </document>

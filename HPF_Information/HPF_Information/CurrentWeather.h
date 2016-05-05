@@ -9,5 +9,11 @@
 #import "HPFBaseView.h"
 
 @interface CurrentWeather : HPFBaseView
+@property (weak, nonatomic) IBOutlet UILabel *currentDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *currentWeatherLabel;
+@property (weak, nonatomic) IBOutlet UIButton *currentCity;
+@property (weak, nonatomic) IBOutlet UIImageView *currentImageView;
+@property (weak, nonatomic) IBOutlet UILabel *currentMaxAndMinLabel;
+@property (weak, nonatomic) IBOutlet UILabel *updateLabel;
 
 @end

@@ -13,7 +13,8 @@
 @interface ViewController ()
 @property(nonatomic,strong)HPFBaseTabBarController *hpfTabBar;
 @property(nonatomic,strong)LeftViewController *left;
-@property(nonatomic,strong)UIPanGestureRecognizer *panG;
+@property(nonatomic,strong)UIPanGestureRecognizer *panG;//拖拽手势
+@property(nonatomic,strong)HPFBaseView *GestureView;//当左视图推出时,为防止手势冲突,盖住tabbarController
 @end
 
 @implementation ViewController
@@ -38,7 +39,15 @@
     [self.view addSubview:timeS];
     
 }
-
+//懒加载解决抽屉栏与tabbar里ScrollView的手势冲突
+-(HPFBaseView *)GestureView
+{
+    if (!_GestureView) {
+        _GestureView = [[HPFBaseView alloc] initWithFrame:CGRectMake(0, 64, kSCREEN_WIDTH, kSCREEN_HEIGHT-64)];
+        _GestureView.backgroundColor = [UIColor clearColor];
+    }
+    return _GestureView;
+}
 
 #pragma mark- 收到通知 推出左视图
 -(void)showLeftView:(NSNotification *)nsnotification
@@ -52,6 +61,8 @@
     
     _panG = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(hiddenLeftView:)];
     [_hpfTabBar.view addGestureRecognizer:_panG];
+    
+    [self.hpfTabBar.view addSubview:self.GestureView];
     _panG.enabled = YES;
 }
 #pragma mark- 手势隐藏左视图方法
@@ -84,6 +95,8 @@
                 //移除手势,视图,发送重现左上角按钮的通知
                 [view removeGestureRecognizer:pan];
                 [_left.view removeFromSuperview];
+                //移除遮住scrlllView的透明视图
+                [self.GestureView removeFromSuperview];
                 //发送通知到 NewsViewController 改变isShowLeftView
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"changeIsShowLeftView" object:nil];
             }];
@@ -106,6 +119,9 @@
         //移除手势,视图,发送重现左上角按钮的通知
         [_hpfTabBar.view removeGestureRecognizer:_panG];
         [_left.view removeFromSuperview];
+        //移除遮住scrlllView的透明视图
+        [self.GestureView removeFromSuperview];
+        
     }];
 }
 

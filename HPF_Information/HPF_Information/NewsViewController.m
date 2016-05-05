@@ -39,7 +39,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"首页";
-    self.view.backgroundColor = [UIColor redColor];
     [self createLefBarButton];
     [self createTitleScrollView];
     [self creareNewsScrollview];
