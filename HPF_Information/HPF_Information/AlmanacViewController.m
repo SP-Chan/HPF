@@ -50,12 +50,12 @@
     [self SetMainInterface];
     [self setTimeTitle];
     
-   
-  
+
     
     
     
 }
+
 -(void)SetMainInterface
 {
 

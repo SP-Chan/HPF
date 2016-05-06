@@ -124,6 +124,7 @@
 		3FB4D3281CDA2CBE00B514F3 /* MinWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB4D3271CDA2CBE00B514F3 /* MinWeather.m */; settings = {ASSET_TAGS = (); }; };
 		3FB4D32A1CDA2CFF00B514F3 /* MinWeather.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FB4D3291CDA2CFF00B514F3 /* MinWeather.xib */; settings = {ASSET_TAGS = (); }; };
 		3FB4D32D1CDA302900B514F3 /* XPChartAndLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB4D32C1CDA302900B514F3 /* XPChartAndLineView.m */; settings = {ASSET_TAGS = (); }; };
+		3FE19C591CDC72F900BD876F /* textViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE19C581CDC72F900BD876F /* textViewController.m */; settings = {ASSET_TAGS = (); }; };
 		977A145F1CDA200700F5879A /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 977A145A1CDA200700F5879A /* placeholder.png */; };
 		977A14601CDA200700F5879A /* DFCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = 977A145C1CDA200700F5879A /* DFCarouselView.m */; };
 		977A14611CDA200700F5879A /* ScrollViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 977A145E1CDA200700F5879A /* ScrollViewCell.m */; };
@@ -342,6 +343,8 @@
 		3FB4D3291CDA2CFF00B514F3 /* MinWeather.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MinWeather.xib; sourceTree = "<group>"; };
 		3FB4D32B1CDA302900B514F3 /* XPChartAndLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPChartAndLineView.h; sourceTree = "<group>"; };
 		3FB4D32C1CDA302900B514F3 /* XPChartAndLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPChartAndLineView.m; sourceTree = "<group>"; };
+		3FE19C571CDC72F900BD876F /* textViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = textViewController.h; sourceTree = "<group>"; };
+		3FE19C581CDC72F900BD876F /* textViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = textViewController.m; sourceTree = "<group>"; };
 		977A145A1CDA200700F5879A /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		977A145B1CDA200700F5879A /* DFCarouselView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCarouselView.h; sourceTree = "<group>"; };
 		977A145C1CDA200700F5879A /* DFCarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCarouselView.m; sourceTree = "<group>"; };
@@ -442,6 +445,7 @@
 				3F19A4541CD3314200C3D532 /* 视频 */,
 				3F19A3F01CD311C300C3D532 /* Main.storyboard */,
 				3F19A3F31CD311C300C3D532 /* Assets.xcassets */,
+				3F13CAA21CDB92970037CB78 /* Info.plist */,
 				3F19A3F51CD311C300C3D532 /* LaunchScreen.storyboard */,
 				3F19A3E71CD311C300C3D532 /* Supporting Files */,
 			);
@@ -601,6 +605,8 @@
 			children = (
 				3F3270321CD9E99200926CFA /* TripViewController.h */,
 				3F3270331CD9E99200926CFA /* TripViewController.m */,
+				3FE19C571CDC72F900BD876F /* textViewController.h */,
+				3FE19C581CDC72F900BD876F /* textViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -696,7 +702,6 @@
 		3F19A4541CD3314200C3D532 /* 视频 */ = {
 			isa = PBXGroup;
 			children = (
-				3F13CAA21CDB92970037CB78 /* Info.plist */,
 				3F19A4571CD3316C00C3D532 /* model */,
 				3F19A4561CD3316900C3D532 /* view */,
 				3F19A4551CD3315B00C3D532 /* controller */,
@@ -1081,6 +1086,7 @@
 				3F19A46C1CD334CC00C3D532 /* VideoViewController.m in Sources */,
 				3F13CA9F1CDB6D7C0037CB78 /* PM25Model.m in Sources */,
 				3F3270BB1CDA142A00926CFA /* UIImageView+WebCache.m in Sources */,
+				3FE19C591CDC72F900BD876F /* textViewController.m in Sources */,
 				3F3270B81CDA142A00926CFA /* UIImage+MultiFormat.m in Sources */,
 				3F3270701CDA112000926CFA /* ScienceViewController.m in Sources */,
 				3F3270B61CDA142A00926CFA /* UIButton+WebCache.m in Sources */,

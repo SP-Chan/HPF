@@ -8,6 +8,7 @@
 
 #import "TripViewController.h"
 #import "NetworkRequestManager.h"
+#import "textViewController.h"
 
 @interface TripViewController ()
 
@@ -18,9 +19,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    self.view.backgroundColor = [UIColor whiteColor];
-    
+    self.navigationItem.title = @"出行";
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(50, 50, 50, 50)];
+    [button addTarget:self action:@selector(jump) forControlEvents:UIControlEventTouchDown];
+    button.backgroundColor = [UIColor redColor];
+    [self.view addSubview:button];
 }
-
+-(void)jump
+{
+    textViewController *text = [[textViewController alloc] init];
+    
+    [self.navigationController pushViewController:text animated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
