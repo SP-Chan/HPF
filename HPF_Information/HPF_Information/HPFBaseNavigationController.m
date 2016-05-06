@@ -9,13 +9,14 @@
 #import "HPFBaseNavigationController.h"
 
 @interface HPFBaseNavigationController ()
-@property(nonatomic,strong)HPFBaseImageView *navigationBarView;
+
 @end
 
 @implementation HPFBaseNavigationController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationBar.translucent = NO;
     [self createNavigationController];
     //接收通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeNightTheme:) name:nil object:nil];

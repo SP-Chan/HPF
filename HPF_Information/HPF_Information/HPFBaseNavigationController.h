@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface HPFBaseNavigationController : UINavigationController
-
+@property(nonatomic,strong)HPFBaseImageView *navigationBarView;
 @end

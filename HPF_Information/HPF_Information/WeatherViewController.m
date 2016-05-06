@@ -45,6 +45,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.view.backgroundColor = [UIColor yellowColor];
     [self createNavgationLeftBarButton];
     
@@ -159,7 +160,11 @@
 -(NSMutableArray *)maxLineYArray
 {
     if (!_maxLineYArray) {
-        _maxLineYArray = [NSMutableArray arrayWithObjects:@"30",@"16",@"28",@"30",@"29", nil];
+        _maxLineYArray = [NSMutableArray array];
+        for (int i = 0; i<5; i++) {
+             FiveDayWeatherModel *maxWeather = self.fiveDayModelArray[i];
+            [_maxLineYArray addObject:[[maxWeather.info objectForKey:@"day"] objectAtIndex:2]];
+        }
     }
     return _maxLineYArray;
 
@@ -167,8 +172,15 @@
 //懒加载最低温度的Y轴坐标
 -(NSMutableArray *)minLineYArray
 {
+
     if (!_minLineYArray) {
-        _minLineYArray = [NSMutableArray arrayWithObjects:@"23",@"23",@"22",@"25",@"25", nil];
+        _minLineYArray = [NSMutableArray array];
+        for (int i = 0; i<5; i++) {
+            FiveDayWeatherModel *minWeather = self.fiveDayModelArray[i];
+            [_minLineYArray addObject:[[minWeather.info objectForKey:@"night"] objectAtIndex:2]];
+            NSLog(@"%@",[[minWeather.info objectForKey:@"night"] objectAtIndex:2]);
+        }
+        
     }
     return _minLineYArray;
 }
@@ -176,7 +188,11 @@
 -(NSMutableArray *)maxStringYArray
 {
     if (!_maxStringYArray) {
-        _maxStringYArray = [NSMutableArray arrayWithObjects:@"30°",@"16°",@"28°",@"30°",@"29°", nil];
+        _maxStringYArray = [NSMutableArray array];
+        for (int i = 0; i<5; i++) {
+            NSString *newString = [NSString stringWithFormat:@"%@°",self.maxLineYArray[i]];
+            [_maxStringYArray addObject:newString];
+        }
     }
     return _maxStringYArray;
 }
@@ -184,7 +200,13 @@
 -(NSMutableArray *)minStringYarray
 {
     if (!_minStringYarray) {
-        _minStringYarray = [NSMutableArray arrayWithObjects:@"23°",@"23°",@"22°",@"25°",@"25°", nil];
+        _minStringYarray = [NSMutableArray array];
+        for (int i = 0; i<5; i++) {
+            NSString *newString = [NSString stringWithFormat:@"%@",self.minLineYArray[i]];
+            [_minStringYarray addObject:newString];
+        }
+        
+//        _minStringYarray = [NSMutableArray arrayWithObjects:@"23°",@"23°",@"22°",@"25°",@"25°", nil];
     }
     return _minStringYarray;
 }
@@ -196,7 +218,19 @@
         _currentWeather.frame = CGRectMake(0, 0, kSCREEN_WIDTH, 150);
         _currentWeather.currentDateLabel.text = self.currentStatus.date;
         _currentWeather.currentWeatherLabel.text = [NSString stringWithFormat:@"%@°",self.currentWeatherModel.temperature];
-//        _currentWeather.currentMaxAndMinLabel = [NSString stringWithFormat:@"%@/%@",]
+        
+        //取数据 "多云 23°/16°"
+        //当前天气状况
+        NSString *currentInfo = self.currentWeatherModel.info;
+        //拿到当天天气信息
+        FiveDayWeatherModel *dayModel = self.fiveDayModelArray[0];
+        //拿到当天最高气温
+        NSString *maxTemperature = [[dayModel.info objectForKey:@"day"] objectAtIndex:2];
+        //拿到最低气温
+        NSString *minTemperature = [[dayModel.info objectForKey:@"night"] objectAtIndex:2];
+        _currentWeather.currentMaxAndMinLabel.text = [NSString stringWithFormat:@"%@ %@/%@",currentInfo,maxTemperature,minTemperature];
+        
+        _currentWeather.updateLabel.text = [NSString stringWithFormat:@"[%@]",[self getDateForHourAndMinute]];
     }
     return _currentWeather;
 }
@@ -206,6 +240,8 @@
     if (!_airAndHumidity) {
         _airAndHumidity = [[[NSBundle mainBundle] loadNibNamed:@"AirAndHumidity" owner:self options:nil] lastObject];
         _airAndHumidity.frame = CGRectMake(0, 150, kSCREEN_WIDTH, 40);
+        _airAndHumidity.AirQuality.text = self.pm25Model.quality;
+        _airAndHumidity.humidity.text = self.currentWeatherModel.humidity;
     }
     return _airAndHumidity;
 }
@@ -217,6 +253,7 @@
     }
     return _twentyFourHoursWeather;
 }
+//懒加载星期几 天气状况 和白天天气的图片
 -(HPFBaseView *)weatherAndLineView
 {
     if (!_weatherAndLineView) {
@@ -225,11 +262,23 @@
             WeatherAndLine *maxWeather = [[[NSBundle mainBundle] loadNibNamed:@"WeatherAndLine" owner:self options:nil] lastObject];
             maxWeather.frame = CGRectMake(self.view.bounds.size.width/5*i, 0, self.view.bounds.size.width/5, 135);
             maxWeather.tag = i+1;
+            
+            FiveDayWeatherModel *fiveDayModel = _fiveDayModelArray[i];
+            //今天星期几
+//            if (i == 0) {
+//                <#statements#>
+//            }
+            maxWeather.TodayLabel.text = [NSString stringWithFormat:@"星期%@",fiveDayModel.week];
+            //白天天气
+            NSString *dayWeather = [[fiveDayModel.info objectForKey:@"day"] objectAtIndex:1];
+            maxWeather.weatherLabel.text = dayWeather;
+//            maxWeather.weatherImageView.image
             [_weatherAndLineView addSubview:maxWeather];
         }
     }
     return _weatherAndLineView;
 }
+//懒加载,最高气温曲线
 -(HPFBaseView *)maxLineView
 {
     if (!_maxLineView) {
@@ -242,6 +291,7 @@
     }
     return _maxLineView;
 }
+//懒加载最低气温曲线
 -(HPFBaseView *)minLineView
 {
     if (!_minLineView) {
@@ -254,6 +304,7 @@
     }
     return _minLineView;
 }
+//懒加载 晚间天气图片 晚间天气 日期 风向 风力
 -(HPFBaseView *)minWeatherView
 {
     if (!_minWeatherView) {
@@ -262,6 +313,23 @@
             MinWeather *minWeather = [[[NSBundle mainBundle] loadNibNamed:@"MinWeather" owner:self options:nil] lastObject];
             minWeather.frame = CGRectMake(self.view.bounds.size.width/5*i, 0, self.view.frame.size.width/5, 135);
             minWeather.tag = i + 1;
+            
+            FiveDayWeatherModel *nightModel = _fiveDayModelArray[i];
+
+            
+//            minWeather.minWeatherImageView.image
+            //文件天气
+            NSString *nightWeather = [[nightModel.info objectForKey:@"night"] objectAtIndex:1];
+            minWeather.minWeather.text = nightWeather;
+            //日期
+            NSString *minDate = [nightModel.date substringWithRange:NSMakeRange(5, 5)];
+            minDate = [minDate stringByReplacingOccurrencesOfString:@"-" withString:@"/"];
+            minWeather.minDate.text = minDate;
+            //风向
+            minWeather.windLabel.text = [[nightModel.info objectForKey:@"night"] objectAtIndex:3];
+            //风力
+            minWeather.windDegreeLabel.text = [[nightModel.info objectForKey:@"night"] objectAtIndex:4];
+            
             [_minWeatherView addSubview:minWeather];
         }
     }
@@ -277,12 +345,12 @@
         _weatherScrollView.bounces = NO;
         _weatherScrollView.pagingEnabled = NO
         ;
-        _weatherScrollView.contentSize = CGSizeMake(kSCREEN_WIDTH, kSCREEN_HEIGHT*1.4);
+        _weatherScrollView.contentSize = CGSizeMake(kSCREEN_WIDTH, kSCREEN_HEIGHT*1.5);
 //        _weatherScrollView.backgroundColor = [UIColor clearColor];
         
+        [_weatherScrollView addSubview:self.currentWeather];
         [_weatherScrollView addSubview:self.airAndHumidity];
         [_weatherScrollView addSubview:self.twentyFourHoursWeather];
-        [_weatherScrollView addSubview:self.currentWeather];
         [_weatherScrollView addSubview:self.weatherAndLineView];
         [_weatherScrollView addSubview:self.maxLineView];
         [_weatherScrollView addSubview:self.minLineView];
@@ -304,6 +372,18 @@
         
     }];
 }
+#pragma mark- 获取当前更新的时间
+-(NSString *)getDateForHourAndMinute
+{
+    NSDate *currentDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH:mm"];
+    NSString *dateString = [dateFormatter stringFromDate:currentDate];
+    NSString *updateString = [NSString stringWithFormat:@"%@更新",dateString];
+    NSLog(@"%@",updateString);
+    return updateString;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
