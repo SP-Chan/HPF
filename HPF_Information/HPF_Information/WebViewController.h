@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "NewsModel.h"
+#import "HPFBaseViewController.h"
 
-@interface WebViewController : UIViewController<UIWebViewDelegate>
+@interface WebViewController : HPFBaseViewController<UIWebViewDelegate>
 
 @property(nonatomic,strong)NewsModel *news;
 
 @property(nonatomic,strong)UIWebView *webV;
-
 
 @end
