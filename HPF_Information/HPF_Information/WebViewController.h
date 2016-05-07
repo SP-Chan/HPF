@@ -8,11 +8,13 @@
 
 #import "HPFBaseViewController.h"
 #import "NewsModel.h"
+
+
+
 @interface WebViewController : HPFBaseViewController<UIWebViewDelegate>
 
 @property(nonatomic,strong)NewsModel *news;
 
 @property(nonatomic,strong)UIWebView *webV;
-
 
 @end

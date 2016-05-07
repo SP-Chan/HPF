@@ -126,7 +126,7 @@
         //线条宽度(没有设定默认为2)
         lineLayer.lineWidth = self.lineWith>0?self.lineWith:2;
         if (!_lineColor) {
-            self.lineColor = [UIColor redColor];
+            self.lineColor = [UIColor whiteColor];
         }
         lineLayer.strokeColor = self.lineColor.CGColor;
         lineLayer.fillColor = [UIColor clearColor].CGColor;
