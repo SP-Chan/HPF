@@ -23,6 +23,8 @@
     [super viewDidLoad];
     
     
+    
+    
     _webV = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT)];
     [self.view addSubview:_webV];
     NSURL *url = [NSURL URLWithString:self.news.url];
@@ -47,7 +49,7 @@
         //菊花;
         _ActivityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         _ActivityIndicator.center = CGPointMake(200, 195);
-        [self.view addSubview:_ActivityIndicator];
+        [_webV addSubview:_ActivityIndicator];
         [_ActivityIndicator startAnimating]; // 开始旋转
     }
     

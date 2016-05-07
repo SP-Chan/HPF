@@ -13,7 +13,7 @@
 
 @interface LocalViewController : HPFBaseViewController<UITableViewDataSource,UITableViewDelegate>
 
-@property(nonatomic,strong)NSMutableArray *dataArary;
+
 @property(nonatomic,strong)UITableView *tabView;
 
 @property(nonatomic,strong)NewsModel *news;

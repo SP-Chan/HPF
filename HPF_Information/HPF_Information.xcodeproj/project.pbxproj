@@ -119,21 +119,14 @@
 		3F3270C01CDA145900926CFA /* Unknown-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3270BD1CDA145900926CFA /* Unknown-1.png */; };
 		3F3270C11CDA145900926CFA /* queding.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3270BE1CDA145900926CFA /* queding.png */; };
 		3F3270C21CDA145900926CFA /* 2008111385229728_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3270BF1CDA145900926CFA /* 2008111385229728_2.png */; };
-
 		3FB4D3231CDA284C00B514F3 /* WeatherAndLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB4D3221CDA284C00B514F3 /* WeatherAndLine.m */; };
 		3FB4D3251CDA286B00B514F3 /* WeatherAndLine.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FB4D3241CDA286B00B514F3 /* WeatherAndLine.xib */; };
 		3FB4D3281CDA2CBE00B514F3 /* MinWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB4D3271CDA2CBE00B514F3 /* MinWeather.m */; };
 		3FB4D32A1CDA2CFF00B514F3 /* MinWeather.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FB4D3291CDA2CFF00B514F3 /* MinWeather.xib */; };
 		3FB4D32D1CDA302900B514F3 /* XPChartAndLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB4D32C1CDA302900B514F3 /* XPChartAndLineView.m */; };
-
-		3FB4D3231CDA284C00B514F3 /* WeatherAndLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB4D3221CDA284C00B514F3 /* WeatherAndLine.m */; settings = {ASSET_TAGS = (); }; };
-		3FB4D3251CDA286B00B514F3 /* WeatherAndLine.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FB4D3241CDA286B00B514F3 /* WeatherAndLine.xib */; settings = {ASSET_TAGS = (); }; };
-		3FB4D3281CDA2CBE00B514F3 /* MinWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB4D3271CDA2CBE00B514F3 /* MinWeather.m */; settings = {ASSET_TAGS = (); }; };
-		3FB4D32A1CDA2CFF00B514F3 /* MinWeather.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FB4D3291CDA2CFF00B514F3 /* MinWeather.xib */; settings = {ASSET_TAGS = (); }; };
-		3FB4D32D1CDA302900B514F3 /* XPChartAndLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB4D32C1CDA302900B514F3 /* XPChartAndLineView.m */; settings = {ASSET_TAGS = (); }; };
-		3FE19C591CDC72F900BD876F /* textViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE19C581CDC72F900BD876F /* textViewController.m */; settings = {ASSET_TAGS = (); }; };
-
-		977A145F1CDA200700F5879A /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 977A145A1CDA200700F5879A /* placeholder.png */; };
+		3FE19C591CDC72F900BD876F /* textViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE19C581CDC72F900BD876F /* textViewController.m */; };
+		974760561CDDEA490029E9CF /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 974760551CDDEA490029E9CF /* placeholder.png */; };
+		977A145F1CDA200700F5879A /* placeholder1.png in Resources */ = {isa = PBXBuildFile; fileRef = 977A145A1CDA200700F5879A /* placeholder1.png */; };
 		977A14601CDA200700F5879A /* DFCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = 977A145C1CDA200700F5879A /* DFCarouselView.m */; };
 		977A14611CDA200700F5879A /* ScrollViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 977A145E1CDA200700F5879A /* ScrollViewCell.m */; };
 		97B0A7D91CDAD6AD0008A2F7 /* NewsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B0A7D81CDAD6AD0008A2F7 /* NewsModel.m */; };
@@ -373,7 +366,8 @@
 		3FB4D32C1CDA302900B514F3 /* XPChartAndLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPChartAndLineView.m; sourceTree = "<group>"; };
 		3FE19C571CDC72F900BD876F /* textViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = textViewController.h; sourceTree = "<group>"; };
 		3FE19C581CDC72F900BD876F /* textViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = textViewController.m; sourceTree = "<group>"; };
-		977A145A1CDA200700F5879A /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
+		974760551CDDEA490029E9CF /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
+		977A145A1CDA200700F5879A /* placeholder1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder1.png; sourceTree = "<group>"; };
 		977A145B1CDA200700F5879A /* DFCarouselView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFCarouselView.h; sourceTree = "<group>"; };
 		977A145C1CDA200700F5879A /* DFCarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFCarouselView.m; sourceTree = "<group>"; };
 		977A145D1CDA200700F5879A /* ScrollViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollViewCell.h; sourceTree = "<group>"; };
@@ -936,7 +930,8 @@
 		977A14621CDA201200F5879A /* DFCarouselView */ = {
 			isa = PBXGroup;
 			children = (
-				977A145A1CDA200700F5879A /* placeholder.png */,
+				977A145A1CDA200700F5879A /* placeholder1.png */,
+				974760551CDDEA490029E9CF /* placeholder.png */,
 				977A145B1CDA200700F5879A /* DFCarouselView.h */,
 				977A145C1CDA200700F5879A /* DFCarouselView.m */,
 				977A145D1CDA200700F5879A /* ScrollViewCell.h */,
@@ -1176,6 +1171,7 @@
 				3F19A4981CD346C400C3D532 /* almanac-1.png in Resources */,
 				3F3270241CD9A1D900926CFA /* nightBackgroundView.jpg in Resources */,
 				3F13CA841CDB4B500037CB78 /* 天气_08.png in Resources */,
+				974760561CDDEA490029E9CF /* placeholder.png in Resources */,
 				3F19A4991CD346C400C3D532 /* almanac.png in Resources */,
 				3F1D61991CD89E04006D5A5C /* LeftViewTop.xib in Resources */,
 				3F1D61B21CD8CF64006D5A5C /* WeatherAndCity.xib in Resources */,
@@ -1188,7 +1184,7 @@
 				3F13CA861CDB4B500037CB78 /* 天气_10.png in Resources */,
 				3F13CA821CDB4B500037CB78 /* 天气_06.png in Resources */,
 				3F13CA7D1CDB4B500037CB78 /* 天气_01.png in Resources */,
-				977A145F1CDA200700F5879A /* placeholder.png in Resources */,
+				977A145F1CDA200700F5879A /* placeholder1.png in Resources */,
 				3FB4D32A1CDA2CFF00B514F3 /* MinWeather.xib in Resources */,
 				3F3270C21CDA145900926CFA /* 2008111385229728_2.png in Resources */,
 				3F3270391CD9EA0F00926CFA /* AirAndHumidity.xib in Resources */,

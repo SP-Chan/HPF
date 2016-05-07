@@ -46,8 +46,7 @@
       
     
 }
-
-//主页scrollview
+#pragma mark  主页的scrollview
 -(void)creareNewsScrollview
 {
     
@@ -126,7 +125,7 @@
     
 }
 
-//左右滑动主页面
+#pragma mark 左右滑动主页面
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     NSInteger number = _newsSc.contentOffset.x/kSCREEN_WIDTH;
@@ -153,18 +152,15 @@
             [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         }
     }
-    
 }
 
-
-//点击标题栏切换页面
+#pragma mark 点击标题栏切换页面
 -(void)touchTitleButton:(HPFBaseButton *)button
 {
     for (int i = 0 ; i < _btnArray.count; i++) {
         if (button.tag == i) {
-            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             
-            _newsSc.contentOffset = CGPointMake(button.tag*kSCREEN_WIDTH, kSCREEN_HEIGHT-35-110);
+            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             
         }
         else
@@ -172,6 +168,7 @@
             UIButton *button = [_btnArray objectAtIndex:i];
             [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         }
+         _newsSc.contentOffset = CGPointMake(button.tag*kSCREEN_WIDTH, 0);
     }
 }
 
