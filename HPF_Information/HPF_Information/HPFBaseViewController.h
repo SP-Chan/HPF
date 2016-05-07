@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface HPFBaseViewController : UIViewController
-@property(nonatomic,strong)NSMutableArray *dataArray;
-@property(nonatomic,strong)UITableView *tabV;
+//@property(nonatomic,strong)NSMutableArray *dataArray;
+//@property(nonatomic,strong)UITableView *tabV;
 
 
 

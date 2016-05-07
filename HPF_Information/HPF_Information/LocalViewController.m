@@ -9,64 +9,80 @@
 #import "LocalViewController.h"
 #import "NetworkRequestManager.h"
 #import "MJRefresh.h"
-
-typedef void(^block)();
-
+#import "MJRefreshAutoFooter.h"
 
 @interface LocalViewController ()
 
-@property(nonatomic,assign)BOOL isRefresh;
-@property(nonatomic,assign) CGFloat contentOffsetY;
-@property(nonatomic,retain)UILabel *headerLable;
-@property(nonatomic,retain)UILabel *footerLable;
+{
+    NSInteger startNum;//第几条开始加载;
+    NSInteger countNum;//加载的数量;
+}
+
+@property(nonatomic,strong)NSMutableArray *array;
+@property(nonatomic,strong)NSMutableArray *dataArrary;
 
 
 @end
 
 @implementation LocalViewController
 
+#pragma mark 懒加载
+-(NSMutableArray *)array
+{
+    if (!_array) {
+        self.array = [NSMutableArray array];
+    }
+    return _array;
+}
+
+-(NSMutableArray *)dataArrary
+{
+    if (!_dataArrary) {
+        self.dataArrary = [NSMutableArray array];
+        
+    }
+    return _dataArrary;
+}
+
+
+#pragma mark viewDidLoad
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
-//    [self requestDatarequestWithType:GET UrlString:@"http://c.3g.163.com/nc/article/local/5bm%2F5bee/0-20.html" ParDic:nil Header:nil];
+    startNum = 0;
+    countNum = 20;
     
+    NSString *str = [NSString stringWithFormat:@"%ld-%ld",startNum,countNum];
     
+    NSString *urlStr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/article/local/广州/%@.html",str];
+    
+    [self requestData:urlStr];
     [self createTableView];
-    [self requestData];
-
     
+    [self creatFooterRefresh];
+    [self creatHeaderRefresh];
     
     // Do any additional setup after loading the view.
 }
 
-
-
--(void)requestData
+#pragma mark 网络请求
+-(void)requestData:(NSString *)string
 {
-    NSInteger startNum = 0;
-    NSInteger countNum = 20;
     
-    NSString *str = [NSString stringWithFormat:@"%ld-%ld",startNum,countNum];
-    
-   NSString *urlStr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/article/local/广州/%@.html",str];
-    
-    
-    [NetworkRequestManager requestWithType:GET urlString:urlStr ParDic:nil Header:nil finish:^(NSData *data) {
+    [NetworkRequestManager requestWithType:GET urlString:string ParDic:nil Header:nil finish:^(NSData *data) {
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             
             NSDictionary *dataDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-            _dataArary = [NSMutableArray array];
             NSArray *array = [dataDic objectForKey:@"广州"];
             for (NSDictionary *dic in array) {
                 NewsModel *news = [[NewsModel alloc]init];
                 [news setValuesForKeysWithDictionary:dic];
-                [_dataArary addObject:news];
+                [self.dataArrary addObject:news];
             }
         });
         dispatch_async(dispatch_get_main_queue(), ^{
-            
+            [self.tabView reloadData];
         });
         
         
@@ -78,7 +94,7 @@ typedef void(^block)();
 }
 
 
-
+#pragma mark 创建TableView
 -(void)createTableView
 {
     _tabView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT-35-110) style:UITableViewStylePlain];
@@ -93,7 +109,7 @@ typedef void(^block)();
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 20;
+    return _dataArrary.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -105,7 +121,7 @@ typedef void(^block)();
     }
     
     NewsModel *news = [[NewsModel alloc]init];
-    news = [_dataArary objectAtIndex:indexPath.row];
+    news = [_dataArrary objectAtIndex:indexPath.row];
     cell.news = news;
     cell.backgroundColor = [UIColor clearColor];
     return cell;
@@ -119,13 +135,11 @@ typedef void(^block)();
 }
 
 
-
-
-//点击跳转的方法;
+#pragma mark  点击跳转的方法;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    NewsModel *news = [_dataArary objectAtIndex:indexPath.row];
+    NewsModel *news = [_dataArrary objectAtIndex:indexPath.row];
     
     WebViewController *webVC = [[WebViewController alloc]init];
     webVC.news = news;
@@ -133,115 +147,53 @@ typedef void(^block)();
     [self.navigationController pushViewController:webVC animated:YES];
 }
 
-
-#pragma mark- scrollView只要滑动就会走该方法
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
+#pragma mark  加载更多
+- (void) creatFooterRefresh
 {
-    //获取额外的大小(scrollView可滚动的距离)
-    CGFloat contentSizeH = scrollView.contentSize.height - self.tabV.frame.size.height;
-    
-    //上拉到底部的高度(scrollView当前Y向底部的位置)
-    self.contentOffsetY = scrollView.contentOffset.y - contentSizeH;
-    
-    self.footerLable.frame = CGRectMake(0, self.tabV.frame.size.height+contentSizeH, CGRectGetWidth(self.view.frame), 50);
-    
-    [self.tabV addSubview:_footerLable];
-    if(!self.isRefresh)
-    {
-        self.headerLable.text = @"下拉刷新";
-        self.footerLable.text = @"上拉加载";
-        if(scrollView.contentOffset.y <= -50){
-            _headerLable.text = @"释放立即刷新";
-        }
-        
-        if (self.contentOffsetY >= 50) {
-            _footerLable.text = @"释放加载更多";
-        }
-    }
-    
-    
-    
-    
-    
-}
-
--(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-    if ((scrollView.contentOffset.y <= -50 || _contentOffsetY >= 50) && !self.isRefresh)
-    {
-        
-        self.isRefresh = YES;
-        
-        if (scrollView.contentOffset.y <= -50) {
-            _headerLable.text = @"刷新中.......";
-        }else if (self.contentOffsetY >= 50)
-        {
-            _footerLable.text = @"加载中......";
-        }
-        
-        if(scrollView.contentOffset.y <= -50)
-        {
-            [UIView animateWithDuration:0.2 animations:^{
-                //使刷新页面同在刷新位置的代码
-                scrollView.contentInset = UIEdgeInsetsMake(50, 0, 0, 0);
-                //写网络请求的代码
-                //code....
-                
-            } completion:^(BOOL finished) {
-                [self requestEndWithBlock:^{
-                    
-                    [UIView animateWithDuration:0.2 animations:^{
-                        
-                        scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-                        
-                    } completion:^(BOOL finished) {
-                        self.isRefresh = NO;
-//                        [_dataArary removeAllObjects];
-//                        [self addDataWithCount:20];
-                        [_tabView reloadData];
-                    }];
-                }];
-            }];
-        }
-        if(self.contentOffsetY >= 50)
-        {
-            [UIView animateWithDuration:0.3 animations:^{
-                //让上提更多的视图停在UI中一段时间
-                scrollView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
-                
-            } completion:^(BOOL finished) {
-                [self requestEndWithBlock:^{
-                    [UIView animateWithDuration:0.3 animations:^{
-                        
-                    } completion:^(BOOL finished) {
-                        self.isRefresh = NO;
-//                        [self addDataWithCount:5];
-                        [_footerLable removeFromSuperview];
-                        scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-                        [_tabView reloadData];
-                        
-                    }];
-                }];
-            }];
-        }
-    }
-    
+    _tabView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
 }
 
 
-
--(void)requestEndWithBlock:(block)blocks
+-(void)loadMoreData
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        sleep(2);
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            
-            blocks();
-            
-        });
-    });
+    startNum = startNum +19;
     
+    NSString *str = [NSString stringWithFormat:@"%ld-%ld",startNum,countNum];
+    
+    NSString *urlStr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/article/local/广州/%@.html",str];
+    
+    [self requestData:urlStr];
+    [self.tabView reloadData];
+    
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeStopP) userInfo:nil repeats:NO];
+}
+
+
+-(void)timeStopP
+{
+    [self.tabView.mj_footer endRefreshing];
+}
+
+//下拉刷新
+-(void)creatHeaderRefresh
+{
+    _tabView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+}
+
+-(void)loadNewData
+{
+
+    NSString *urlStr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/article/local/广州/0-20.html"];
+    
+    [self requestData:urlStr];
+    [_tabView  reloadData];
+    
+    [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(timeStopPP) userInfo:nil repeats:NO];
+}
+
+-(void)timeStopPP
+{
+    [_tabView.header endRefreshing];
 }
 
 
