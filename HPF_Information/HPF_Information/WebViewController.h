@@ -1,14 +1,15 @@
 //
-//  WebViewController.h
+//  WebViewController2.h
 //  HPF_Information
 //
-//  Created by 邓方 on 16/5/5.
+//  Created by 邓方 on 16/5/6.
 //  Copyright © 2016年 HPF. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "NewsModel.h"
 #import "HPFBaseViewController.h"
+#import "NewsModel.h"
+
+
 
 @interface WebViewController : HPFBaseViewController<UIWebViewDelegate>
 

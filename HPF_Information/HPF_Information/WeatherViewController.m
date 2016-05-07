@@ -120,7 +120,7 @@
         //当前小时
         NSString *hourString = [[self getDateForHourAndMinute] substringWithRange:NSMakeRange(0, 2)];
         NSInteger hour = [hourString integerValue];
-        if (hour > 6 && hour < 18) {
+        if (hour > 6 && hour < 19) {
             if ([weatherString containsString:@"雨"]) {
                 if ([weatherString containsString:@"雷"]) {
                     _backgroundImageView.image = [UIImage imageNamed:@"lei.jpg"];
