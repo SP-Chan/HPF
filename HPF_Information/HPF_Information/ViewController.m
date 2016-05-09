@@ -10,6 +10,8 @@
 #import "LeftViewController.h"
 #import "HPFBaseTabBarController.h"
 #import "TimeSelector.h"
+#import "FlickAnimation.h"
+#import "SolveDream.h"
 @interface ViewController ()
 @property(nonatomic,strong)HPFBaseTabBarController *hpfTabBar;
 @property(nonatomic,strong)LeftViewController *left;
@@ -26,8 +28,43 @@
     [self createSubView];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(time:) name:@"TimeSelector" object:nil];
-
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(animate:) name:@"animation" object:nil];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(SolveDream:) name:@"SolveDream" object:nil];
 }
+
+-(void)animate:(NSNotification *)animate
+{
+    
+    FlickAnimation *flick = [[FlickAnimation alloc]initWithFrame:CGRectMake(0, kSCREEN_HEIGHT, kSCREEN_WIDTH, kSCREEN_HEIGHT)];
+    [self.tabBarController.view bringSubviewToFront:flick];
+    flick.backgroundColor= [UIColor cyanColor];
+    
+    
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        flick.frame= CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT);
+    }];
+    
+    
+    [self.view addSubview:flick];
+}
+-(void)SolveDream:(NSNotification *)Solve
+{
+    
+    SolveDream *sol = [[SolveDream alloc]initWithFrame:CGRectMake(0, kSCREEN_HEIGHT, kSCREEN_WIDTH, kSCREEN_HEIGHT)];
+    [self.tabBarController.view bringSubviewToFront:sol];
+    sol.backgroundColor= [UIColor  whiteColor];
+    
+    
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        sol.frame= CGRectMake(0, 20, kSCREEN_WIDTH, kSCREEN_HEIGHT);
+    }];
+    [self.view addSubview:sol];
+}
+
 -(void)time:(NSNotification *)time
 {
     TimeSelector *timeS = [[TimeSelector alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT)];
