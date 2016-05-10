@@ -69,7 +69,6 @@
         _actiView.layer.masksToBounds = YES;
         [_webV addSubview:_actiView];
         
-        //创建一个菊花;
         if (_ActivityIndicator == nil) {
             //菊花;
             _ActivityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -78,7 +77,7 @@
             
             [self.view addSubview:_ActivityIndicator];
             
-            [_ActivityIndicator startAnimating]; // 开始旋转
+            [_ActivityIndicator startAnimating]; 
         }
         
         if (!_label) {
@@ -113,14 +112,19 @@
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    
+    
+     [_webV stringByEvaluatingJavaScriptFromString:@"document.body.style.background='red'"];
+    
+    
     //webView日间与夜间模式下背景颜色的切换
-    NSString *string = [[NSUserDefaults standardUserDefaults] stringForKey:kChangeTheme];
-    if ([string isEqualToString:@"night"]) {
-        
-        [_webV stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[2].style.background='gray'"];
-    }else{
-         [_webV stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[2].style.background='white'"];
-    }
+//    NSString *string = [[NSUserDefaults standardUserDefaults] stringForKey:kChangeTheme];
+//    if ([string isEqualToString:@"night"]) {
+//        
+//        [_webV stringByEvaluatingJavaScriptFromString:@"document.body.style.background='red'"];
+//    }else{
+//         [_webV stringByEvaluatingJavaScriptFromString:@"document.body.style.background='white'"];
+//    }
     
 }
 

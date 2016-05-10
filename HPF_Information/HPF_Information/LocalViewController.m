@@ -10,6 +10,8 @@
 #import "NetworkRequestManager.h"
 #import "MJRefresh.h"
 #import "MJRefreshAutoFooter.h"
+#import "DFCarouselView.h"
+#import "NewsModel.h"
 
 @interface LocalViewController ()
 
@@ -66,6 +68,7 @@
     
      _flag = 0;
     
+    
     // Do any additional setup after loading the view.
 }
 
@@ -84,8 +87,6 @@
         
     }
     _flag += 1;
-    
-    
     
 }
 
@@ -115,8 +116,6 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tabView reloadData];
         });
-        
-        
         
         
     } err:^(NSError *error) {
@@ -179,6 +178,20 @@
 }
 
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 130;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    
+    
+    return nil;
+    
+}
+
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -227,7 +240,7 @@
     [self.tabView.mj_footer endRefreshing];
 }
 
-//下拉刷新
+#pragma mark 下拉刷新
 -(void)creatHeaderRefresh
 {
     _tabView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
