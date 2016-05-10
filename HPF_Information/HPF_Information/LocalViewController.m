@@ -10,6 +10,8 @@
 #import "NetworkRequestManager.h"
 #import "MJRefresh.h"
 #import "MJRefreshAutoFooter.h"
+#import "DFCarouselView.h"
+#import "NewsModel.h"
 
 @interface LocalViewController ()
 
@@ -20,6 +22,8 @@
 
 @property(nonatomic,strong)NSMutableArray *array;
 @property(nonatomic,strong)NSMutableArray *dataArrary;
+@property(nonatomic,strong)NSMutableArray *imgArray;
+@property(nonatomic,assign)NSInteger flag;
 
 
 @end
@@ -62,8 +66,30 @@
     [self creatFooterRefresh];
     [self creatHeaderRefresh];
     
+     _flag = 0;
+    
+    
     // Do any additional setup after loading the view.
 }
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear: animated];
+    
+   
+    if (_flag == 0) {
+        // 马上进入刷新状态
+        [self.tabView.header beginRefreshing];
+    }
+    else
+    {
+        
+    }
+    _flag += 1;
+    
+}
+
 
 #pragma mark 网络请求
 -(void)requestData:(NSString *)string
@@ -79,13 +105,17 @@
                 NewsModel *news = [[NewsModel alloc]init];
                 [news setValuesForKeysWithDictionary:dic];
                 [self.dataArrary addObject:news];
+                
+                if ([[dic allKeys] containsObject:@"imgextra"]) {
+                    _imgArray = [dic objectForKey:@"imgextra"];
+//                    NSLog(@"%@",_imgArray);
+                }
+                
             }
         });
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tabView reloadData];
         });
-        
-        
         
         
     } err:^(NSError *error) {
@@ -114,17 +144,51 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *identifier = @"cell";
-    CommonCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (cell == nil) {
-        cell = [[[NSBundle mainBundle]loadNibNamed:@"CommonCell" owner:nil options:nil]lastObject];
-    }
     
-    NewsModel *news = [[NewsModel alloc]init];
-    news = [_dataArrary objectAtIndex:indexPath.row];
-    cell.news = news;
-    cell.backgroundColor = [UIColor clearColor];
-    return cell;
+//    if (_imgArray.count == 2) {
+//        static NSString *identifier = @"cell";
+//        ThreeImageCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+//        if (cell == nil) {
+//            cell = [[[NSBundle mainBundle]loadNibNamed:@"ThreeImageCell" owner:nil options:nil]lastObject];
+//        }
+//        
+//        NewsModel *news = [[NewsModel alloc]init];
+//        news = [_dataArrary objectAtIndex:indexPath.row];
+//        cell.news = news;
+//        cell.backgroundColor = [UIColor clearColor];
+//        return cell;
+//
+//        }
+//        else
+//        {
+            static NSString *identifier = @"cell";
+            CommonCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            if (cell == nil) {
+                cell = [[[NSBundle mainBundle]loadNibNamed:@"CommonCell" owner:nil options:nil]lastObject];
+            }
+            
+            NewsModel *news = [[NewsModel alloc]init];
+            news = [_dataArrary objectAtIndex:indexPath.row];
+            cell.news = news;
+            cell.backgroundColor = [UIColor clearColor];
+            return cell;
+           
+//        }
+    
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 130;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    
+    
+    return nil;
+    
 }
 
 
@@ -156,8 +220,10 @@
 
 -(void)loadMoreData
 {
-    startNum = startNum +19;
     
+    //  http://c.3g.163.com/nc/article/local/广州/0-20.html
+    
+    startNum = startNum +19;
     NSString *str = [NSString stringWithFormat:@"%ld-%ld",startNum,countNum];
     
     NSString *urlStr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/article/local/广州/%@.html",str];
@@ -174,7 +240,7 @@
     [self.tabView.mj_footer endRefreshing];
 }
 
-//下拉刷新
+#pragma mark 下拉刷新
 -(void)creatHeaderRefresh
 {
     _tabView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
@@ -202,6 +268,13 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+
+
+
+
+
 
 /*
 #pragma mark - Navigation

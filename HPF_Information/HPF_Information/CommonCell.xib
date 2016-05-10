@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -10,20 +10,18 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="119"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="119.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nQ5-Is-gco">
                         <rect key="frame" x="8" y="5" width="126" height="110"/>
-                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="110" id="bi3-tM-VWX"/>
                             <constraint firstAttribute="width" constant="126" id="bnr-tz-g6s"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ucw-nC-8ec">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ucw-nC-8ec">
                         <rect key="frame" x="142" y="8" width="170" height="59"/>
-                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="59" id="SaK-uv-bOH"/>
                         </constraints>
@@ -31,20 +29,18 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7a0-cX-HZo">
-                        <rect key="frame" x="267" y="89" width="45" height="24"/>
-                        <animations/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7a0-cX-HZo">
+                        <rect key="frame" x="257" y="89" width="55" height="24"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="45" id="5NA-Oe-ait"/>
+                            <constraint firstAttribute="width" constant="55" id="5NA-Oe-ait"/>
                             <constraint firstAttribute="height" constant="23.5" id="mPs-gn-VHn"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLS-WP-bCY">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLS-WP-bCY">
                         <rect key="frame" x="142" y="88" width="101" height="27"/>
-                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="27" id="D3z-ts-b89"/>
                             <constraint firstAttribute="width" constant="101" id="Eja-do-n75"/>
@@ -55,7 +51,6 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <animations/>
                 <constraints>
                     <constraint firstItem="kLS-WP-bCY" firstAttribute="leading" secondItem="nQ5-Is-gco" secondAttribute="trailing" constant="8" id="Ize-4E-dDg"/>
                     <constraint firstItem="kLS-WP-bCY" firstAttribute="top" secondItem="Ucw-nC-8ec" secondAttribute="bottom" constant="21" id="L99-cE-Xir"/>
@@ -68,7 +63,6 @@
                     <constraint firstItem="Ucw-nC-8ec" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="yNX-Ji-S05"/>
                 </constraints>
             </tableViewCellContentView>
-            <animations/>
             <connections>
                 <outlet property="followLabel" destination="7a0-cX-HZo" id="2ey-ZA-78T"/>
                 <outlet property="iconImage" destination="nQ5-Is-gco" id="0Ns-iE-yTp"/>

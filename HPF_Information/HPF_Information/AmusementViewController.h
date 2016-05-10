@@ -7,7 +7,15 @@
 //
 
 #import "HPFBaseViewController.h"
+#import "NewsModel.h"
+#import "CommonCell.h"
+#import "WebViewController.h"
+@interface AmusementViewController : HPFBaseViewController<UITableViewDataSource,UITableViewDelegate>
 
-@interface AmusementViewController : HPFBaseViewController
+
+@property(nonatomic,strong)UITableView *tabView;
+
+@property(nonatomic,strong)NewsModel *news;
+
 
 @end

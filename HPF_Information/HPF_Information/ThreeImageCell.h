@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+#import "NewsModel.h"
 @interface ThreeImageCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *iconImage1;
@@ -16,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *sourceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *followLabel;
 
+@property(nonatomic,strong)NewsModel *news;
 
 
 

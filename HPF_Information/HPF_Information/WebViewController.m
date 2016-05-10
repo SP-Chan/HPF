@@ -15,6 +15,9 @@
 
 //@property (nonatomic, strong)SXDetailModel *detailModel;
 @property(nonatomic,strong)UIActivityIndicatorView *ActivityIndicator;
+@property(nonatomic,strong)UIView *actiView;
+@property(nonatomic,strong)UILabel *label;
+
 @end
 
 @implementation WebViewController
@@ -23,6 +26,7 @@
     [super viewDidLoad];
     
     
+//    self.navigationController.navigationBar.hidden = YES;
     
     _webV = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT)];
     [self.view addSubview:_webV];
@@ -32,25 +36,61 @@
     
     _webV.delegate = self;
     
-    //    [self showInWebView];
+    _webV.scrollView.bounces = NO;
     
+    
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT/13.6)];
+    view.backgroundColor = [UIColor lightGrayColor];
+    [self.webV addSubview:view];
+    UILabel *headLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT/13.7)];
+    headLabel.backgroundColor = [UIColor colorWithRed:8.6 green:10.1 blue:9.5 alpha:1];
+    headLabel.textAlignment = NSTextAlignmentCenter;
+    headLabel.text = @"内容来源自网易";
+    [self.webV addSubview:headLabel];
     
     // Do any additional setup after loading the view.
 }
 
 
 
+
+
+
+
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
     
-    //在屏幕中间创建一个红色的菊花;
-    if (_ActivityIndicator == nil) {
-        //菊花;
-        _ActivityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        _ActivityIndicator.center = CGPointMake(200, 195);
-        [_webV addSubview:_ActivityIndicator];
-        [_ActivityIndicator startAnimating]; // 开始旋转
+    
+    
+    if (!_actiView) {
+        _actiView = [[UIView alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH/2.85, kSCREEN_HEIGHT/4, kSCREEN_WIDTH/3.3, kSCREEN_HEIGHT/6)];
+        _actiView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.65];
+        _actiView.layer.cornerRadius = 10;
+        _actiView.layer.masksToBounds = YES;
+        [_webV addSubview:_actiView];
+        
+        if (_ActivityIndicator == nil) {
+            //菊花;
+            _ActivityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+            //        _ActivityIndicator.center = CGPointMake(kSCREEN_WIDTH/2, kSCREEN_HEIGHT/4);
+            _ActivityIndicator.center = _actiView.center;
+            
+            [self.view addSubview:_ActivityIndicator];
+            
+            [_ActivityIndicator startAnimating]; 
+        }
+        
+        if (!_label) {
+            _label = [[UILabel alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH/2.25, kSCREEN_HEIGHT/3.3, kSCREEN_WIDTH/3.3, kSCREEN_HEIGHT/6)];
+            _label.text = @"加载中";
+            _label.backgroundColor = [UIColor clearColor];
+            [self.view addSubview:_label];
+        }
+        
     }
+    
+    
+    
     
     
     
@@ -61,188 +101,35 @@
 
 -(void)stopActivityIndicator
 {
-        [_ActivityIndicator stopAnimating]; // 结束旋转
-        [_ActivityIndicator setHidesWhenStopped:YES];
+    [_ActivityIndicator stopAnimating]; // 结束旋转
+    [_ActivityIndicator setHidesWhenStopped:YES];
+    [self.actiView removeFromSuperview];
+    [self.label removeFromSuperview];
 }
 
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView
+
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView
 {
-//        [_ActivityIndicator stopAnimating]; // 结束旋转
-//        [_ActivityIndicator setHidesWhenStopped:YES]; //当旋转结束时隐藏
-}
-
-//- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error
-//{
-
-//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"网页无法加载" message:@"请稍后重试" preferredStyle:UIAlertControllerStyleAlert];
-//    UIAlertAction *action = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:nil];
-//    [alert addAction:action];
-//    [self presentViewController:alert animated:YES completion:^{
+    
+    
+     [_webV stringByEvaluatingJavaScriptFromString:@"document.body.style.background='red'"];
+    
+    
+    //webView日间与夜间模式下背景颜色的切换
+//    NSString *string = [[NSUserDefaults standardUserDefaults] stringForKey:kChangeTheme];
+//    if ([string isEqualToString:@"night"]) {
 //        
-//    }];
-//}
-
-
-
-
-/*
-
- #pragma mark - ******************** 拼接html语言
- - (void)showInWebView
- {
- 
- NSMutableString *html = [NSMutableString string];
- [html appendString:@"<html>"];
- [html appendString:@"<head>"];
- [html appendFormat:@"<link rel=\"stylesheet\" href=\"%@\">",[[NSBundle mainBundle] URLForResource:@"SXDetails.css" withExtension:nil]];
- [html appendString:@"</head>"];
- 
- [html appendString:@"<body>"];
- [html appendString:[self touchBody]];
- [html appendString:@"</body>"];
- 
- [html appendString:@"</html>"];
- 
- [self.webV loadHTMLString:html baseURL:nil];
- [self.view addSubview:self.webV];
- }
- 
- 
- - (NSString *)touchBody
- {
- NSMutableString *body = [NSMutableString string];
- [body appendFormat:@"<div class=\"title\">%@</div>",self.news.title];
- [body appendFormat:@"<div class=\"time\">%@         %@</div>",self.news.ptime,self.news.source];
- 
- if (self.news.body != nil)
- {
- [body appendString:self.news.body];
- }
- // 遍历img
- for (NewsModel *news in self.news.img)
- {
- NSMutableString *imgHtml = [NSMutableString string];
- 
- // 设置img的div
- [imgHtml appendString:@"<div class=\"img-parent\">"];
- 
- // 数组存放被切割的像素
- NSArray *pixel = [news.pixel componentsSeparatedByString:@"*"];
- CGFloat width = [[pixel firstObject]floatValue];
- CGFloat height = [[pixel lastObject]floatValue];
- // 判断是否超过最大宽度
- CGFloat maxWidth = [UIScreen mainScreen].bounds.size.width * 0.96;
- if (width > maxWidth) {
- height = maxWidth / width * height;
- width = maxWidth;
- }
- 
- NSString *onload = @"this.onclick = function() {"
- "  window.location.href = 'sx:src=' + this.src;"
- "};";
- [imgHtml appendFormat:@"<img onload=\"%@\" width=\"%f\" height=\"%f\" src=\"%@\">",onload,width,height,news.src];
- 
- // 结束标记
- [imgHtml appendString:@"</div>"];
- // 替换标记
- [body replaceOccurrencesOfString:news.ref withString:imgHtml options:NSCaseInsensitiveSearch range:NSMakeRange(0, body.length)];
- }
- return body;
- }
- 
- */
-/*
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    
-    
-    //    NSString *headerStr = @"document.getElementsByTagName('h1')[0].innerText = '测试文字';";
-    //    [webView stringByEvaluatingJavaScriptFromString:headerStr];
-    
-    //    NSString *downLoadStr = @"document.getElementById('xiazaiapp').getElementsByTagName('a')[0].innerText = '下个鸡蛋';";
-    //    [webView stringByEvaluatingJavaScriptFromString:downLoadStr];
-}
-
-#pragma mark - ******************** 拼接html语言
-- (void)showInWebView
-{
-    
-    NSMutableString *html = [NSMutableString string];
-    [html appendString:@"<html>"];
-    [html appendString:@"<head>"];
-    [html appendFormat:@"<link rel=\"stylesheet\" href=\"%@\">",[[NSBundle mainBundle] URLForResource:@"SXDetails.css" withExtension:nil]];
-    [html appendString:@"</head>"];
-    
-    [html appendString:@"<body>"];
-    [html appendString:[self touchBody]];
-    [html appendString:@"</body>"];
-    
-    [html appendString:@"</html>"];
-    
-    [self.webV loadHTMLString:html baseURL:nil];
-    [self.view addSubview:self.webV];
-}
-
-- (NSString *)touchBody
-{
-    NSMutableString *body = [NSMutableString string];
-    [body appendFormat:@"<div class=\"title\">%@</div>",self.detailModel.title];
-    [body appendFormat:@"<div class=\"time\">%@         %@</div>",self.detailModel.ptime,self.detailModel.source];
-    
-    if (self.detailModel.body != nil)
-    {
-        [body appendString:self.detailModel.body];
-    }
-    // 遍历img
-    for (SXDetailImgModel *detailImgModel in self.detailModel.img)
-    {
-        NSMutableString *imgHtml = [NSMutableString string];
-        
-        // 设置img的div
-        [imgHtml appendString:@"<div class=\"img-parent\">"];
-        
-        // 数组存放被切割的像素
-        NSArray *pixel = [detailImgModel.pixel componentsSeparatedByString:@"*"];
-        CGFloat width = [[pixel firstObject]floatValue];
-        CGFloat height = [[pixel lastObject]floatValue];
-        // 判断是否超过最大宽度
-        CGFloat maxWidth = [UIScreen mainScreen].bounds.size.width * 0.96;
-        if (width > maxWidth) {
-            height = maxWidth / width * height;
-            width = maxWidth;
-        }
-        
-        NSString *onload = @"this.onclick = function() {"
-        "  window.location.href = 'sx:src=' + this.src;"
-        "};";
-        [imgHtml appendFormat:@"<img onload=\"%@\" width=\"%f\" height=\"%f\" src=\"%@\">",onload,width,height,detailImgModel.src];
-        
-        // 结束标记
-        [imgHtml appendString:@"</div>"];
-        // 替换标记
-        [body replaceOccurrencesOfString:detailImgModel.ref withString:imgHtml options:NSCaseInsensitiveSearch range:NSMakeRange(0, body.length)];
-    }
-    return body;
-}
-
-//#pragma mark - ******************** 将发出通知时调用
-//- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-//{
-//    NSString *url = request.URL.absoluteString;
-//    NSRange range = [url rangeOfString:@"sx:src="];
-//    if (range.location != NSNotFound)
-//    {
-//        NSInteger begin = range.location + range.length;
-//        NSString *src = [url substringFromIndex:begin];
-//        [self savePictureToAlbum:src];
-//        return NO;
+//        [_webV stringByEvaluatingJavaScriptFromString:@"document.body.style.background='red'"];
+//    }else{
+//         [_webV stringByEvaluatingJavaScriptFromString:@"document.body.style.background='white'"];
 //    }
-//    return YES;
-//}
+    
+}
 
 
-*/
+
 
 
 
