@@ -17,10 +17,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationBar.translucent = NO;
-    [self createNavigationController];
+//    [self createNavigationController];
     //接收通知
+    [self setNavigationControllerColor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeNightTheme:) name:nil object:nil];
 }
+/*
 #pragma mark- 创建导航控制器
 -(void)createNavigationController
 {
@@ -28,7 +30,7 @@
     [self setNavigationControllerColor];
     [self.navigationBar addSubview:self.navigationBarView];
 }
-
+*/
 #pragma mark- 夜间模式设置
 //从 LeftViewController 接收通知
 -(void)changeNightTheme:(NSNotification *)notification
@@ -41,9 +43,9 @@
 {
     NSString *string = [[NSUserDefaults standardUserDefaults] stringForKey:kChangeTheme];
     if ([string isEqualToString:@"night"]) {
-        self.navigationBarView.backgroundColor = [UIColor colorWithRed:81/255.0 green:77/255.0 blue:77/255.0 alpha:1];
+        self.navigationBar.barTintColor = [UIColor colorWithRed:81/255.0 green:77/255.0 blue:77/255.0 alpha:1];
     }else{
-        self.navigationBarView.backgroundColor = [UIColor colorWithRed:146/255.0 green:115/255.0 blue:173/255.0 alpha:1];
+        self.navigationBar.barTintColor = [UIColor colorWithRed:146/255.0 green:115/255.0 blue:173/255.0 alpha:1];
     }
 }
 

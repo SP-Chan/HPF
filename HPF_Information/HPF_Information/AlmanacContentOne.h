@@ -14,4 +14,14 @@
 @property(nonatomic,strong)UIView *CentreView;
 @property(nonatomic,strong)UIView *CentreLeft;
 @property(nonatomic,strong)UIView *CentreRight;
+
+@property(nonatomic,strong)UILabel *luckyTime;
+@property(nonatomic,strong)UILabel *fierceTime;
+
+@property(nonatomic,strong)UILabel *CentreLable;
+@property(nonatomic,strong)UIView *CentreBelow;
+
+
+@property(nonatomic,strong)UILabel *CentreLeftLabel;
+@property(nonatomic,strong)UILabel *CentreRightLabel;
 @end

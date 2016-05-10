@@ -27,7 +27,6 @@
     
 //    self.navigationController.navigationBar.hidden = YES;
     
-    
     _webV = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT)];
     [self.view addSubview:_webV];
     NSURL *url = [NSURL URLWithString:self.news.url];

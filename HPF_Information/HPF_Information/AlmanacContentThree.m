@@ -16,8 +16,15 @@
         
         self.LeftView = [[UIView alloc]init];
         [self addSubview:self.LeftView];
+        
+        self.leftLabel = [[UILabel alloc]init];
+        [self.LeftView addSubview:self.leftLabel];
+        
         self.RightView = [[UIView alloc]init];
         [self addSubview:self.RightView];
+        
+        self.rightLable = [[UILabel alloc]init];
+        [self.RightView addSubview:self.rightLable];
         
         
     }
@@ -30,11 +37,24 @@
     self.LeftView.frame = CGRectMake(0, 0, Width/2, Height);
     self.LeftView.layer.borderWidth=1;
     self.LeftView.layer.borderColor =[UIColor redColor].CGColor;
-    self.LeftView.backgroundColor = [UIColor colorWithRed:arc4random()%254/255.0 green:arc4random()%254/255.0 blue:arc4random()%254/255.0 alpha:1];
+    self.leftLabel.frame =CGRectMake(0, 0,Width/2,Height );
+    self.leftLabel.font = [UIFont boldSystemFontOfSize:20];
+    self.leftLabel.textAlignment=NSTextAlignmentCenter;
+    self.leftLabel.textColor = [UIColor redColor];
+    
+    
+    
+    self.rightLable.frame =CGRectMake(0, 0,Width/2,Height );
+    self.rightLable.font = [UIFont boldSystemFontOfSize:20];
+    self.rightLable.textAlignment=NSTextAlignmentCenter;
+    self.rightLable.textColor = [UIColor redColor];
+   
+   
+  
     self.RightView.frame = CGRectMake(Width/2, 0, Width/2, Height);
     self.RightView.layer.borderWidth=1;
     self.RightView.layer.borderColor =[UIColor redColor].CGColor;
-    self.RightView.backgroundColor = [UIColor colorWithRed:arc4random()%254/255.0 green:arc4random()%254/255.0 blue:arc4random()%254/255.0 alpha:1];
+   
 
 }
 @end
