@@ -62,8 +62,23 @@
     [self creatFooterRefresh];
     [self creatHeaderRefresh];
     
+    
+    
+    
     // Do any additional setup after loading the view.
 }
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear: animated];
+    
+    
+        // 马上进入刷新状态
+        [self.tabView.header beginRefreshing];
+    
+}
+
 
 #pragma mark 网络请求
 -(void)requestData:(NSString *)string
@@ -79,6 +94,13 @@
                 NewsModel *news = [[NewsModel alloc]init];
                 [news setValuesForKeysWithDictionary:dic];
                 [self.dataArrary addObject:news];
+                
+                if ([[dic allKeys] containsObject:@"imgextra"]) {
+                    NSArray *imgArray = [dic objectForKey:@"imgextra"];
+                    
+                }
+                
+                
             }
         });
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -156,8 +178,10 @@
 
 -(void)loadMoreData
 {
-    startNum = startNum +19;
     
+    //  http://c.3g.163.com/nc/article/local/广州/0-20.html
+    
+    startNum = startNum +19;
     NSString *str = [NSString stringWithFormat:@"%ld-%ld",startNum,countNum];
     
     NSString *urlStr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/article/local/广州/%@.html",str];
@@ -202,6 +226,13 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+
+
+
+
+
 
 /*
 #pragma mark - Navigation

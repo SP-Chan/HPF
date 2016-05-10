@@ -102,7 +102,7 @@
     _titleSc.contentSize = CGSizeMake(kSCREEN_WIDTH/6*12, 0);
     _titleSc.showsHorizontalScrollIndicator = NO;
     
-    NSArray *array = [NSArray arrayWithObjects:@"本地",@"娱乐",@"体育",@"科技",@"汽车",@"时尚",@"房产",@"军事",@"历史",@"手机",@"情感",@"教育", nil];
+    NSArray *array = [NSArray arrayWithObjects:@"本地",@"娱乐",@"体育",@"经济",@"汽车",@"时尚",@"房产",@"军事",@"历史",@"手机",@"情感",@"教育", nil];
     _btnArray = [NSMutableArray array];
     
     for (int i = 0; i < 12; i++) {
