@@ -109,11 +109,15 @@
         HPFBaseButton *button = [HPFBaseButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(kSCREEN_WIDTH/6*i, 0, kSCREEN_WIDTH/6, 35);
         [button setTitle:array[i] forState:UIControlStateNormal];
-        button.backgroundColor = [UIColor greenColor];
+        button.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:0.9];
         button.tag = i;
+        [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont systemFontOfSize:15];
+        
         
         if (button.tag == 0) {
             [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            button.titleLabel.font = [UIFont boldSystemFontOfSize:20];
         }
         
         [_btnArray addObject:button];
@@ -145,11 +149,13 @@
         if (number == i) {
             UIButton *button = [_btnArray objectAtIndex:number];
             [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            button.titleLabel.font = [UIFont boldSystemFontOfSize:20];
         }
         else
         {
             UIButton *button = [_btnArray objectAtIndex:i];
-            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+            button.titleLabel.font = [UIFont systemFontOfSize:15];
         }
     }
 }
@@ -161,12 +167,15 @@
         if (button.tag == i) {
             
             [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            button.titleLabel.font = [UIFont boldSystemFontOfSize:20];
             
         }
         else
         {
             UIButton *button = [_btnArray objectAtIndex:i];
-            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+            button.titleLabel.font = [UIFont systemFontOfSize:15];
+
         }
          _newsSc.contentOffset = CGPointMake(button.tag*kSCREEN_WIDTH, 0);
     }

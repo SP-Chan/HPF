@@ -20,6 +20,8 @@
 
 @property(nonatomic,strong)NSMutableArray *array;
 @property(nonatomic,strong)NSMutableArray *dataArrary;
+@property(nonatomic,strong)NSMutableArray *imgArray;
+@property(nonatomic,assign)NSInteger flag;
 
 
 @end
@@ -62,8 +64,7 @@
     [self creatFooterRefresh];
     [self creatHeaderRefresh];
     
-    
-    
+     _flag = 0;
     
     // Do any additional setup after loading the view.
 }
@@ -73,9 +74,18 @@
 {
     [super viewWillAppear: animated];
     
-    
+   
+    if (_flag == 0) {
         // 马上进入刷新状态
         [self.tabView.header beginRefreshing];
+    }
+    else
+    {
+        
+    }
+    _flag += 1;
+    
+    
     
 }
 
@@ -96,10 +106,9 @@
                 [self.dataArrary addObject:news];
                 
                 if ([[dic allKeys] containsObject:@"imgextra"]) {
-                    NSArray *imgArray = [dic objectForKey:@"imgextra"];
-                    
+                    _imgArray = [dic objectForKey:@"imgextra"];
+//                    NSLog(@"%@",_imgArray);
                 }
-                
                 
             }
         });
@@ -136,17 +145,37 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *identifier = @"cell";
-    CommonCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (cell == nil) {
-        cell = [[[NSBundle mainBundle]loadNibNamed:@"CommonCell" owner:nil options:nil]lastObject];
-    }
     
-    NewsModel *news = [[NewsModel alloc]init];
-    news = [_dataArrary objectAtIndex:indexPath.row];
-    cell.news = news;
-    cell.backgroundColor = [UIColor clearColor];
-    return cell;
+//    if (_imgArray.count == 2) {
+//        static NSString *identifier = @"cell";
+//        ThreeImageCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+//        if (cell == nil) {
+//            cell = [[[NSBundle mainBundle]loadNibNamed:@"ThreeImageCell" owner:nil options:nil]lastObject];
+//        }
+//        
+//        NewsModel *news = [[NewsModel alloc]init];
+//        news = [_dataArrary objectAtIndex:indexPath.row];
+//        cell.news = news;
+//        cell.backgroundColor = [UIColor clearColor];
+//        return cell;
+//
+//        }
+//        else
+//        {
+            static NSString *identifier = @"cell";
+            CommonCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            if (cell == nil) {
+                cell = [[[NSBundle mainBundle]loadNibNamed:@"CommonCell" owner:nil options:nil]lastObject];
+            }
+            
+            NewsModel *news = [[NewsModel alloc]init];
+            news = [_dataArrary objectAtIndex:indexPath.row];
+            cell.news = news;
+            cell.backgroundColor = [UIColor clearColor];
+            return cell;
+           
+//        }
+    
 }
 
 

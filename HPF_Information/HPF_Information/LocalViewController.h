@@ -9,6 +9,7 @@
 #import "HPFBaseViewController.h"
 #import "NewsModel.h"
 #import "CommonCell.h"
+#import "ThreeImageCell.h"
 #import "WebViewController.h"
 
 @interface LocalViewController : HPFBaseViewController<UITableViewDataSource,UITableViewDelegate>

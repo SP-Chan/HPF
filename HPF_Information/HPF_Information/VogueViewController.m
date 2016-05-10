@@ -18,6 +18,7 @@
 
 @property(nonatomic,strong)NSMutableArray *array;
 @property(nonatomic,strong)NSMutableArray *dataArrary;
+@property(nonatomic,assign)NSInteger flag;
 
 @end
 
@@ -59,6 +60,8 @@
     [self creatFooterRefresh];
     [self creatHeaderRefresh];
     
+    _flag = 0;
+    
     // Do any additional setup after loading the view.
 }
 
@@ -67,8 +70,15 @@
 {
     [super viewWillAppear: animated];
     
-    // 马上进入刷新状态
-    [self.tabView.header beginRefreshing];
+    if (_flag == 0) {
+        // 马上进入刷新状态
+        [self.tabView.header beginRefreshing];
+    }
+    else
+    {
+        
+    }
+    _flag += 1;
 }
 
 #pragma mark 网络请求

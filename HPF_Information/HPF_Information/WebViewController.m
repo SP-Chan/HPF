@@ -17,6 +17,7 @@
 @property(nonatomic,strong)UIActivityIndicatorView *ActivityIndicator;
 @property(nonatomic,strong)UIView *actiView;
 @property(nonatomic,strong)UILabel *label;
+
 @end
 
 @implementation WebViewController
@@ -38,10 +39,14 @@
     _webV.scrollView.bounces = NO;
     
     
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT/14)];
-    view.backgroundColor = [UIColor redColor];
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT/13.6)];
+    view.backgroundColor = [UIColor lightGrayColor];
     [self.webV addSubview:view];
-    
+    UILabel *headLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT/13.7)];
+    headLabel.backgroundColor = [UIColor colorWithRed:8.6 green:10.1 blue:9.5 alpha:1];
+    headLabel.textAlignment = NSTextAlignmentCenter;
+    headLabel.text = @"内容来源自网易";
+    [self.webV addSubview:headLabel];
     
     // Do any additional setup after loading the view.
 }
