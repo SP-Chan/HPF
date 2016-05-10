@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="FirstStationTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="36"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ruc-bK-EdS">
+                        <rect key="frame" x="8" y="5" width="164" height="25"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="164" id="dhE-qF-QAb"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QMH-WA-CV3">
+                        <rect key="frame" x="185" y="0.0" width="36" height="34"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="36" id="uLt-Y0-otb"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <animations/>
+                <constraints>
+                    <constraint firstItem="QMH-WA-CV3" firstAttribute="leading" secondItem="Ruc-bK-EdS" secondAttribute="trailing" constant="13" id="H4d-s8-MnO"/>
+                    <constraint firstItem="QMH-WA-CV3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="PIt-xe-CdT"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Ruc-bK-EdS" secondAttribute="bottom" constant="-3" id="Ugy-fi-HwM"/>
+                    <constraint firstItem="Ruc-bK-EdS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-3" id="hNH-CI-8TF"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="QMH-WA-CV3" secondAttribute="trailing" constant="146" id="hwT-fs-SbL"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="QMH-WA-CV3" secondAttribute="bottom" constant="-7" id="wsK-QZ-Lpu"/>
+                </constraints>
+            </tableViewCellContentView>
+            <animations/>
+            <connections>
+                <outlet property="FirstStationImage" destination="QMH-WA-CV3" id="Y0B-hf-lrY"/>
+                <outlet property="FirstStitionLabel" destination="Ruc-bK-EdS" id="qD5-Fd-tgO"/>
+            </connections>
+            <point key="canvasLocation" x="429.5" y="282"/>
+        </tableViewCell>
+    </objects>
+</document>

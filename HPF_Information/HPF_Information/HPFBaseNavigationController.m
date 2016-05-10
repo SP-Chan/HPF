@@ -41,12 +41,15 @@
 //设定背景色
 -(void)setNavigationControllerColor
 {
-    NSString *string = [[NSUserDefaults standardUserDefaults] stringForKey:kChangeTheme];
-    if ([string isEqualToString:@"night"]) {
-        self.navigationBar.barTintColor = [UIColor colorWithRed:81/255.0 green:77/255.0 blue:77/255.0 alpha:1];
-    }else{
-        self.navigationBar.barTintColor = [UIColor colorWithRed:146/255.0 green:115/255.0 blue:173/255.0 alpha:1];
-    }
+//    if (self.navigationBar.barTintColor) {
+        NSString *string = [[NSUserDefaults standardUserDefaults] stringForKey:kChangeTheme];
+        if ([string isEqualToString:@"night"]) {
+            self.navigationBar.barTintColor = [UIColor colorWithRed:81/255.0 green:77/255.0 blue:77/255.0 alpha:1];
+        }else{
+            self.navigationBar.barTintColor = [UIColor colorWithRed:146/255.0 green:115/255.0 blue:173/255.0 alpha:1];
+        }
+
+//    }
 }
 
 
