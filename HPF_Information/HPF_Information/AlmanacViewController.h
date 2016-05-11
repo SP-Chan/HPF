@@ -10,4 +10,5 @@
 
 @interface AlmanacViewController : HPFBaseViewController
 @property(nonatomic,strong)NSString *time;
+@property(nonatomic,strong)UIView *timeView;
 @end

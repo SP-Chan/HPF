@@ -8,7 +8,7 @@
 
 #import "DetailsDreamViewController.h"
 #import "MarkViewController.h"
-@interface DetailsDreamViewController ()
+@interface DetailsDreamViewController ()<UIWebViewDelegate>
 @property(nonatomic,strong)MarkViewController *mark;
 @end
 
@@ -39,24 +39,18 @@
         
         subview.layer.cornerRadius=20;
         subview.layer.masksToBounds=YES;
-        subview.backgroundColor = [UIColor clearColor];
+        subview.backgroundColor = [UIColor grayColor];
         
-//        for (UIView *view in subview.subviews) {
-//            
-//         
-//            view.layer.cornerRadius=20;
-//            view.layer.masksToBounds=YES;
-//            
-//            
-//        }
         
         
     }
     
-    
+    self.webView.delegate=self;
     
     [self.view addSubview:self.webView];
     [self.webView loadHTMLString:_dream.content baseURL:nil];
+    
+    
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(20, kSCREEN_HEIGHT-52, kSCREEN_WIDTH-40,42);
@@ -74,6 +68,11 @@
     
     [self dismissViewControllerAnimated:YES completion:nil];
    
+
+}
+-(void)webViewDidFinishLoad:(UIWebView *)webView
+{
+[_webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.background='gray'"];
 
 }
 - (void)didReceiveMemoryWarning {

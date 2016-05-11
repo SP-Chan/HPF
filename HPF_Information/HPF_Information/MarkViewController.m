@@ -38,12 +38,17 @@
     _searchController.dimsBackgroundDuringPresentation=NO;
     _searchController.searchBar.placeholder=@"请输入你的梦境";
      [self.searchController.searchBar setValue:@"取消" forKey:@"_cancelButtonText"];
-//   _searchController.searchBar.frame = CGRectMake(self.searchController.searchBar.frame.origin.x, self.searchController.searchBar.frame.origin.y, self.searchController.searchBar.frame.size.width, 44.0);
-    ;
+
+   
+    
      _searchController.dimsBackgroundDuringPresentation = NO;
      _searchController.hidesNavigationBarDuringPresentation = NO;
     [self.view addSubview:_searchController.searchBar];
     
+    
+}
+-(void)onPage
+{
     
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -70,7 +75,8 @@ static NSString *identifier =@"cell";
 {
  NSString *searchString = [self.searchController.searchBar text];
 
-
+    [_dataArray removeAllObjects];
+    [_tableView reloadData];
     
     if (searchString.length==0) {
         _dataArray = [[totalDataBaseUtil shareTotalDataBase]selectDreamWithParentld:self.identifier];
@@ -89,8 +95,7 @@ static NSString *identifier =@"cell";
     
     deta.dream = [_dataArray objectAtIndex:indexPath.row];
     
-    Dream *d = [_dataArray objectAtIndex:indexPath.row];
-    NSLog(@"%@==%@",d.title,d.content);
+    
     deta.modalTransitionStyle=UIModalPresentationCustom;
     if (_searchController.searchBar.text.length>0) {
         

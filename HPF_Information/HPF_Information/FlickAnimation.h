@@ -11,4 +11,6 @@
 @interface FlickAnimation : UIView
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)NSMutableSet *buttonSet;
+@property(nonatomic,strong)NSString *urlTime;
+@property(nonatomic,strong)UILabel *lableDes;
 @end

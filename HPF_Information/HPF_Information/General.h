@@ -23,7 +23,13 @@
  * 切换主题发送的Notification
  */
 #define kChangeTheme @"kChangeTheme"
-
-
+/**
+ * 百度APIKey
+ **/
+#define kBaiDuAPIKey @"5a459f84da963ce86b81254b69783481"
+/**
+ * 聚合APIKey
+ **/
+#define kJuHeAPIKey @"f42334b47586bfd62de709c03db94cec"
 
 #endif /* General_h */

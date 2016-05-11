@@ -7,7 +7,11 @@
 //
 
 #import "HPFBaseViewController.h"
-
+#import "todayView.h"
+#import "NetworkRequestManager.h"
 @interface ConstellationViewController : HPFBaseViewController
-
+@property(nonatomic,strong)NSString *Constellation;
+@property(nonatomic,strong)NSString *date;
+@property(nonatomic,strong)NSString *image;
+@property(nonatomic,strong)NSDictionary *dataDic;
 @end

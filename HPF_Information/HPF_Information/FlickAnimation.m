@@ -19,10 +19,13 @@ NSInteger  temp;
 }
 @property(nonatomic,strong)UIButton *addbutton;
 @property(nonatomic,strong)UIView *contentView;
-@property(nonatomic,strong)NSString *urlTime;
+
 @property(nonatomic,strong)NSMutableArray *TimeArray;
 @property(nonatomic,strong)NSString *hours;
 
+@property(nonatomic,strong)UILabel *lableJi;
+@property(nonatomic,strong)UILabel *lableYi;
+@property(nonatomic,strong)UIActivityIndicatorView *activity;
 @end
 @implementation FlickAnimation
 
@@ -47,9 +50,12 @@ NSInteger  temp;
             [_dataArray addObject:image];
         }
         isOpem=YES;
+       
+     NSDictionary *dic= [[NSUserDefaults standardUserDefaults]objectForKey:@"time"];
         
+       
         
-       _urlTime=[[NSUserDefaults standardUserDefaults]objectForKey:@"time"];
+        _urlTime = [dic objectForKey:@"dateTime"];
         
         
         NSLog(@"flick==%@",_urlTime);
@@ -65,62 +71,26 @@ NSInteger  temp;
        _hours=[dateformatter stringFromDate:senddate];
         NSLog(@"hhhh==%@",_hours);
         
-      [self requestData];
-        
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(timeActiom:) name:@"time" object:nil];
-        
+
+        [self requestData];
+       
     }
+    
     return self;
 }
--(void)layoutSubviews
-{
-    [super layoutSubviews];
-    
-   
-    _addbutton.frame =CGRectMake(0, 0, self.frame.size.width/4,  self.frame.size.width/4);
-    [_addbutton setImage:[UIImage imageNamed:@"9389104_145654745119_2.jpg"] forState:UIControlStateNormal];
-    _addbutton.center =self.center;
-    _addbutton.layer.cornerRadius=self.frame.size.width/8;
-    _addbutton.layer.masksToBounds=YES;
-    
-    [_addbutton addTarget:self action:@selector(starButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
-    HPFBaseButton *baseButton = [[HPFBaseButton alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH*5/12, 64, kSCREEN_WIDTH/12, kSCREEN_WIDTH/12)];
-    
-    [baseButton setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
-    [self addSubview:baseButton];
-    
-    [baseButton addTarget:self action:@selector(removeObject) forControlEvents:UIControlEventTouchUpInside];
-    [self setContent];
 
-}
 -(void)removeObject
 {
     
-    
-    if (!isOpem) {
-        [self close];
+  
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            usleep(666666);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                [self removeFromSuperview];
-            });
-            
-        });
-    }else
-    {
-        CGRect rect =_addbutton.frame;
-        rect.origin.y=kSCREEN_HEIGHT;
         
         [UIView animateWithDuration:0.5 animations:^{
-           
-            _addbutton.frame=rect;
+            self.frame=CGRectMake(kSCREEN_WIDTH, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT);
         }];
-        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            
             
             usleep(666666);
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -128,17 +98,18 @@ NSInteger  temp;
                 [self removeFromSuperview];
             });
             
-        });
-    
-    }
-    
-    
-    
-    
+       });
 }
 -(void)requestData
 {
     
+    
+    _activity = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
+    _activity.layer.position=CGPointMake(kSCREEN_WIDTH/2, kSCREEN_HEIGHT/2-64);
+    [_activity setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [_activity setColor:[UIColor blackColor]];
+    [self addSubview:_activity];
+    [_activity startAnimating];
     
     NSString *url = [NSString stringWithFormat:@"http://v.juhe.cn/laohuangli/h?date=%@&key=b45f8bf8fd8c3132a47890b409ae984d",_urlTime];
     
@@ -156,17 +127,22 @@ NSInteger  temp;
             [luck setValuesForKeysWithDictionary:dic];
             [_TimeArray addObject:luck];
         }
-        for (TimeLuck *luck in _TimeArray) {
-            NSLog(@"%@",luck.hours);
-        }
+       
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
            
-          
-            dispatch_async(dispatch_get_main_queue(), ^{
-               
-                  [self open];
-            });
+            if (_TimeArray.count>0) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [self open];
+                    
+                    [self addconten];
+                    [self setContent];
+                    [_activity stopAnimating];
+                });
+                
+                
+            }
             
         });
         
@@ -177,7 +153,25 @@ NSInteger  temp;
     
     
 }
+-(void)addconten
+{
 
+    _addbutton.frame =CGRectMake(0, 0, self.frame.size.width/4,  self.frame.size.width/4);
+    [_addbutton setImage:[UIImage imageNamed:@"9389104_145654745119_2.jpg"] forState:UIControlStateNormal];
+    _addbutton.center =self.center;
+    _addbutton.layer.cornerRadius=self.frame.size.width/8;
+    _addbutton.layer.masksToBounds=YES;
+    
+    [_addbutton addTarget:self action:@selector(starButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    HPFBaseButton *baseButton = [[HPFBaseButton alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH/12, kSCREEN_WIDTH/12, kSCREEN_WIDTH/8, kSCREEN_WIDTH/8)];
+    
+    [baseButton setImage:[UIImage imageNamed:@"fanhui"] forState:UIControlStateNormal];
+    [self addSubview:baseButton];
+    
+    [baseButton addTarget:self action:@selector(removeObject) forControlEvents:UIControlEventTouchUpInside];
+
+}
 
 -(void)todoSomething
 {
@@ -217,6 +211,54 @@ NSInteger  temp;
     imagej.layer.masksToBounds=YES;
     [self addSubview:imagej];
 
+    HPFBaseImageView *imaged = [[HPFBaseImageView alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH/12, kSCREEN_HEIGHT/6, kSCREEN_WIDTH/8, kSCREEN_WIDTH/8)];
+    
+    UIImage *image =[UIImage imageNamed:@"xiangqing"];
+    imaged.backgroundColor = [UIColor whiteColor];
+    imaged.image = image;
+    
+   imaged.layer.cornerRadius=kSCREEN_WIDTH/16;
+    imaged.layer.masksToBounds=YES;
+   
+    [self addSubview:imaged];
+    
+    
+    
+    self.lableJi = [[UILabel alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH*5/24+20, kSCREEN_HEIGHT-49-64-64, kSCREEN_WIDTH*2/3, kSCREEN_WIDTH/8)];
+    self.lableJi.backgroundColor = [UIColor clearColor];
+    self.lableJi.textColor = [UIColor blackColor];
+    [self addSubview:self.lableJi];
+    self.lableJi.numberOfLines=2;
+    self.lableYi = [[UILabel alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH*5/24+20, kSCREEN_HEIGHT-49-64, kSCREEN_WIDTH*2/3, kSCREEN_WIDTH/8)];
+     self.lableYi.backgroundColor = [UIColor clearColor];
+    self.lableYi.textColor = [UIColor blackColor];
+    self.lableYi.numberOfLines=2;
+    [self addSubview:self.lableYi];
+ 
+    self.lableDes = [[UILabel alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH*5/24+20, kSCREEN_HEIGHT/6, kSCREEN_WIDTH*2/3, kSCREEN_WIDTH/8)];
+    self.lableDes.backgroundColor = [UIColor clearColor];
+    self.lableDes.textColor = [UIColor blackColor];
+    self.lableDes.numberOfLines=2;
+    [self addSubview:self.lableDes];
+    
+    
+    for (TimeLuck *luck in _TimeArray) {
+        
+        NSLog(@"%@",luck.hours);
+        NSArray *array = [luck.hours componentsSeparatedByString:@"-"];
+        
+        NSInteger first = [array.firstObject integerValue];
+        NSInteger  last = [array.lastObject integerValue];
+        NSInteger hours = [_hours integerValue];
+        if (first<hours&&hours<=last) {
+            
+            self.lableYi.text=luck.yi;
+            self.lableJi.text=luck.ji;
+            self.lableDes.text=luck.des;
+        }
+        
+    }
+    
     
 }
 - (void)starButtonClicked:(id)sender
@@ -367,40 +409,38 @@ NSInteger  temp;
     
     
     //加到线程里面 (目的就是动画结束的时候所用的时间1s等于 在线程里面睡眠大约1s删除button)
-    [NSThread detachNewThreadSelector:@selector(delay) toTarget:self withObject:nil];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+       usleep(99999);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [_buttonSet removeAllObjects];
+        });
+        
+    });
     isOpem=YES;
 //    
 }
 
 
--(void)delay
-{
-    //微秒 (必须小于动画时候)100000等于1秒
-    usleep(9999);
-    [_buttonSet removeAllObjects];
-    
-}
 
 
--(void)timeActiom:(NSNotification *)time
-{
-    NSDictionary *dic = time.userInfo;
-    
-    NSLog(@"____%@",dic);
-    
-    
-}
 
 -(void)touch:(UIButton *)button
 {
     [_TimeArray objectAtIndex:button.tag];
     
     
-//    NSLog(@"==%@",[_TimeArray objectAtIndex:button.tag]);
+    NSLog(@"==%@",[_TimeArray objectAtIndex:button.tag]);
     
 //    NSDictionary *dic =(NSDictionary *)[_TimeArray objectAtIndex:button.tag];
 //    NSLog(@"==%@",[dic objectForKey:@"yi"]);
     
+    
+    TimeLuck *luck = [_TimeArray objectAtIndex:button.tag];
+    
+    _lableJi.text=luck.ji;
+    _lableYi.text=luck.yi;
+    self.lableDes.text=luck.des;
 
 }
 

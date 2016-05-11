@@ -33,7 +33,8 @@
         [self.CentreView addSubview:self.CentreButton];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(animation:) name:@"animation" object:nil];
         
-        
+        self.LocManager = [[CLLocationManager alloc]init];
+        self.LocManager.delegate=self;
     }
     return self;
     
@@ -80,9 +81,9 @@
     self.CentreView.layer.borderColor =[UIColor redColor].CGColor;
     
   
-    self.CentreButton.frame=CGRectMake(0, 0, Width/3-4, Width/3-4);
+    self.CentreButton.frame=CGRectMake(0, (self.CentreView.bounds.size.height-self.CentreView.bounds.size.width)/2, self.CentreView.bounds.size.width, self.CentreView.bounds.size.width);
    
-    self.CentreButton.layer.cornerRadius=(Width/3-4)/2;
+    self.CentreButton.layer.cornerRadius=self.CentreView.bounds.size.width/2;
     self.CentreButton.layer.masksToBounds=YES;
     [self.CentreButton setImage:[UIImage imageNamed:@"wuxinbagua.jpg"] forState:UIControlStateNormal];
     
@@ -112,6 +113,16 @@
     self.RightLable.font = [UIFont systemFontOfSize:18];
     
     
+    if ([CLLocationManager headingAvailable]) {
+        //设置精度
+        self.LocManager.desiredAccuracy = kCLLocationAccuracyBest;
+        //设置滤波器不工作
+        self.LocManager.headingFilter = kCLHeadingFilterNone;
+        //开始更新
+        [self.LocManager startUpdatingHeading];
+    }
+    
+    
 
 }
 -(void)animation:(NSNotification *)animation
@@ -122,5 +133,13 @@
 }];
     
 }
+-(void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading
+{
+    _CentreButton.transform =CGAffineTransformIdentity;
+    CGAffineTransform transform = CGAffineTransformMakeRotation(-1 * M_PI*newHeading.magneticHeading/180.0);
+    
+    
+    _CentreButton.transform = transform;
 
+}
 @end
