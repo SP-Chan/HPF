@@ -9,7 +9,8 @@
 #import "SolveLogo.h"
 #import "TypeDataBaseUtil.h"
 #import "DreamType.h"
-
+#import "MarkViewController.h"
+#import "totalDataBaseUtil.h"
 @implementation SolveLogo
 
 -(instancetype)initWithFrame:(CGRect)frame
@@ -25,6 +26,16 @@
         _buttonArray=[NSMutableArray array];
         
         [self addSubview:self.dbSphere];
+        
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+       
+        button.frame=CGRectMake(0, 0, self.bounds.size.width/3,self.bounds.size.width/8);
+        [button setImage:[UIImage imageNamed:@"Unknown-3"] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(search) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:button];
+        
+        [button setTitle:@"实时搜索" forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         
         for (DreamType *dream in [[TypeDataBaseUtil shareDataBaseUtil]selectDreamType]) {
             [_dataArray addObject:dream.title];
@@ -42,6 +53,12 @@
    
    
     
+}
+
+-(void)search
+{
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"搜索" object:nil];
+
 }
 -(void)setType
 {

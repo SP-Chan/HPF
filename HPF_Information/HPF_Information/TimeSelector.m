@@ -31,7 +31,7 @@
     
         
         self.PickView = [[UIView alloc]initWithFrame:CGRectMake(0,kSCREEN_HEIGHT, self.bounds.size.width,  (self.frame.size.width)*3/4)];
-       
+        self.pickerV.backgroundColor = [UIColor orangeColor];
         [self addSubview:self.PickView];
         
         UIImageView *imageV = [[UIImageView alloc]initWithFrame:CGRectMake(0,0, kSCREEN_WIDTH,  (self.frame.size.width)*3/4)];
@@ -76,9 +76,9 @@
         
         
         //存储年的数组
-        start_year=2001;
+        start_year=2010;
         NSMutableArray *yearArray = [NSMutableArray array];
-        for (NSInteger i = 0; i<100; i++) {
+        for (NSInteger i = 0; i<16; i++) {
             
             
             [yearArray addObject:[NSString stringWithFormat:@"%ld年",start_year+i]];
@@ -326,9 +326,33 @@
     
   
     
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:year,@"year",month,@"month",day,@"day", nil];
+   
+    
+    NSString*Dateyear = [year stringByReplacingOccurrencesOfString:@"年" withString:@""];;
+    
+ 
+    
+    NSString*Datemonth = [month stringByReplacingOccurrencesOfString:@"月" withString:@""];
+    
+   
+    
+    NSString*Dateday = [day stringByReplacingOccurrencesOfString:@"日" withString:@""];
+    
+    
+    NSString *date =  [[Dateyear stringByAppendingString:@"-"] stringByAppendingString:Datemonth];
+    NSString *dateTime = [[date stringByAppendingString:@"-"] stringByAppendingString:Dateday];
+    
+    
+    
+    
+    
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:dateTime,@"dateTime", nil];
     [[NSNotificationCenter defaultCenter]postNotificationName:@"time" object:nil userInfo:dic];
    
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"time"];
+    
+    [[NSUserDefaults standardUserDefaults]setObject:dic forKey:@"time"];
     
     [UIView animateWithDuration:0.5 animations:^{
         self.PickView.frame= CGRectMake(0,kSCREEN_HEIGHT, self.bounds.size.width,  (self.frame.size.height)/2);
