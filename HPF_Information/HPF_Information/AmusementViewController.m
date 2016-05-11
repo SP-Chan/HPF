@@ -208,7 +208,7 @@
 -(void)loadNewData
 {
     
-    NSString *urlStr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/article/local/广州/0-20.html"];
+    NSString *urlStr = [NSString stringWithFormat:@"http://c.m.163.com/nc/article/list/T1348648517839/0-20.html"];
     
     [self requestData:urlStr];
     [_tabView  reloadData];

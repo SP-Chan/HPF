@@ -25,6 +25,8 @@
         self.followLabel.text = followStr;
         //        [self.iconImage sd_setImageWithURL:[NSURL URLWithString:_news.imgsrc]];
         [self.iconImage1 sd_setImageWithURL:[NSURL URLWithString:_news.imgsrc] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        [self.iconImage2 sd_setImageWithURL:[NSURL URLWithString:[_news.imgextra[0]objectForKey:@"imgsrc"]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        [self.iconImage3 sd_setImageWithURL:[NSURL URLWithString:[_news.imgextra[1]objectForKey:@"imgsrc"]] placeholderImage:[UIImage imageNamed:@"placeholder"]];
         self.followLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
         self.followLabel.layer.masksToBounds = YES;
         self.followLabel.layer.borderWidth = 1;

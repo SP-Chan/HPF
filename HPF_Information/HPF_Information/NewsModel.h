@@ -37,6 +37,7 @@
 @property(nonatomic,strong)NSString *wap_desc;
 @property(nonatomic,strong)NSString *ptime;
 @property(nonatomic,strong)NSString *digest;
+@property(nonatomic,strong)NSArray *imgextra;
 
 
 

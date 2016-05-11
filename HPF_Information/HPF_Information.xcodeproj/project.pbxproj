@@ -184,6 +184,7 @@
 		3FB4D32A1CDA2CFF00B514F3 /* MinWeather.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FB4D3291CDA2CFF00B514F3 /* MinWeather.xib */; };
 		3FB4D32D1CDA302900B514F3 /* XPChartAndLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB4D32C1CDA302900B514F3 /* XPChartAndLineView.m */; };
 		3FE19C591CDC72F900BD876F /* textViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE19C581CDC72F900BD876F /* textViewController.m */; };
+		971D04E91CE3061C007130B5 /* ImgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 971D04E81CE3061C007130B5 /* ImgModel.m */; };
 		9720A0D11CE2113F00A13CAD /* ScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9720A0D01CE2113F00A13CAD /* ScrollViewController.m */; };
 		974760561CDDEA490029E9CF /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 974760551CDDEA490029E9CF /* placeholder.png */; };
 		977A145F1CDA200700F5879A /* placeholder1.png in Resources */ = {isa = PBXBuildFile; fileRef = 977A145A1CDA200700F5879A /* placeholder1.png */; };
@@ -507,6 +508,8 @@
 		3FB4D32C1CDA302900B514F3 /* XPChartAndLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPChartAndLineView.m; sourceTree = "<group>"; };
 		3FE19C571CDC72F900BD876F /* textViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = textViewController.h; sourceTree = "<group>"; };
 		3FE19C581CDC72F900BD876F /* textViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = textViewController.m; sourceTree = "<group>"; };
+		971D04E71CE3061C007130B5 /* ImgModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImgModel.h; sourceTree = "<group>"; };
+		971D04E81CE3061C007130B5 /* ImgModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImgModel.m; sourceTree = "<group>"; };
 		9720A0CF1CE2113F00A13CAD /* ScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollViewController.h; sourceTree = "<group>"; };
 		9720A0D01CE2113F00A13CAD /* ScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollViewController.m; sourceTree = "<group>"; };
 		974760551CDDEA490029E9CF /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
@@ -818,6 +821,8 @@
 			children = (
 				97B0A7D71CDAD6AD0008A2F7 /* NewsModel.h */,
 				97B0A7D81CDAD6AD0008A2F7 /* NewsModel.m */,
+				971D04E71CE3061C007130B5 /* ImgModel.h */,
+				971D04E81CE3061C007130B5 /* ImgModel.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -1608,6 +1613,7 @@
 				97FAB9841CDCA24600996308 /* MJRefreshFooter.m in Sources */,
 				97FAB9851CDCA24600996308 /* MJRefreshHeader.m in Sources */,
 				3F3270341CD9E99200926CFA /* TripViewController.m in Sources */,
+				971D04E91CE3061C007130B5 /* ImgModel.m in Sources */,
 				3F19A4401CD313BB00C3D532 /* HPFBaseImageView.m in Sources */,
 				3F5D07641CE0656C002A9998 /* FMDatabaseAdditions.m in Sources */,
 				3F5D07471CE064BB002A9998 /* AlmanacContentTwo.m in Sources */,
