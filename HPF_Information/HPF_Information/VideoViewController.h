@@ -7,7 +7,7 @@
 //
 
 #import "HPFBaseViewController.h"
-
-@interface VideoViewController : HPFBaseViewController
-
+#import "VideoPlayerViewController.h"
+@interface VideoViewController : HPFBaseViewController<UITableViewDataSource,UITableViewDelegate>
+@property(nonatomic,strong)UITableView *tableView;
 @end
