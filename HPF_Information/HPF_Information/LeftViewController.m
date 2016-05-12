@@ -49,7 +49,7 @@
 //创建中间的Button
 -(void)createMiddleButton
 {
-    NSArray *array = [NSArray arrayWithObjects:@"关于我们",@"关于我们",@"关于我们",@"清除缓存",@"关于我们", nil];
+    NSArray *array = [NSArray arrayWithObjects:@"关于我们",@"检查更新",@"意见反馈",@"清除缓存",@"关于我们", nil];
     for (int i = 0 ; i<5; i++) {
         HPFBaseButton *button = [HPFBaseButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(0, 150+kSCREEN_HEIGHT/11*i, kSCREEN_WIDTH*2/3, kSCREEN_HEIGHT/11);

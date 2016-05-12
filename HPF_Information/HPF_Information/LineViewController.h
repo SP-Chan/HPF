@@ -10,4 +10,5 @@
 
 @interface LineViewController : HPFBaseViewController
 @property(nonatomic,strong)UITextField *textFild;
+@property(nonatomic,strong)NSString *cityName;
 @end

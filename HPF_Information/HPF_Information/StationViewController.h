@@ -9,5 +9,5 @@
 #import "HPFBaseViewController.h"
 
 @interface StationViewController : HPFBaseViewController
-
+@property(nonatomic,strong)NSString *cityName;
 @end

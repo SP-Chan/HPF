@@ -18,6 +18,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    NSString *string = [[NSUserDefaults standardUserDefaults] stringForKey:kBusCity];
+    if (string.length == 0) {
+        [[NSUserDefaults standardUserDefaults]setObject:@"广州" forKey:kBusCity];
+    }
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = [[ViewController alloc] init];
     [self.window makeKeyAndVisible];

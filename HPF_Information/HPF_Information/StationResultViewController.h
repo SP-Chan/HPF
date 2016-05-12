@@ -10,4 +10,5 @@
 
 @interface StationResultViewController : HPFBaseViewController
 @property(nonatomic,strong)NSString *busName;
+@property(nonatomic,strong)NSString *cityName;
 @end

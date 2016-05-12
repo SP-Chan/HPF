@@ -32,14 +32,20 @@
     
 }
 
+
+
 -(void)selectResult
 {
-    [NetworkRequestManager requestWithType:POST urlString:@"http://apis.baidu.com/xiaota/bus_lines/buses_lines" ParDic:@{@"city":@"广州",@"bus":self.busNumber,@"direction":@"0"} Header:kBaiDuAPIKey finish:^(NSData *data) {
+    NSString *string = [[NSUserDefaults standardUserDefaults] stringForKey:kBusCity];
+    [NetworkRequestManager requestWithType:POST urlString:@"http://apis.baidu.com/xiaota/bus_lines/buses_lines" ParDic:@{@"city":string,@"bus":self.busNumber,@"direction":@"0"} Header:kBaiDuAPIKey finish:^(NSData *data) {
         
         [self.busesArray removeAllObjects];
         [self.stationArray removeAllObjects];
         
         NSDictionary *dicData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        //请求数据判断
+        if ([[dicData objectForKey:@"msg"] isEqualToString:@"success!"])
+        {
         NSDictionary *dic = [dicData objectForKey:@"data"];
         NSArray *array = [dic objectForKey:@"buses"];
         //            NSLog(@"%ld",array.count);
@@ -63,23 +69,35 @@
             
         }
         NSLog(@"------->%ld",_stationArray.count);
-        //回归主线程
-        dispatch_async(dispatch_get_main_queue(), ^{
-            //判断,当数据错误,时候执行提示
-            if (_stationArray.count == 0) {
+            //回归主线程
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //数组判断,当数据错误,时候执行提示
+                if (_stationArray.count == 0) {
+                    _alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"抱歉,暂无该车信息" preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    [self presentViewController:_alert animated:YES completion:^{
+                        [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(reBack) userInfo:nil repeats:NO];
+                    }];
+                }
+                else{
+#pragma -mark 避免刷新的时候重复 执行 self createContext
+                    if (!_flag) {
+                        [self createUI];
+                    }
+                }
+            });
+        }
+        else{
+            dispatch_async(dispatch_get_main_queue(), ^{
                 _alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"抱歉,暂无该车信息" preferredStyle:UIAlertControllerStyleAlert];
                 
                 [self presentViewController:_alert animated:YES completion:^{
                     [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(reBack) userInfo:nil repeats:NO];
                 }];
-            }
-            else{
-#pragma -mark 避免刷新的时候重复 执行 self createContext
-                if (!_flag) {
-                    [self createUI];
-                }
-            }
-        });
+
+            });
+        }
+
     } err:^(NSError *error) {
     
     }];

@@ -45,12 +45,14 @@
 {
     [self.forwardArray removeAllObjects];
     [self.reverseArray removeAllObjects];
-    
-    [NetworkRequestManager requestWithType:POST urlString:@"http://op.juhe.cn/189/bus/busline" ParDic:@{@"city":@"广州",@"bus":self.busNumber,@"key":kJuHeAPIKey} Header:nil finish:^(NSData *data) {
+    NSString *string = [[NSUserDefaults standardUserDefaults] stringForKey:kBusCity];
+    [NetworkRequestManager requestWithType:POST urlString:@"http://op.juhe.cn/189/bus/busline" ParDic:@{@"city":string,@"bus":self.busNumber,@"key":kJuHeAPIKey} Header:nil finish:^(NSData *data) {
         NSError *error = nil;
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
         NSArray *resultArray = [dic objectForKey:@"result"];
-        
+        if ([[dic objectForKey:@"reason"] isEqualToString:@"success"])
+        {
+
         [self.forwardLine setValuesForKeysWithDictionary:[resultArray objectAtIndex:0]];
         [self.reverseLine setValuesForKeysWithDictionary:[resultArray objectAtIndex:1]];
         
@@ -66,21 +68,27 @@
             [message setValuesForKeysWithDictionary:dic];
             [self.reverseArray addObject:message];
             NSLog(@"%@",message.name);
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (self.forwardArray.count == 0) {
-                _alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"抱歉,暂无该车信息" preferredStyle:UIAlertControllerStyleAlert];
-                
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (self.forwardArray.count == 0) {
+                    _alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"抱歉,暂无该车信息" preferredStyle:UIAlertControllerStyleAlert];
                 [self presentViewController:_alert animated:YES completion:^{
                     [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(reBack) userInfo:nil repeats:NO];
                 }];
-            }else{
+                }else{
                 self.changeArray = self.forwardArray;
                 [self createUI];
-
-            }
-
-        });
+                }
+                
+            });
+        }
+        }else{
+            _alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"抱歉,暂无该车信息" preferredStyle:UIAlertControllerStyleAlert];
+            
+            [self presentViewController:_alert animated:YES completion:^{
+                [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(reBack) userInfo:nil repeats:NO];
+            }];
+            
+        }
         
     } err:^(NSError *error) {
         
@@ -91,7 +99,7 @@
 -(UITableView *)tab
 {
     if (!_tab) {
-        _tab = [[UITableView alloc] initWithFrame:CGRectMake(0, kSCREEN_HEIGHT/11+20, kSCREEN_WIDTH, kSCREEN_HEIGHT-64-49-kSCREEN_HEIGHT/11) style:UITableViewStylePlain];
+        _tab = [[UITableView alloc] initWithFrame:CGRectMake(0, kSCREEN_HEIGHT/11+20, kSCREEN_WIDTH, kSCREEN_HEIGHT-64-49-kSCREEN_HEIGHT/8) style:UITableViewStylePlain];
         _tab.delegate = self;
         _tab.dataSource = self;
         _tab.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -109,9 +117,10 @@
 //        if (self.isForward == YES) {
             _lineTopView.startLabel.text = [NSString stringWithFormat:@"起:%@",self.forwardLine.front_name];
             _lineTopView.finishLabel.text = [NSString stringWithFormat:@"终:%@",self.forwardLine.terminal_name];
-            _lineTopView.startTimeLabel.text = [NSString stringWithFormat:@"首班车:%@",self.forwardLine.start_time];
-            _lineTopView.finishTimeLabel.text = [NSString stringWithFormat:@"末班车:%@",self.forwardLine.end_time];
-
+            _lineTopView.startTimeLabel.text = [NSString stringWithFormat:@"首班车:%@",[self AppendingNewTimeString:self.forwardLine.start_time]];
+        
+            _lineTopView.finishTimeLabel.text = [NSString stringWithFormat:@"末班车:%@",[self AppendingNewTimeString:self.forwardLine.end_time]];
+        
 //        }else
 //        {
 //            _lineTopView.startLabel.text = [NSString stringWithFormat:@"起:%@",self.reverseLine.front_name];
@@ -125,6 +134,14 @@
         [_lineTopView.changeButton addTarget:self action:@selector(changeDirection:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _lineTopView;
+}
+-(NSString *)AppendingNewTimeString:(NSString *)TimeString
+{
+    NSString *startString = [TimeString substringWithRange:NSMakeRange(0, 2)];
+    NSString *endString = [TimeString substringWithRange:NSMakeRange(2, 2)];
+    NSString *newString = [startString stringByAppendingString:@":"];
+    NSString *appendingString = [newString stringByAppendingString:endString];
+    return appendingString;
 }
 -(NSMutableArray *)forwardArray
 {
