@@ -9,5 +9,5 @@
 #import "HPFBaseViewController.h"
 
 @interface TripViewController : HPFBaseViewController
-
+@property(nonatomic,strong)NSString *cityName;
 @end

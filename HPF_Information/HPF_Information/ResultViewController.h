@@ -10,5 +10,5 @@
 
 @interface ResultViewController : HPFBaseViewController
 @property(nonatomic,strong)NSString *busNumber;
-
+@property(nonatomic,strong)NSString *cityName;
 @end

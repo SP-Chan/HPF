@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationBar.translucent = NO;
+    self.tabBarController.tabBar.translucent = NO;
 //    [self createNavigationController];
     //接收通知
     [self setNavigationControllerColor];

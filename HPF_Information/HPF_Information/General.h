@@ -31,5 +31,9 @@
  * 聚合APIKey
  **/
 #define kJuHeAPIKey @"f42334b47586bfd62de709c03db94cec"
+/**
+ * 切换公交城市
+ **/
+#define kBusCity @"kBusCity"
 
 #endif /* General_h */

@@ -10,4 +10,5 @@
 
 @interface QueryViewController : HPFBaseViewController
 @property(nonatomic,strong)UITextField *textFild;
+@property(nonatomic,strong)NSString *cityName;
 @end

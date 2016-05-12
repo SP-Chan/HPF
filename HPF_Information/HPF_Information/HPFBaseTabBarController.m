@@ -28,6 +28,7 @@
     [super viewDidLoad];
     [self addTabBarSubControllers];
     [self createTabBar];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeNightTheme:) name:nil object:nil];
 }
 #pragma mark- 添加子控制器
