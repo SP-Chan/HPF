@@ -75,7 +75,7 @@
     
     if (_flag == 0) {
         // 马上进入刷新状态
-        [self.tabView.header beginRefreshing];
+        [self.tabView.mj_header beginRefreshing];
     }
     else
     {
@@ -98,12 +98,6 @@
                 NewsModel *news = [[NewsModel alloc]init];
                 [news setValuesForKeysWithDictionary:dic];
                 [self.dataArrary addObject:news];
-                
-                if ([[dic allKeys] containsObject:@"imgextra"]) {
-                    NSArray *imgArray = [dic objectForKey:@"imgextra"];
-                    
-                }
-                
                 
             }
         });
@@ -254,7 +248,7 @@
 //下拉刷新
 -(void)creatHeaderRefresh
 {
-    _tabView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    _tabView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
 }
 
 -(void)loadNewData
@@ -270,7 +264,7 @@
 
 -(void)timeStopPP
 {
-    [_tabView.header endRefreshing];
+    [_tabView.mj_header endRefreshing];
 }
 
 

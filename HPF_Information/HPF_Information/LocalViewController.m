@@ -15,7 +15,7 @@
 #import "ImgModel.h"
 #import "ThreeImageCell.h"
 
-@interface LocalViewController ()<DFCarouselViewDelegate>
+@interface LocalViewController ()
 
 {
     NSInteger startNum;//第几条开始加载;
@@ -28,7 +28,6 @@
 @property(nonatomic,strong)NSMutableArray *imageArray;
 @property(nonatomic,assign)NSInteger flag;
 @property(nonatomic,assign)BOOL tag;
-@property(nonatomic,strong)DFCarouselView *carouselView;
 
 
 @end
@@ -87,7 +86,7 @@
    
     if (_flag == 0) {
         // 马上进入刷新状态
-        [self.tabView.header beginRefreshing];
+        [self.tabView.mj_header beginRefreshing];
     }
     else
     {
@@ -196,28 +195,6 @@
     _tabView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT-35-110) style:UITableViewStylePlain];
     _tabView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_tabView];
-    
-
-    self.carouselView.frame = CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT/4.5);
-//    _carouselView = [[DFCarouselView alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT/4.5)];
-    for (ImgModel *model in self.imgArray) {
-//        NSLog(@"%@",model.imgsrc);
-        [self.imageArray addObject:model.imgsrc];
-        
-    }
-//    NSLog(@"%@",_imageArray);
-
-    self.carouselView = [DFCarouselView carouselViewWithImageArray:_imageArray describeArray:nil];
-//    [_tabView setTableHeaderView:_carouselView];
-//    _tabView.tableHeaderView = self.carouselView;
-    [_tabView addSubview:self.carouselView];
-//    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT/4.5)];
-//    view.backgroundColor = [UIColor redColor];
-//    [view addSubview:self.carouselView];
-//    self.carouselView.backgroundColor = [UIColor blackColor];
-//    _tabView.tableHeaderView = view;
-    
-
     
     _tabView.delegate = self;
     _tabView.dataSource = self;
@@ -375,7 +352,7 @@
 #pragma mark 下拉刷新
 -(void)creatHeaderRefresh
 {
-    _tabView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    _tabView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
 }
 
 -(void)loadNewData
@@ -391,7 +368,7 @@
 
 -(void)timeStopPP
 {
-    [_tabView.header endRefreshing];
+    [_tabView.mj_header endRefreshing];
 }
 
 

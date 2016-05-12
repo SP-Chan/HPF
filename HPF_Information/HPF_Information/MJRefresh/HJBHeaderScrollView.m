@@ -86,7 +86,7 @@
 
   self.rightImageView.image = [[SDImageCache sharedImageCache]
       imageFromDiskCacheForKey:
-          [NSString stringWithFormat:@"img_0%d",
+          [NSString stringWithFormat:@"img_0%ld",
                                      (self.pageControl.currentPage + 1) >=
                                              (self.pageControl.numberOfPages)
                                          ? 0
@@ -94,7 +94,7 @@
 
   self.leftImageView.image = [[SDImageCache sharedImageCache]
       imageFromDiskCacheForKey:
-          [NSString stringWithFormat:@"img_0%d",
+          [NSString stringWithFormat:@"img_0%ld",
                                      (self.pageControl.currentPage - 1) < 0
                                          ? (self.pageControl.numberOfPages - 1)
                                          : (self.pageControl.currentPage - 1)]];

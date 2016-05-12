@@ -12,6 +12,7 @@
 #import <ImageIO/ImageIO.h>
 #import "SDWebImageManager.h"
 
+
 @interface SDWebImageDownloaderOperation () <NSURLConnectionDataDelegate>
 
 @property (copy, nonatomic) SDWebImageDownloaderProgressBlock progressBlock;
@@ -67,7 +68,9 @@
             [self reset];
             return;
         }
-
+        
+//忽略警告
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 #if TARGET_OS_IPHONE && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_4_0
         if ([self shouldContinueWhenAppEntersBackground]) {
             __weak __typeof__ (self) wself = self;
@@ -85,7 +88,15 @@
 #endif
 
         self.executing = YES;
+        
         self.connection = [[NSURLConnection alloc] initWithRequest:self.request delegate:self startImmediately:NO];
+        
+        
+        
+        
+        
+        
+        
         self.thread = [NSThread currentThread];
     }
 
