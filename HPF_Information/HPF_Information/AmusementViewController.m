@@ -10,6 +10,8 @@
 #import "NetworkRequestManager.h"
 #import "MJRefresh.h"
 #import "MJRefreshAutoFooter.h"
+#import "ThreeImageCell.h"
+
 @interface AmusementViewController ()
 {
     NSInteger startNum;//第几条开始加载;
@@ -137,24 +139,73 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *identifier = @"cell";
-    CommonCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (cell == nil) {
-        cell = [[[NSBundle mainBundle]loadNibNamed:@"CommonCell" owner:nil options:nil]lastObject];
-    }
+    //    NSLog(@"%@",_news.imgextra);
     
     NewsModel *news = [[NewsModel alloc]init];
+    
     news = [_dataArrary objectAtIndex:indexPath.row];
-    cell.news = news;
-    cell.backgroundColor = [UIColor clearColor];
-    return cell;
+    
+    if (news.imgextra != nil)
+    {
+        static NSString *identifier = @"cell";
+        ThreeImageCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (cell == nil) {
+            cell = [[[NSBundle mainBundle]loadNibNamed:@"ThreeImageCell" owner:nil options:nil]lastObject];
+        }
+        
+        NewsModel *news = [[NewsModel alloc]init];
+        
+        news = [_dataArrary objectAtIndex:indexPath.row];
+        cell.news = news;
+        
+        //        NSLog(@"%ld",news.imgextra.count);
+        
+        cell.backgroundColor = [UIColor clearColor];
+        return cell;
+        
+        
+    }
+    else
+    {
+        static NSString *identifier = @"cell";
+        CommonCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (cell == nil) {
+            cell = [[[NSBundle mainBundle]loadNibNamed:@"CommonCell" owner:nil options:nil]lastObject];
+        }
+        
+        NewsModel *news = [[NewsModel alloc]init];
+        news = [_dataArrary objectAtIndex:indexPath.row];
+        cell.news = news;
+        cell.backgroundColor = [UIColor clearColor];
+        return cell;
+    }
+    
+    
+    
 }
 
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 120;
+    
+    
+    NewsModel *news = [[NewsModel alloc]init];
+    
+    news = [_dataArrary objectAtIndex:indexPath.row];
+    
+    if (news.imgextra != nil)
+    {
+        
+        return 150;
+    }
+    else
+    {
+        return 120;
+    }
+    
+    
+    
 }
 
 
@@ -208,7 +259,7 @@
 -(void)loadNewData
 {
     
-    NSString *urlStr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/article/local/广州/0-20.html"];
+    NSString *urlStr = [NSString stringWithFormat:@"http://c.m.163.com/nc/article/list/T1348648517839/0-20.html"];
     
     [self requestData:urlStr];
     [_tabView  reloadData];

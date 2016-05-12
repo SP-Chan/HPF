@@ -19,5 +19,10 @@
 
 @property(nonatomic,strong)NewsModel *news;
 
+@property(nonatomic,strong)UIActivityIndicatorView *ActivityIndicator;
+@property(nonatomic,strong)UIView *actiView;
+@property(nonatomic,strong)UILabel *label;
+
+
 
 @end

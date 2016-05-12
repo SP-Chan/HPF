@@ -12,8 +12,10 @@
 #import "MJRefreshAutoFooter.h"
 #import "DFCarouselView.h"
 #import "NewsModel.h"
+#import "ImgModel.h"
+#import "ThreeImageCell.h"
 
-@interface LocalViewController ()
+@interface LocalViewController ()<DFCarouselViewDelegate>
 
 {
     NSInteger startNum;//第几条开始加载;
@@ -23,7 +25,10 @@
 @property(nonatomic,strong)NSMutableArray *array;
 @property(nonatomic,strong)NSMutableArray *dataArrary;
 @property(nonatomic,strong)NSMutableArray *imgArray;
+@property(nonatomic,strong)NSMutableArray *imageArray;
 @property(nonatomic,assign)NSInteger flag;
+@property(nonatomic,assign)BOOL tag;
+@property(nonatomic,strong)DFCarouselView *carouselView;
 
 
 @end
@@ -61,12 +66,14 @@
     NSString *urlStr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/article/local/广州/%@.html",str];
     
     [self requestData:urlStr];
-    [self createTableView];
+//    [self createTableView];
     
-    [self creatFooterRefresh];
-    [self creatHeaderRefresh];
+//    [self creatFooterRefresh];
+//    [self creatHeaderRefresh];
     
      _flag = 0;
+    
+     _tag = NO;
     
     
     // Do any additional setup after loading the view.
@@ -95,26 +102,79 @@
 -(void)requestData:(NSString *)string
 {
     
+    
+    if (!_actiView) {
+        _actiView = [[UIView alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH/2.85, kSCREEN_HEIGHT/4, kSCREEN_WIDTH/3.3, kSCREEN_HEIGHT/6)];
+        _actiView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.65];
+        _actiView.layer.cornerRadius = 10;
+        _actiView.layer.masksToBounds = YES;
+        [self.view addSubview:_actiView];
+        
+        if (_ActivityIndicator == nil) {
+            //菊花;
+            _ActivityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+            //        _ActivityIndicator.center = CGPointMake(kSCREEN_WIDTH/2, kSCREEN_HEIGHT/4);
+            _ActivityIndicator.center = _actiView.center;
+            
+            [self.view addSubview:_ActivityIndicator];
+            
+            [_ActivityIndicator startAnimating];
+        }
+        
+        if (!_label) {
+            _label = [[UILabel alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH/2.25, kSCREEN_HEIGHT/3.3, kSCREEN_WIDTH/3.3, kSCREEN_HEIGHT/6)];
+            _label.text = @"加载中";
+            _label.backgroundColor = [UIColor clearColor];
+            [self.view addSubview:_label];
+        }
+        
+    }
+    
+    
+    
+    
+    
     [NetworkRequestManager requestWithType:GET urlString:string ParDic:nil Header:nil finish:^(NSData *data) {
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            
+        self.imgArray = [NSMutableArray array];
+        
             NSDictionary *dataDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
             NSArray *array = [dataDic objectForKey:@"广州"];
             for (NSDictionary *dic in array) {
                 NewsModel *news = [[NewsModel alloc]init];
                 [news setValuesForKeysWithDictionary:dic];
                 [self.dataArrary addObject:news];
-                
-                if ([[dic allKeys] containsObject:@"imgextra"]) {
-                    _imgArray = [dic objectForKey:@"imgextra"];
-//                    NSLog(@"%@",_imgArray);
+            
+                if (news.imgextra != nil) {
+                    for (NSDictionary *imgDic in news.imgextra) {
+                        ImgModel *imgModel = [[ImgModel alloc]init];
+                        [imgModel setValuesForKeysWithDictionary:imgDic];
+                        
+                        [self.imgArray addObject:imgModel];
+//                        NSLog(@"imgArray = %@",imgModel.imgsrc);
+                    }
                 }
                 
             }
-        });
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tabView reloadData];
+            
+//            [self.tabView reloadData];
+            if (!_tag) {
+                [self createTableView];
+                [self creatFooterRefresh];
+                [self creatHeaderRefresh];
+                
+                [_ActivityIndicator stopAnimating]; // 结束旋转
+                [_ActivityIndicator setHidesWhenStopped:YES];
+                [self.actiView removeFromSuperview];
+                [self.label removeFromSuperview];
+                
+                
+                
+                
+            }
+            _tag = YES;
+            
         });
         
         
@@ -123,7 +183,13 @@
     }];
 }
 
-
+-(NSMutableArray *)imageArray
+{
+    if (!_imageArray) {
+        _imageArray = [NSMutableArray array];
+    }
+    return _imageArray;
+}
 #pragma mark 创建TableView
 -(void)createTableView
 {
@@ -131,8 +197,32 @@
     _tabView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_tabView];
     
+
+    self.carouselView.frame = CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT/4.5);
+//    _carouselView = [[DFCarouselView alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT/4.5)];
+    for (ImgModel *model in self.imgArray) {
+//        NSLog(@"%@",model.imgsrc);
+        [self.imageArray addObject:model.imgsrc];
+        
+    }
+//    NSLog(@"%@",_imageArray);
+
+    self.carouselView = [DFCarouselView carouselViewWithImageArray:_imageArray describeArray:nil];
+//    [_tabView setTableHeaderView:_carouselView];
+//    _tabView.tableHeaderView = self.carouselView;
+    [_tabView addSubview:self.carouselView];
+//    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT/4.5)];
+//    view.backgroundColor = [UIColor redColor];
+//    [view addSubview:self.carouselView];
+//    self.carouselView.backgroundColor = [UIColor blackColor];
+//    _tabView.tableHeaderView = view;
+    
+
+    
     _tabView.delegate = self;
     _tabView.dataSource = self;
+    
+
     
 }
 
@@ -144,72 +234,114 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+//    NSLog(@"%@",_news.imgextra);
     
-//    if (_imgArray.count == 2) {
-//        static NSString *identifier = @"cell";
-//        ThreeImageCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-//        if (cell == nil) {
-//            cell = [[[NSBundle mainBundle]loadNibNamed:@"ThreeImageCell" owner:nil options:nil]lastObject];
-//        }
-//        
-//        NewsModel *news = [[NewsModel alloc]init];
-//        news = [_dataArrary objectAtIndex:indexPath.row];
-//        cell.news = news;
-//        cell.backgroundColor = [UIColor clearColor];
-//        return cell;
-//
-//        }
-//        else
-//        {
-            static NSString *identifier = @"cell";
-            CommonCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            if (cell == nil) {
-                cell = [[[NSBundle mainBundle]loadNibNamed:@"CommonCell" owner:nil options:nil]lastObject];
-            }
-            
-            NewsModel *news = [[NewsModel alloc]init];
-            news = [_dataArrary objectAtIndex:indexPath.row];
-            cell.news = news;
-            cell.backgroundColor = [UIColor clearColor];
-            return cell;
-           
-//        }
+    NewsModel *news = [[NewsModel alloc]init];
+    
+    news = [_dataArrary objectAtIndex:indexPath.row];
+    
+    if (news.imgextra != nil)
+    {
+        static NSString *identifier = @"cell";
+        ThreeImageCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (cell == nil) {
+            cell = [[[NSBundle mainBundle]loadNibNamed:@"ThreeImageCell" owner:nil options:nil]lastObject];
+        }
+        
+        NewsModel *news = [[NewsModel alloc]init];
+        
+        news = [_dataArrary objectAtIndex:indexPath.row];
+        cell.news = news;
+        
+//        NSLog(@"%ld",news.imgextra.count);
+        
+        cell.backgroundColor = [UIColor clearColor];
+        return cell;
+
+        
+    }
+    else
+    {
+        static NSString *identifier = @"cell";
+        CommonCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (cell == nil) {
+            cell = [[[NSBundle mainBundle]loadNibNamed:@"CommonCell" owner:nil options:nil]lastObject];
+        }
+        
+        NewsModel *news = [[NewsModel alloc]init];
+        news = [_dataArrary objectAtIndex:indexPath.row];
+        cell.news = news;
+        cell.backgroundColor = [UIColor clearColor];
+        return cell;
+    }
+    
+    
     
 }
 
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 130;
-}
 
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    
-    
-    return nil;
-    
-}
 
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 120;
+    
+    
+    NewsModel *news = [[NewsModel alloc]init];
+    
+    news = [_dataArrary objectAtIndex:indexPath.row];
+    
+    if (news.imgextra != nil)
+    {
+    
+    return 150;
+    }
+    else
+    {
+        return 120;
+    }
+    
+    
+    
 }
 
 
 #pragma mark  点击跳转的方法;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // 取消选中状态
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    NewsModel *news = [_dataArrary objectAtIndex:indexPath.row];
+    
+    NewsModel *news = [[NewsModel alloc]init];
+    
+    news = [_dataArrary objectAtIndex:indexPath.row];
+    
+    if (news.imgextra != nil)
+    {
+        UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+//        cell.selected = NO;
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        cell.userInteractionEnabled = NO;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    
+//    NewsModel *news = [_dataArrary objectAtIndex:indexPath.row];
     
     WebViewController *webVC = [[WebViewController alloc]init];
     webVC.news = news;
     
     [self.navigationController pushViewController:webVC animated:YES];
 }
+
+
+
+
+
+
+
+
 
 #pragma mark  加载更多
 - (void) creatFooterRefresh

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -10,49 +10,85 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="149"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="149.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6IX-Nt-IGI">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6IX-Nt-IGI">
                         <rect key="frame" x="8" y="35" width="100" height="80"/>
-                        <animations/>
-                    </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sME-Wi-iLD">
-                        <rect key="frame" x="110" y="35" width="100" height="80"/>
-                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="yah-k9-so4"/>
+                        </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1WI-XZ-yxq">
                         <rect key="frame" x="212" y="35" width="100" height="80"/>
-                        <animations/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5EX-44-4DV">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5EX-44-4DV">
                         <rect key="frame" x="8" y="5" width="304" height="25"/>
-                        <animations/>
-                        <color key="backgroundColor" red="0.62501045040000003" green="0.92828211230000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="LsM-yS-5NA"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5VB-7p-qEh">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5VB-7p-qEh">
                         <rect key="frame" x="8" y="123" width="100" height="21"/>
-                        <animations/>
-                        <color key="backgroundColor" red="0.62501045040000003" green="0.92828211230000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="rhM-oN-EEn"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4b-WC-baO">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4b-WC-baO">
                         <rect key="frame" x="243" y="123" width="69" height="21"/>
-                        <animations/>
-                        <color key="backgroundColor" red="0.62501045040000003" green="0.92828211230000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="0oe-T0-SKk"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TFv-ns-Kcq">
+                        <rect key="frame" x="110" y="35" width="100" height="80"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Gy8-lK-6cw">
+                                <rect key="frame" x="0.0" y="0.0" width="100" height="80"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="nts-wU-iSk">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="80"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sME-Wi-iLD">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="80"/>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="0ZM-ot-U8I"/>
+                                    <constraint firstAttribute="width" constant="100" id="8EN-Bu-uJ7"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Gy8-lK-6cw" firstAttribute="centerY" secondItem="TFv-ns-Kcq" secondAttribute="centerY" id="T8j-FB-qYY"/>
+                            <constraint firstAttribute="bottom" secondItem="Gy8-lK-6cw" secondAttribute="bottom" id="evP-T8-hkl"/>
+                        </constraints>
+                    </stackView>
                 </subviews>
-                <animations/>
+                <constraints>
+                    <constraint firstItem="5EX-44-4DV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="5a0-vg-qfX"/>
+                    <constraint firstItem="5EX-44-4DV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="7ZU-tc-cFe"/>
+                    <constraint firstItem="5VB-7p-qEh" firstAttribute="top" secondItem="6IX-Nt-IGI" secondAttribute="bottom" constant="8" id="JzP-tt-DoD"/>
+                    <constraint firstAttribute="trailing" secondItem="C4b-WC-baO" secondAttribute="trailing" constant="8" id="Krc-Ye-jZM"/>
+                    <constraint firstAttribute="bottom" secondItem="5VB-7p-qEh" secondAttribute="bottom" constant="5.5" id="O6n-Dl-fc2"/>
+                    <constraint firstItem="6IX-Nt-IGI" firstAttribute="top" secondItem="5EX-44-4DV" secondAttribute="bottom" constant="5" id="P0y-c5-i04"/>
+                    <constraint firstItem="6IX-Nt-IGI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="cj4-no-uHq"/>
+                    <constraint firstAttribute="trailing" secondItem="5EX-44-4DV" secondAttribute="trailing" constant="8" id="dLN-XL-jf8"/>
+                    <constraint firstItem="5VB-7p-qEh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="m2D-RP-bB8"/>
+                    <constraint firstAttribute="bottom" secondItem="C4b-WC-baO" secondAttribute="bottom" constant="5.5" id="oO8-IU-VOz"/>
+                </constraints>
             </tableViewCellContentView>
-            <animations/>
             <connections>
                 <outlet property="followLabel" destination="C4b-WC-baO" id="Jar-oC-ah6"/>
                 <outlet property="iconImage1" destination="6IX-Nt-IGI" id="JYY-pd-OvK"/>
@@ -61,7 +97,7 @@
                 <outlet property="sourceLabel" destination="5VB-7p-qEh" id="Zfb-KR-z4X"/>
                 <outlet property="titleLabel" destination="5EX-44-4DV" id="gkd-hC-6JM"/>
             </connections>
-            <point key="canvasLocation" x="417" y="275"/>
+            <point key="canvasLocation" x="410" y="287"/>
         </tableViewCell>
     </objects>
 </document>
