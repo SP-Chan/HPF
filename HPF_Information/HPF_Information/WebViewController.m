@@ -89,33 +89,28 @@
         
     }
     
-    
-    
-    
-    
-    
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(stopActivityIndicator) userInfo:self repeats:YES];
-    
+//    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(stopActivityIndicator) userInfo:self repeats:YES];
     
 }
 
 -(void)stopActivityIndicator
 {
-    [_ActivityIndicator stopAnimating]; // 结束旋转
-    [_ActivityIndicator setHidesWhenStopped:YES];
-    [self.actiView removeFromSuperview];
-    [self.label removeFromSuperview];
+//    [_ActivityIndicator stopAnimating]; // 结束旋转
+//    [_ActivityIndicator setHidesWhenStopped:YES];
+//    [self.actiView removeFromSuperview];
+//    [self.label removeFromSuperview];
 }
-
-
 
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView
 {
     
+        [_ActivityIndicator stopAnimating]; // 结束旋转
+        [_ActivityIndicator setHidesWhenStopped:YES];
+        [self.actiView removeFromSuperview];
+        [self.label removeFromSuperview];
     
 //     [_webV stringByEvaluatingJavaScriptFromString:@"document.body.style.background='red'"];
-    
     
     //webView日间与夜间模式下背景颜色的切换
 //    NSString *string = [[NSUserDefaults standardUserDefaults] stringForKey:kChangeTheme];
@@ -127,9 +122,6 @@
 //    }
     
 }
-
-
-
 
 
 

@@ -12,6 +12,9 @@
 @implementation CommonCell
 
 
+
+
+
 -(void)layoutSubviews
 {
     [super layoutSubviews];
@@ -30,6 +33,8 @@
         self.followLabel.layer.masksToBounds = YES;
         self.followLabel.layer.borderWidth = 1;
         self.followLabel.layer.cornerRadius = 5;
+        
+        
         
         
     });

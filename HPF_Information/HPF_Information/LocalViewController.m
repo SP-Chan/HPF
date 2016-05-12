@@ -102,6 +102,38 @@
 -(void)requestData:(NSString *)string
 {
     
+    
+    if (!_actiView) {
+        _actiView = [[UIView alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH/2.85, kSCREEN_HEIGHT/4, kSCREEN_WIDTH/3.3, kSCREEN_HEIGHT/6)];
+        _actiView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.65];
+        _actiView.layer.cornerRadius = 10;
+        _actiView.layer.masksToBounds = YES;
+        [self.view addSubview:_actiView];
+        
+        if (_ActivityIndicator == nil) {
+            //菊花;
+            _ActivityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+            //        _ActivityIndicator.center = CGPointMake(kSCREEN_WIDTH/2, kSCREEN_HEIGHT/4);
+            _ActivityIndicator.center = _actiView.center;
+            
+            [self.view addSubview:_ActivityIndicator];
+            
+            [_ActivityIndicator startAnimating];
+        }
+        
+        if (!_label) {
+            _label = [[UILabel alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH/2.25, kSCREEN_HEIGHT/3.3, kSCREEN_WIDTH/3.3, kSCREEN_HEIGHT/6)];
+            _label.text = @"加载中";
+            _label.backgroundColor = [UIColor clearColor];
+            [self.view addSubview:_label];
+        }
+        
+    }
+    
+    
+    
+    
+    
     [NetworkRequestManager requestWithType:GET urlString:string ParDic:nil Header:nil finish:^(NSData *data) {
         
         self.imgArray = [NSMutableArray array];
@@ -131,6 +163,15 @@
                 [self createTableView];
                 [self creatFooterRefresh];
                 [self creatHeaderRefresh];
+                
+                [_ActivityIndicator stopAnimating]; // 结束旋转
+                [_ActivityIndicator setHidesWhenStopped:YES];
+                [self.actiView removeFromSuperview];
+                [self.label removeFromSuperview];
+                
+                
+                
+                
             }
             _tag = YES;
             
@@ -269,14 +310,38 @@
 #pragma mark  点击跳转的方法;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // 取消选中状态
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    NewsModel *news = [_dataArrary objectAtIndex:indexPath.row];
+    
+    NewsModel *news = [[NewsModel alloc]init];
+    
+    news = [_dataArrary objectAtIndex:indexPath.row];
+    
+    if (news.imgextra != nil)
+    {
+        UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+//        cell.selected = NO;
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        cell.userInteractionEnabled = NO;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    
+//    NewsModel *news = [_dataArrary objectAtIndex:indexPath.row];
     
     WebViewController *webVC = [[WebViewController alloc]init];
     webVC.news = news;
     
     [self.navigationController pushViewController:webVC animated:YES];
 }
+
+
+
+
+
+
+
+
 
 #pragma mark  加载更多
 - (void) creatFooterRefresh
