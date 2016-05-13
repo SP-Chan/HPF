@@ -43,14 +43,14 @@
     return _array;
 }
 
--(NSMutableArray *)dataArrary
-{
-    if (!_dataArrary) {
-        self.dataArrary = [NSMutableArray array];
-        
-    }
-    return _dataArrary;
-}
+//-(NSMutableArray *)dataArrary
+//{
+//    if (!_dataArrary) {
+//        self.dataArrary = [NSMutableArray array];
+//        
+//    }
+//    return _dataArrary;
+//}
 
 
 #pragma mark viewDidLoad
@@ -60,7 +60,7 @@
     startNum = 0;
     countNum = 20;
     
-    NSString *str = [NSString stringWithFormat:@"%ld-%ld",startNum,countNum];
+    NSString *str = [NSString stringWithFormat:@"%ld-%ld",(long)startNum,countNum];
     
     NSString *urlStr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/article/local/广州/%@.html",str];
     
@@ -74,6 +74,8 @@
     
      _tag = NO;
     
+    self.dataArrary = [NSMutableArray array];
+    
     
     // Do any additional setup after loading the view.
 }
@@ -85,7 +87,6 @@
     
    
     if (_flag == 0) {
-        // 马上进入刷新状态
         [self.tabView.mj_header beginRefreshing];
     }
     else
@@ -155,6 +156,8 @@
                 }
                 
             }
+        NSLog(@"%ld",_dataArrary.count);
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             
 //            [self.tabView reloadData];
@@ -297,19 +300,19 @@
     
     if (news.imgextra != nil)
     {
-        UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-//        cell.selected = NO;
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        cell.userInteractionEnabled = NO;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        ScrollViewController *sv = [[ScrollViewController alloc]init];
+        sv.news = news;
+        [self.navigationController pushViewController:sv animated:YES];
+        
     }
-    
-//    NewsModel *news = [_dataArrary objectAtIndex:indexPath.row];
-    
+    if (news.imgextra == nil)
+    {
+        
     WebViewController *webVC = [[WebViewController alloc]init];
     webVC.news = news;
     
-    [self.navigationController pushViewController:webVC animated:YES];
+        [self.navigationController pushViewController:webVC animated:YES];
+    }
 }
 
 
@@ -332,15 +335,29 @@
     
     //  http://c.3g.163.com/nc/article/local/广州/0-20.html
     
-    startNum = startNum +19;
-    NSString *str = [NSString stringWithFormat:@"%ld-%ld",startNum,countNum];
+    startNum = startNum + 19;
+    NSString *str = [NSString stringWithFormat:@"%ld-%ld",(long)startNum,countNum];
+    
     
     NSString *urlStr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/article/local/广州/%@.html",str];
     
     [self requestData:urlStr];
-    [self.tabView reloadData];
+//    [self.tabView reloadData];
     
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeStopP) userInfo:nil repeats:NO];
+//    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(timeStopP) userInfo:nil repeats:NO];
+    
+    
+    // 2.模拟2秒后刷新表格UI（真实开发中，可以移除这段gcd代码）
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        // 刷新表格
+        [self.tabView reloadData];
+        
+        // 拿到当前的上拉刷新控件，结束刷新状态
+        [self.tabView.mj_footer endRefreshing];
+    });
+
+    
+    
 }
 
 

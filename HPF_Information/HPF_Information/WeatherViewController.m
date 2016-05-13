@@ -79,7 +79,7 @@
             [fiveDayModel setValuesForKeysWithDictionary:fiveDayDic];
             [self.fiveDayModelArray addObject:fiveDayModel];
         }
-        NSLog(@"%ld",self.fiveDayModelArray.count);
+        NSLog(@"%ld",(unsigned long)self.fiveDayModelArray.count);
         
         //赋值 4
         NSDictionary *pm25Dic = [dicData objectForKey:@"pm25"];

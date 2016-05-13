@@ -58,7 +58,8 @@
 {
     self.tabBarView = [[HPFBaseView alloc] initWithFrame:CGRectMake(0, kSCREEN_HEIGHT-49, kSCREEN_WIDTH, 49)];
     _tabBarBackgroundImageView = [[HPFBaseImageView alloc] initWithFrame:self.tabBarView.bounds];
-    _tabBarBackgroundImageView.backgroundColor = [UIColor yellowColor];
+//    _tabBarBackgroundImageView.backgroundColor = [UIColor yellowColor];
+    [self setTabBarBackgroundImageColor];
     [self.tabBarView addSubview:_tabBarBackgroundImageView];
     [self.view addSubview:self.tabBarView];
     [self createTabBarButton];

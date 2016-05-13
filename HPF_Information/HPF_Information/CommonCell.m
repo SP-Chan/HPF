@@ -24,7 +24,7 @@
         
         self.titleLabel.text = _news.title;
         self.sourceLabel.text = _news.source;
-        NSString *str = [NSString stringWithFormat:@"%ld",_news.replyCount];
+        NSString *str = [NSString stringWithFormat:@"%ld",(long)_news.replyCount];
         NSString *followStr = [str stringByAppendingString:@"跟帖"];
         self.followLabel.text = followStr;
 //        [self.iconImage sd_setImageWithURL:[NSURL URLWithString:_news.imgsrc]];

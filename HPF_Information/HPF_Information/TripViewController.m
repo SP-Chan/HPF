@@ -96,7 +96,7 @@
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     NSInteger number = scrollView.contentOffset.x/_transportScrollView.frame.size.width;
-    NSLog(@"%ld",number);
+    NSLog(@"%ld",(long)(long)number);
     for (int i = 0; i<3; i++) {
         if (number == i) {
             HPFBaseButton *button = (HPFBaseButton *)[_topBackgroundView viewWithTag:number+1];
