@@ -27,23 +27,23 @@
     
     
     
-    self.webView = [[WKWebView alloc]initWithFrame:self.view.bounds];
-    [self.view addSubview:self.webView];
-    NSString *str = [NSString stringWithFormat:@"%@",self.news.url];
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
-    //左划回退
-    self.webView.allowsBackForwardNavigationGestures =YES;
-    _webView.scrollView.bounces = NO;
+//    self.webView = [[WKWebView alloc]initWithFrame:self.view.bounds];
+//    [self.view addSubview:self.webView];
+//    NSString *str = [NSString stringWithFormat:@"%@",self.news.url];
+//    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+//    //左划回退
+//    self.webView.allowsBackForwardNavigationGestures =YES;
+//    _webView.scrollView.bounces = NO;
     
     
 //    self.navigationController.navigationBar.hidden = YES;
-//    _webV = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT)];
-//    [self.view addSubview:_webV];
-//    NSURL *url = [NSURL URLWithString:self.news.url];
-//    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
-//    [_webV loadRequest:request];
-//    _webV.delegate = self;
-//    _webV.scrollView.bounces = NO;
+    _webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT)];
+    [self.view addSubview:_webView];
+    NSURL *url = [NSURL URLWithString:self.news.url];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+    [_webView loadRequest:request];
+    _webView.delegate = self;
+    _webView.scrollView.bounces = NO;
     
     
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT/13.6)];

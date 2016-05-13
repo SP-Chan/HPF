@@ -156,11 +156,11 @@
                 }
                 
             }
-        NSLog(@"%ld",_dataArrary.count);
+//        NSLog(@"%ld",_dataArrary.count);
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-//            [self.tabView reloadData];
+            [self.tabView reloadData];
             if (!_tag) {
                 [self createTableView];
                 [self creatFooterRefresh];
@@ -214,8 +214,6 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSLog(@"%@",_news.imgextra);
-    
     NewsModel *news = [[NewsModel alloc]init];
     
     news = [_dataArrary objectAtIndex:indexPath.row];
@@ -227,18 +225,11 @@
         if (cell == nil) {
             cell = [[[NSBundle mainBundle]loadNibNamed:@"ThreeImageCell" owner:nil options:nil]lastObject];
         }
-        
         NewsModel *news = [[NewsModel alloc]init];
-        
         news = [_dataArrary objectAtIndex:indexPath.row];
         cell.news = news;
-        
-//        NSLog(@"%ld",news.imgextra.count);
-        
         cell.backgroundColor = [UIColor clearColor];
         return cell;
-
-        
     }
     else
     {
@@ -247,43 +238,23 @@
         if (cell == nil) {
             cell = [[[NSBundle mainBundle]loadNibNamed:@"CommonCell" owner:nil options:nil]lastObject];
         }
-        
         NewsModel *news = [[NewsModel alloc]init];
         news = [_dataArrary objectAtIndex:indexPath.row];
         cell.news = news;
         cell.backgroundColor = [UIColor clearColor];
         return cell;
     }
-    
-    
-    
 }
-
-
-
-
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
     NewsModel *news = [[NewsModel alloc]init];
-    
     news = [_dataArrary objectAtIndex:indexPath.row];
-    
     if (news.imgextra != nil)
     {
-    
     return 150;
-    }
-    else
-    {
-        return 120;
-    }
-    
-    
-    
+    }else{return 120;}
 }
 
 
@@ -303,11 +274,9 @@
         ScrollViewController *sv = [[ScrollViewController alloc]init];
         sv.news = news;
         [self.navigationController pushViewController:sv animated:YES];
-        
     }
     if (news.imgextra == nil)
     {
-        
     WebViewController *webVC = [[WebViewController alloc]init];
     webVC.news = news;
     
@@ -315,15 +284,7 @@
     }
 }
 
-
-
-
-
-
-
-
-
-#pragma mark  加载更多
+#pragma mark  上拉加载更多
 - (void) creatFooterRefresh
 {
     _tabView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
@@ -332,34 +293,19 @@
 
 -(void)loadMoreData
 {
-    
     //  http://c.3g.163.com/nc/article/local/广州/0-20.html
     
     startNum = startNum + 19;
     NSString *str = [NSString stringWithFormat:@"%ld-%ld",(long)startNum,countNum];
     
-    
     NSString *urlStr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/article/local/广州/%@.html",str];
     
     [self requestData:urlStr];
-//    [self.tabView reloadData];
+    [self.tabView reloadData];
     
-//    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(timeStopP) userInfo:nil repeats:NO];
-    
-    
-    // 2.模拟2秒后刷新表格UI（真实开发中，可以移除这段gcd代码）
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        // 刷新表格
-        [self.tabView reloadData];
-        
-        // 拿到当前的上拉刷新控件，结束刷新状态
-        [self.tabView.mj_footer endRefreshing];
-    });
-
-    
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(timeStopP) userInfo:nil repeats:NO];
     
 }
-
 
 -(void)timeStopP
 {
@@ -374,7 +320,6 @@
 
 -(void)loadNewData
 {
-
     NSString *urlStr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/article/local/广州/0-20.html"];
     
     [self requestData:urlStr];
@@ -390,16 +335,14 @@
 
 
 
+
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-
-
-
-
 
 
 /*

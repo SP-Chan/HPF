@@ -12,11 +12,12 @@
 
 
 
-@interface WebViewController : HPFBaseViewController
+@interface WebViewController : HPFBaseViewController<UIWebViewDelegate>
 
 @property(nonatomic,strong)NewsModel *news;
 
-@property (nonatomic,strong)WKWebView *webView;
+//@property (nonatomic,strong)WKWebView *webView;
+@property (nonatomic,strong)UIWebView *webView;
 
 
 
