@@ -65,17 +65,62 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
     /*
      
      春绿色 [UIColor colorWithRed:105/255.0 green:178/255.0 blue:115/255.0 alpha:1];
       
      [UIColor colorWithRed:249/255.0 green:191/255.0 blue:100/255.0 alpha:1];
      */
+
+
+    NSDate *  senddate=[NSDate date];
     
- 
-   
+    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+    
+    [dateformatter setDateFormat:@"YYYY-MM-dd"];
+    
+    _urlTime=[dateformatter stringFromDate:senddate];
+
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:_urlTime,@"dateTime", nil];
+    
+    
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"time"];
+    
+    [[NSUserDefaults standardUserDefaults]setObject:dic forKey:@"time"];
+
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(Actiom:) name:@"标签" object:nil];
+
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(search:) name:@"搜索" object:nil];
+
+     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(yearBeyond) name:@"yearBeyond" object:nil];
+    
+
+     [self requestData];
+    
+     _constellationArray = [NSMutableArray array];
+    for (int i = 0; i<12; i++) {
+        NSString *str = [NSString stringWithFormat:@"xingzuo000%d.jpg",i+1];
+        UIImage *image = [UIImage imageNamed:str];
+        [_constellationArray addObject:image];
+    }
+
+    [self setRightNavigation];
+}
+-(void)setRightNavigation
+{
+  
+    UIButton*rightButton = [[UIButton alloc]initWithFrame:CGRectMake(0,0,30,30)];
+    [rightButton setImage:[UIImage imageNamed:@"jing.png"]forState:UIControlStateNormal];
+    
+    [rightButton addTarget:self action:@selector(Comeback) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem*rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightButton];
+    
+    self.navigationItem.rightBarButtonItem= rightItem;
+}
+
+-(void)Comeback
+{
 
     NSDate *  senddate=[NSDate date];
     
@@ -85,40 +130,15 @@
     
     _urlTime=[dateformatter stringFromDate:senddate];
     
- 
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:_urlTime,@"dateTime", nil];
     
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:_urlTime,@"dateTime", nil];
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"time" object:nil userInfo:dic];
     
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"time"];
     
     [[NSUserDefaults standardUserDefaults]setObject:dic forKey:@"time"];
-  
-
-   
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(Actiom:) name:@"标签" object:nil];
-
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(search:) name:@"搜索" object:nil];
-
-     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(yearBeyond) name:@"yearBeyond" object:nil];
-    
-    
-    
-    
-    
-    
-    
-     [self requestData];
-    
-     _constellationArray = [NSMutableArray array];
-    for (int i = 0; i<12; i++) {
-        NSString *str = [NSString stringWithFormat:@"xingzuo000%d.jpg",i+1];
-        UIImage *image = [UIImage imageNamed:str];
-        [_constellationArray addObject:image];
-    }
-    
-   
+ 
 }
-
 #pragma -mark 解梦通知
 -(void)Actiom:(NSNotification *)actiom
 {

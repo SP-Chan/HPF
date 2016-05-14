@@ -40,7 +40,7 @@
 {
     HPFBaseImageView *centerCircle = [[HPFBaseImageView alloc] initWithFrame:CGRectMake((kSCREEN_WIDTH-150)/2, kSCREEN_HEIGHT/10, 150, 150)];
     centerCircle.backgroundColor = [UIColor yellowColor];
-    centerCircle.layer.cornerRadius = 70;
+    centerCircle.layer.cornerRadius = 75;
     centerCircle.layer.masksToBounds = YES;
     [self.view addSubview:centerCircle];
 }
@@ -51,7 +51,7 @@
     button.layer.cornerRadius = 10;
     button.layer.masksToBounds = YES;
     [button setTitle:@"声明" forState:UIControlStateNormal];
-    button.backgroundColor = [UIColor redColor];
+    button.backgroundColor = [UIColor colorWithRed:202/255.0 green:225/255.0 blue:162/255.0 alpha:1];
     [button addTarget:self action:@selector(jumpStatement:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
 }
@@ -73,7 +73,7 @@
     button.layer.masksToBounds = YES;
     [button setTitle:@"切换风格" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(jumpTheme:) forControlEvents:UIControlEventTouchUpInside];
-    button.backgroundColor = [UIColor redColor];
+   button.backgroundColor = [UIColor colorWithRed:202/255.0 green:225/255.0 blue:162/255.0 alpha:1];
     [self.view addSubview:button];
 }
 -(void)createBottomButtonForth
@@ -84,7 +84,7 @@
     button.layer.masksToBounds = YES;
     [button setTitle:@"版本内容" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(jumpVersion:) forControlEvents:UIControlEventTouchDown];
-    button.backgroundColor = [UIColor redColor];
+    button.backgroundColor = [UIColor colorWithRed:202/255.0 green:225/255.0 blue:162/255.0 alpha:1];
     [self.view addSubview:button];
 }
 #pragma mark- 切换风格

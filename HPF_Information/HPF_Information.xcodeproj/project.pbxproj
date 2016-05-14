@@ -186,6 +186,7 @@
 		3F856B011CE74AC500DAFB8A /* 481757_12823573491.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F856B001CE74AC500DAFB8A /* 481757_12823573491.png */; settings = {ASSET_TAGS = (); }; };
 		3F856B031CE74ACE00DAFB8A /* meng.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F856B021CE74ACE00DAFB8A /* meng.png */; settings = {ASSET_TAGS = (); }; };
 		3F856B051CE74EFE00DAFB8A /* ThreeImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F856B041CE74EFE00DAFB8A /* ThreeImageCell.xib */; settings = {ASSET_TAGS = (); }; };
+		3F856B091CE758B200DAFB8A /* jing.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F856B081CE758B200DAFB8A /* jing.png */; settings = {ASSET_TAGS = (); }; };
 		3FAE87E01CE4BA0700D37AED /* WJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAE87D91CE4BA0600D37AED /* WJRefresh.m */; };
 		3FAE87E11CE4BA0700D37AED /* activityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAE87DB1CE4BA0600D37AED /* activityView.m */; };
 		3FAE87EC1CE4BA3600D37AED /* WJRefreshArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FAE87E81CE4BA3600D37AED /* WJRefreshArrow@2x.png */; };
@@ -625,6 +626,7 @@
 		3F856B001CE74AC500DAFB8A /* 481757_12823573491.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 481757_12823573491.png; sourceTree = "<group>"; };
 		3F856B021CE74ACE00DAFB8A /* meng.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = meng.png; sourceTree = "<group>"; };
 		3F856B041CE74EFE00DAFB8A /* ThreeImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThreeImageCell.xib; sourceTree = "<group>"; };
+		3F856B081CE758B200DAFB8A /* jing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jing.png; sourceTree = "<group>"; };
 		3FAE87D81CE4BA0600D37AED /* WJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJRefresh.h; sourceTree = "<group>"; };
 		3FAE87D91CE4BA0600D37AED /* WJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJRefresh.m; sourceTree = "<group>"; };
 		3FAE87DA1CE4BA0600D37AED /* activityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = activityView.h; sourceTree = "<group>"; };
@@ -1315,6 +1317,7 @@
 		3F2803201CE061A000C73891 /* 黄历图片 */ = {
 			isa = PBXGroup;
 			children = (
+				3F856B081CE758B200DAFB8A /* jing.png */,
 				3F856B021CE74ACE00DAFB8A /* meng.png */,
 				3F856B001CE74AC500DAFB8A /* 481757_12823573491.png */,
 				3FE0DF401CE2D8A50051F5E6 /* xiangqing.png */,
@@ -1888,6 +1891,7 @@
 				97FAB9901CDCA24600996308 /* MJRefresh.bundle in Resources */,
 				3FE0DF991CE2D8A50051F5E6 /* shi1.jpg in Resources */,
 				3FAE87F71CE4BAF700D37AED /* bofang.png in Resources */,
+				3F856B091CE758B200DAFB8A /* jing.png in Resources */,
 				3FE0DF971CE2D8A50051F5E6 /* 9389104_145654745119_2.jpg in Resources */,
 				3F19A3F21CD311C300C3D532 /* Main.storyboard in Resources */,
 				3FE0DF861CE2D8A50051F5E6 /* xingzuo0003.jpg in Resources */,

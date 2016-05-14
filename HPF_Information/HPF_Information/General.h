@@ -44,4 +44,8 @@
  * 当前温度
  **/
 #define kCurrentWeather @"kCurrentWeather"
+/**
+ * 更改 r g b a设置RGB颜色
+ **/
+#define KColor(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a/1.0]
 #endif /* General_h */
