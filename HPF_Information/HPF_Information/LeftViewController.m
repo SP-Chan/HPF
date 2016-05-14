@@ -12,6 +12,9 @@
 #import "HPFBaseNavigationController.h"
 #import "SettingViewController.h"
 #import "WeatherViewController.h"
+#import "SDImageCache.h"
+#import "SDWebImageManager.h"
+
 @interface LeftViewController ()
 @property(nonatomic,strong)LeftViewTop *topView;
 @property(nonatomic,strong)HPFBaseButton *setButton;
@@ -60,6 +63,14 @@
         [button setImage:[UIImage imageNamed:@"drawer.png"] forState:UIControlStateNormal];
         [button setImageEdgeInsets:UIEdgeInsetsMake(0, -button.bounds.size.width*2/5, 0, 0)];
         [self.view addSubview:button];
+        
+        if ([button.titleLabel.text isEqualToString:@"清除缓存"]) {
+            [button addTarget:self action:@selector(clearCache:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        
+        
+        
+        
     }
 }
 #pragma mark- 懒加载
@@ -73,6 +84,43 @@
     }
     return _topView;
 }
+
+
+-(void)clearCache:(UIButton *)button
+{
+    {
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)lastObject];
+        
+        NSEnumerator *imageFilesEnumerator = [[fileManager subpathsAtPath:cachePath] objectEnumerator];
+        long long Size = 0;
+        NSString* fileName;
+        while ((fileName = [imageFilesEnumerator nextObject]) != nil){
+            NSString* fileAbsolutePath = [cachePath stringByAppendingPathComponent:fileName];
+            Size += [[fileManager attributesOfItemAtPath:fileAbsolutePath error:nil] fileSize];
+        }
+        
+        
+        NSString *cacheSize = [NSString stringWithFormat:@"缓存大小为%.2lldKB\n是否清除?",Size/ 1024 ];
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:cacheSize preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [[SDImageCache sharedImageCache]clearDisk];
+            [[SDWebImageManager sharedManager].imageCache clearMemory];
+            [fileManager removeItemAtPath:cachePath error:nil];
+        }];
+        UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:action];
+        [alertController addAction:action2];
+        
+        [self presentViewController:alertController animated:YES completion:NULL];
+        
+        
+    }
+
+}
+
+
 
 //懒加载底部的的设置按钮
 -(HPFBaseButton *)setButton
@@ -151,14 +199,18 @@
     NSString *string = [[NSUserDefaults standardUserDefaults] stringForKey:kChangeTheme];
     if ([string isEqualToString:@"night"]) {
         //发送通知到 HPFBaseViewController HPFBaseNavigationController HPFBaseTabBarController
-        [[NSNotificationCenter defaultCenter] postNotificationName:kChangeTheme object:nil userInfo:nil];
+        
         [[NSUserDefaults standardUserDefaults] setObject:@"white" forKey:kChangeTheme];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kChangeTheme object:nil userInfo:nil];
+        
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self setButtonStyleAndImageViewImage];
     }else
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kChangeTheme object:nil userInfo:nil];
+        
         [[NSUserDefaults standardUserDefaults] setObject:@"night" forKey:kChangeTheme];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kChangeTheme object:nil userInfo:nil];
+        
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self setButtonStyleAndImageViewImage];
     }

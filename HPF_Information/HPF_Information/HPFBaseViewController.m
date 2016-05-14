@@ -19,7 +19,7 @@
     //设定默认模式背景色
     [self setBackgroundViewColor];
     //接收通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeNightTheme:) name:nil object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeNightTheme:) name:kChangeTheme object:nil];
 }
 
 #pragma mark 创建新闻类tableview

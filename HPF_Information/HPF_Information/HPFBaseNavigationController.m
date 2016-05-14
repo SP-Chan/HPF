@@ -21,7 +21,7 @@
 //    [self createNavigationController];
     //接收通知
     [self setNavigationControllerColor];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeNightTheme:) name:nil object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeNightTheme:) name:kChangeTheme object:nil];
 }
 /*
 #pragma mark- 创建导航控制器
