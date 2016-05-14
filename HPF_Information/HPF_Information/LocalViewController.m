@@ -15,7 +15,7 @@
 #import "ImgModel.h"
 #import "ThreeImageCell.h"
 
-@interface LocalViewController ()<DFCarouselViewDelegate>
+@interface LocalViewController ()
 
 {
     NSInteger startNum;//第几条开始加载;
@@ -28,7 +28,6 @@
 @property(nonatomic,strong)NSMutableArray *imageArray;
 @property(nonatomic,assign)NSInteger flag;
 @property(nonatomic,assign)BOOL tag;
-@property(nonatomic,strong)DFCarouselView *carouselView;
 
 
 @end
@@ -44,14 +43,14 @@
     return _array;
 }
 
--(NSMutableArray *)dataArrary
-{
-    if (!_dataArrary) {
-        self.dataArrary = [NSMutableArray array];
-        
-    }
-    return _dataArrary;
-}
+//-(NSMutableArray *)dataArrary
+//{
+//    if (!_dataArrary) {
+//        self.dataArrary = [NSMutableArray array];
+//        
+//    }
+//    return _dataArrary;
+//}
 
 
 #pragma mark viewDidLoad
@@ -61,7 +60,7 @@
     startNum = 0;
     countNum = 20;
     
-    NSString *str = [NSString stringWithFormat:@"%ld-%ld",startNum,countNum];
+    NSString *str = [NSString stringWithFormat:@"%ld-%ld",(long)startNum,countNum];
     
     NSString *urlStr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/article/local/广州/%@.html",str];
     
@@ -75,6 +74,8 @@
     
      _tag = NO;
     
+    self.dataArrary = [NSMutableArray array];
+    
     
     // Do any additional setup after loading the view.
 }
@@ -86,8 +87,7 @@
     
    
     if (_flag == 0) {
-        // 马上进入刷新状态
-        [self.tabView.header beginRefreshing];
+        [self.tabView.mj_header beginRefreshing];
     }
     else
     {
@@ -156,9 +156,11 @@
                 }
                 
             }
+//        NSLog(@"%ld",_dataArrary.count);
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             
-//            [self.tabView reloadData];
+            [self.tabView reloadData];
             if (!_tag) {
                 [self createTableView];
                 [self creatFooterRefresh];
@@ -197,28 +199,6 @@
     _tabView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_tabView];
     
-
-    self.carouselView.frame = CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT/4.5);
-//    _carouselView = [[DFCarouselView alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT/4.5)];
-    for (ImgModel *model in self.imgArray) {
-//        NSLog(@"%@",model.imgsrc);
-        [self.imageArray addObject:model.imgsrc];
-        
-    }
-//    NSLog(@"%@",_imageArray);
-
-    self.carouselView = [DFCarouselView carouselViewWithImageArray:_imageArray describeArray:nil];
-//    [_tabView setTableHeaderView:_carouselView];
-//    _tabView.tableHeaderView = self.carouselView;
-    [_tabView addSubview:self.carouselView];
-//    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT/4.5)];
-//    view.backgroundColor = [UIColor redColor];
-//    [view addSubview:self.carouselView];
-//    self.carouselView.backgroundColor = [UIColor blackColor];
-//    _tabView.tableHeaderView = view;
-    
-
-    
     _tabView.delegate = self;
     _tabView.dataSource = self;
     
@@ -234,8 +214,6 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSLog(@"%@",_news.imgextra);
-    
     NewsModel *news = [[NewsModel alloc]init];
     
     news = [_dataArrary objectAtIndex:indexPath.row];
@@ -247,18 +225,11 @@
         if (cell == nil) {
             cell = [[[NSBundle mainBundle]loadNibNamed:@"ThreeImageCell" owner:nil options:nil]lastObject];
         }
-        
         NewsModel *news = [[NewsModel alloc]init];
-        
         news = [_dataArrary objectAtIndex:indexPath.row];
         cell.news = news;
-        
-//        NSLog(@"%ld",news.imgextra.count);
-        
         cell.backgroundColor = [UIColor clearColor];
         return cell;
-
-        
     }
     else
     {
@@ -267,43 +238,23 @@
         if (cell == nil) {
             cell = [[[NSBundle mainBundle]loadNibNamed:@"CommonCell" owner:nil options:nil]lastObject];
         }
-        
         NewsModel *news = [[NewsModel alloc]init];
         news = [_dataArrary objectAtIndex:indexPath.row];
         cell.news = news;
         cell.backgroundColor = [UIColor clearColor];
         return cell;
     }
-    
-    
-    
 }
-
-
-
-
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
     NewsModel *news = [[NewsModel alloc]init];
-    
     news = [_dataArrary objectAtIndex:indexPath.row];
-    
     if (news.imgextra != nil)
     {
-    
     return 150;
-    }
-    else
-    {
-        return 120;
-    }
-    
-    
-    
+    }else{return 120;}
 }
 
 
@@ -320,30 +271,20 @@
     
     if (news.imgextra != nil)
     {
-        UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-//        cell.selected = NO;
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        cell.userInteractionEnabled = NO;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        ScrollViewController *sv = [[ScrollViewController alloc]init];
+        sv.news = news;
+        [self.navigationController pushViewController:sv animated:YES];
     }
-    
-//    NewsModel *news = [_dataArrary objectAtIndex:indexPath.row];
-    
+    if (news.imgextra == nil)
+    {
     WebViewController *webVC = [[WebViewController alloc]init];
     webVC.news = news;
     
-    [self.navigationController pushViewController:webVC animated:YES];
+        [self.navigationController pushViewController:webVC animated:YES];
+    }
 }
 
-
-
-
-
-
-
-
-
-#pragma mark  加载更多
+#pragma mark  上拉加载更多
 - (void) creatFooterRefresh
 {
     _tabView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
@@ -352,20 +293,19 @@
 
 -(void)loadMoreData
 {
-    
     //  http://c.3g.163.com/nc/article/local/广州/0-20.html
     
-    startNum = startNum +19;
-    NSString *str = [NSString stringWithFormat:@"%ld-%ld",startNum,countNum];
+    startNum = startNum + 19;
+    NSString *str = [NSString stringWithFormat:@"%ld-%ld",(long)startNum,countNum];
     
     NSString *urlStr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/article/local/广州/%@.html",str];
     
     [self requestData:urlStr];
     [self.tabView reloadData];
     
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeStopP) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(timeStopP) userInfo:nil repeats:NO];
+    
 }
-
 
 -(void)timeStopP
 {
@@ -375,12 +315,11 @@
 #pragma mark 下拉刷新
 -(void)creatHeaderRefresh
 {
-    _tabView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    _tabView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
 }
 
 -(void)loadNewData
 {
-
     NSString *urlStr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/article/local/广州/0-20.html"];
     
     [self requestData:urlStr];
@@ -391,8 +330,12 @@
 
 -(void)timeStopPP
 {
-    [_tabView.header endRefreshing];
+    [_tabView.mj_header endRefreshing];
 }
+
+
+
+
 
 
 
@@ -400,12 +343,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-
-
-
-
 
 
 /*

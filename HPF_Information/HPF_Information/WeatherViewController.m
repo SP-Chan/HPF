@@ -129,6 +129,15 @@
             
             }];
         }
+
+        NSLog(@"%ld",(unsigned long)self.fiveDayModelArray.count);
+        
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.view addSubview:self.weatherScrollView];
+        });
+        
+
     } err:^(NSError *error) {
         
     }];

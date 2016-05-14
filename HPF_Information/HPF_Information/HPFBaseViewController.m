@@ -20,6 +20,7 @@
     [self setBackgroundViewColor];
     //接收通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeNightTheme:) name:kChangeTheme object:nil];
+
 }
 
 #pragma mark- 夜间模式设置
@@ -49,6 +50,7 @@
     }else{
         self.view.backgroundColor = [UIColor whiteColor];
     }
+
 }
 
 #pragma mark 创建新闻类tableview

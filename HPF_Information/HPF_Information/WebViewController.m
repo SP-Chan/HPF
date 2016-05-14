@@ -26,27 +26,34 @@
     [super viewDidLoad];
     
     
-//    self.navigationController.navigationBar.hidden = YES;
     
-    _webV = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT)];
-    [self.view addSubview:_webV];
+//    self.webView = [[WKWebView alloc]initWithFrame:self.view.bounds];
+//    [self.view addSubview:self.webView];
+//    NSString *str = [NSString stringWithFormat:@"%@",self.news.url];
+//    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+//    //左划回退
+//    self.webView.allowsBackForwardNavigationGestures =YES;
+//    _webView.scrollView.bounces = NO;
+    
+    
+//    self.navigationController.navigationBar.hidden = YES;
+    _webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT)];
+    [self.view addSubview:_webView];
     NSURL *url = [NSURL URLWithString:self.news.url];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
-    [_webV loadRequest:request];
-    
-    _webV.delegate = self;
-    
-    _webV.scrollView.bounces = NO;
+    [_webView loadRequest:request];
+    _webView.delegate = self;
+    _webView.scrollView.bounces = NO;
     
     
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT/13.6)];
     view.backgroundColor = [UIColor lightGrayColor];
-    [self.webV addSubview:view];
+    [self.webView addSubview:view];
     UILabel *headLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT/13.7)];
     headLabel.backgroundColor = [UIColor colorWithRed:8.6 green:10.1 blue:9.5 alpha:1];
     headLabel.textAlignment = NSTextAlignmentCenter;
     headLabel.text = @"内容来源自网易";
-    [self.webV addSubview:headLabel];
+    [self.webView addSubview:headLabel];
     
     // Do any additional setup after loading the view.
 }
@@ -67,7 +74,7 @@
         _actiView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.65];
         _actiView.layer.cornerRadius = 10;
         _actiView.layer.masksToBounds = YES;
-        [_webV addSubview:_actiView];
+        [_webView addSubview:_actiView];
         
         if (_ActivityIndicator == nil) {
             //菊花;

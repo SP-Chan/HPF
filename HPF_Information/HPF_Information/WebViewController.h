@@ -8,6 +8,7 @@
 
 #import "HPFBaseViewController.h"
 #import "NewsModel.h"
+#import <WebKit/WebKit.h>
 
 
 
@@ -15,6 +16,11 @@
 
 @property(nonatomic,strong)NewsModel *news;
 
-@property(nonatomic,strong)UIWebView *webV;
+//@property (nonatomic,strong)WKWebView *webView;
+@property (nonatomic,strong)UIWebView *webView;
+
+
+
+
 
 @end

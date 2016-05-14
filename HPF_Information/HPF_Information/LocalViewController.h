@@ -11,6 +11,7 @@
 #import "CommonCell.h"
 #import "ThreeImageCell.h"
 #import "WebViewController.h"
+#import "ScrollViewController.h"
 
 @interface LocalViewController : HPFBaseViewController<UITableViewDataSource,UITableViewDelegate>
 

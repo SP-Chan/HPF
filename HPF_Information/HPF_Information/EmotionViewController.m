@@ -11,6 +11,7 @@
 #import "MJRefresh.h"
 #import "MJRefreshAutoFooter.h"
 #import "ThreeImageCell.h"
+#import "ScrollViewController.h"
 @interface EmotionViewController ()
 {
     NSInteger startNum;//第几条开始加载;
@@ -54,7 +55,7 @@
     startNum = 0;
     countNum = 20;
     
-    NSString *str = [NSString stringWithFormat:@"%ld-%ld",startNum,countNum];
+    NSString *str = [NSString stringWithFormat:@"%ld-%ld",(long)startNum,countNum];
     
     NSString *urlStr = [NSString stringWithFormat:@"http://c.m.163.com/nc/article/list/T1348650839000/%@.html",str];
     
@@ -75,7 +76,7 @@
     
     if (_flag == 0) {
         // 马上进入刷新状态
-        [self.tabView.header beginRefreshing];
+        [self.tabView.mj_header beginRefreshing];
     }
     else
     {
@@ -98,12 +99,6 @@
                 NewsModel *news = [[NewsModel alloc]init];
                 [news setValuesForKeysWithDictionary:dic];
                 [self.dataArrary addObject:news];
-                
-                if ([[dic allKeys] containsObject:@"imgextra"]) {
-                    NSArray *imgArray = [dic objectForKey:@"imgextra"];
-                    
-                }
-                
                 
             }
         });
@@ -213,13 +208,29 @@
 #pragma mark  点击跳转的方法;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // 取消选中状态
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    NewsModel *news = [_dataArrary objectAtIndex:indexPath.row];
     
-    WebViewController *webVC = [[WebViewController alloc]init];
-    webVC.news = news;
+    NewsModel *news = [[NewsModel alloc]init];
     
-    [self.navigationController pushViewController:webVC animated:YES];
+    news = [_dataArrary objectAtIndex:indexPath.row];
+    
+    if (news.imgextra != nil)
+    {
+        ScrollViewController *sv = [[ScrollViewController alloc]init];
+        sv.news = news;
+        [self.navigationController pushViewController:sv animated:YES];
+        
+    }
+    if (news.imgextra == nil)
+    {
+        
+        WebViewController *webVC = [[WebViewController alloc]init];
+        webVC.news = news;
+        
+        [self.navigationController pushViewController:webVC animated:YES];
+    }
 }
 
 #pragma mark  加载更多
@@ -235,7 +246,7 @@
     //  http://c.3g.163.com/nc/article/local/广州/0-20.html
     
     startNum = startNum +19;
-    NSString *str = [NSString stringWithFormat:@"%ld-%ld",startNum,countNum];
+    NSString *str = [NSString stringWithFormat:@"%ld-%ld",(long)startNum,countNum];
     
     NSString *urlStr = [NSString stringWithFormat:@"http://c.m.163.com/nc/article/list/T1348650839000/%@.html",str];
     
@@ -254,7 +265,7 @@
 //下拉刷新
 -(void)creatHeaderRefresh
 {
-    _tabView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    _tabView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
 }
 
 -(void)loadNewData
@@ -270,7 +281,7 @@
 
 -(void)timeStopPP
 {
-    [_tabView.header endRefreshing];
+    [_tabView.mj_header endRefreshing];
 }
 
 
