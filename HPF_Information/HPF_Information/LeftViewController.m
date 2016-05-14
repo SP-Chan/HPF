@@ -28,6 +28,7 @@
 @property(nonatomic,strong)NSMutableArray *buttonArray;
 @property(nonatomic,strong)UIAlertController *alert;
 @property(nonatomic,strong)UIAlertController *alertMe;
+@property(nonatomic,strong)UIAlertController *alertOpinion;
 @end
 
 @implementation LeftViewController
@@ -103,8 +104,17 @@
          
     }else if (button.tag == 2)//意见反馈
     {
+//        opinion
+        _alertOpinion = [UIAlertController alertControllerWithTitle:@"意见反馈" message:@"如果在使用过程中遇到任何问题可以随时与我们联系,我们乐意为你解答一切问题,也可给我们发邮件提意见\n邮箱地址:7568844@qq.com(辉哥) 835891284@qq.com(方方) 540291154@qq.com(小P)\n期待你宝贵的意见" preferredStyle:UIAlertControllerStyleAlert];
         
-        
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [_alertOpinion dismissViewControllerAnimated:YES completion:^{
+                
+            }];
+        }];
+        [_alertOpinion addAction:action];
+        [self presentViewController:_alertOpinion animated:YES completion:^{
+        }];
         
     }else if (button.tag == 3)//清除缓存
     {
@@ -129,26 +139,6 @@
         [self.navigationController popViewControllerAnimated:YES];
     }];
 }
-
-#pragma mark- 懒加载
--(NSMutableArray *)buttonArray
-{
-    if (!_buttonArray) {
-        _buttonArray = [NSMutableArray array];
-    }
-    return _buttonArray;
-}
-//懒加载顶部View
--(LeftViewTop *)topView
-{
-    if (!_topView) {
-        _topView = [[[NSBundle mainBundle] loadNibNamed:@"LeftViewTop" owner:nil options:nil] lastObject];
-        _topView.frame = CGRectMake(0, 30, kSCREEN_WIDTH*2/3, 100);
-        _topView.backgroundColor = [UIColor clearColor];
-    }
-    return _topView;
-}
-
 
 -(void)clearCache:(UIButton *)button
 {
@@ -184,6 +174,24 @@
 
 }
 
+#pragma mark- 懒加载
+-(NSMutableArray *)buttonArray
+{
+    if (!_buttonArray) {
+        _buttonArray = [NSMutableArray array];
+    }
+    return _buttonArray;
+}
+//懒加载顶部View
+-(LeftViewTop *)topView
+{
+    if (!_topView) {
+        _topView = [[[NSBundle mainBundle] loadNibNamed:@"LeftViewTop" owner:nil options:nil] lastObject];
+        _topView.frame = CGRectMake(0, 30, kSCREEN_WIDTH*2/3, 100);
+        _topView.backgroundColor = [UIColor clearColor];
+    }
+    return _topView;
+}
 
 
 //懒加载底部的的设置按钮
