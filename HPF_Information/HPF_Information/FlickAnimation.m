@@ -58,7 +58,7 @@ NSInteger  temp;
         _urlTime = [dic objectForKey:@"dateTime"];
         
         
-        NSLog(@"flick==%@",_urlTime);
+    
         
         
         
@@ -69,7 +69,7 @@ NSInteger  temp;
         [dateformatter setDateFormat:@"HH"];
         
        _hours=[dateformatter stringFromDate:senddate];
-        NSLog(@"hhhh==%@",_hours);
+       
         
 
         [self requestData];
@@ -111,44 +111,131 @@ NSInteger  temp;
     [self addSubview:_activity];
     [_activity startAnimating];
     
-    NSString *url = [NSString stringWithFormat:@"http://v.juhe.cn/laohuangli/h?date=%@&key=b45f8bf8fd8c3132a47890b409ae984d",_urlTime];
+    NSArray *array = [_urlTime componentsSeparatedByString:@"-"];
     
-    [NetworkRequestManager requestWithType:GET urlString:url ParDic:nil Header:nil finish:^(NSData *data) {
+   
+    
+    
+    
+    NSInteger yearI = [[array firstObject] integerValue];
+    
+    NSLog(@"%ld",yearI);
+   
+    
+    if (1999<yearI &&yearI<2021) {
         
-        _TimeArray = [NSMutableArray array];
         
-        NSError *error = nil;
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+        NSString *url = [NSString stringWithFormat:@"http://v.juhe.cn/laohuangli/h?date=%@&key=b45f8bf8fd8c3132a47890b409ae984d",_urlTime];
         
-        NSArray *array = [dic objectForKey:@"result"];
-       
-        for (NSDictionary *dic in array) {
-            TimeLuck *luck = [[TimeLuck alloc]init];
-            [luck setValuesForKeysWithDictionary:dic];
-            [_TimeArray addObject:luck];
-        }
-       
+        [NetworkRequestManager requestWithType:GET urlString:url ParDic:nil Header:nil finish:^(NSData *data) {
+            
+            _TimeArray = [NSMutableArray array];
+            
+            NSError *error = nil;
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+            
+            NSArray *array = [dic objectForKey:@"result"];
+            
+            for (NSDictionary *dic in array) {
+                TimeLuck *luck = [[TimeLuck alloc]init];
+                [luck setValuesForKeysWithDictionary:dic];
+                [_TimeArray addObject:luck];
+            }
+            
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                
+                if (_TimeArray.count>0) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        [self open];
+                        
+                        [self addconten];
+                        [self setContent];
+                        [_activity stopAnimating];
+                    });
+                    
+                    
+                }else
+                {
+                    
+                    
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        
+                        sleep(10);
+                        
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            [UIView animateWithDuration:0.5 animations:^{
+                                self.frame=CGRectMake(kSCREEN_WIDTH, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT);
+                            }];
+                            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                                
+                                
+                                
+                                usleep(666666);
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    
+                                    [self removeFromSuperview];
+                                });
+                                
+                            });
+                            
+                        });
+                        
+                        
+                    });
+                    
+                    
+                }
+                
+            });
+            
+        } err:^(NSError *error) {
+            
+            
+        }];
+        
+
+        
+    }else
+    {
+    
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-           
-            if (_TimeArray.count>0) {
-                dispatch_async(dispatch_get_main_queue(), ^{
+            
+            sleep(1);
+            
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [UIView animateWithDuration:0.5 animations:^{
+                    self.frame=CGRectMake(kSCREEN_WIDTH, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT);
+                }];
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     
-                    [self open];
                     
-                    [self addconten];
-                    [self setContent];
-                    [_activity stopAnimating];
+                     [[NSNotificationCenter defaultCenter]postNotificationName:@"yearBeyond"object:nil];
+                    usleep(666666);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        [self removeFromSuperview];
+                        
+    
+                        
+                    });
+                    
                 });
                 
-                
-            }
+            });
+            
             
         });
         
-    } err:^(NSError *error) {
-        
-    }];
+
+    
+    }
     
     
     
@@ -199,13 +286,13 @@ NSInteger  temp;
 
 -(void)setContent
 {
-    HPFBaseImageView *imagex =[[HPFBaseImageView alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH/12, kSCREEN_HEIGHT-49-64-64, kSCREEN_WIDTH/8, kSCREEN_WIDTH/8)];
+    HPFBaseImageView *imagex =[[HPFBaseImageView alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH/12, kSCREEN_HEIGHT/2+kSCREEN_WIDTH*5/12, kSCREEN_WIDTH/8, kSCREEN_WIDTH/8)];
     imagex.image = [UIImage imageNamed:@"1597758547gY0_b 2.jpg"];
     imagex.layer.cornerRadius=kSCREEN_WIDTH/16;
     imagex.layer.masksToBounds=YES;
     [self addSubview:imagex];
     
-    HPFBaseImageView *imagej =[[HPFBaseImageView alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH/12, kSCREEN_HEIGHT-49-64, kSCREEN_WIDTH/8, kSCREEN_WIDTH/8)];
+    HPFBaseImageView *imagej =[[HPFBaseImageView alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH/12, kSCREEN_HEIGHT/2+kSCREEN_WIDTH*13/24, kSCREEN_WIDTH/8, kSCREEN_WIDTH/8)];
     imagej.image = [UIImage imageNamed:@"1597758547gY0_b.jpg"];
     imagej.layer.cornerRadius=kSCREEN_WIDTH/16;
     imagej.layer.masksToBounds=YES;
@@ -224,23 +311,26 @@ NSInteger  temp;
     
     
     
-    self.lableJi = [[UILabel alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH*5/24+20, kSCREEN_HEIGHT-49-64-64, kSCREEN_WIDTH*2/3, kSCREEN_WIDTH/8)];
+    self.lableJi = [[UILabel alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH*5/24+20, kSCREEN_HEIGHT/2+kSCREEN_WIDTH*5/12, kSCREEN_WIDTH*2/3, kSCREEN_WIDTH/8)];
     self.lableJi.backgroundColor = [UIColor clearColor];
     self.lableJi.textColor = [UIColor blackColor];
     [self addSubview:self.lableJi];
     self.lableJi.numberOfLines=2;
-    self.lableYi = [[UILabel alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH*5/24+20, kSCREEN_HEIGHT-49-64, kSCREEN_WIDTH*2/3, kSCREEN_WIDTH/8)];
+    
+       self.lableJi.adjustsFontSizeToFitWidth = YES;
+    
+    self.lableYi = [[UILabel alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH*5/24+20, kSCREEN_HEIGHT/2+kSCREEN_WIDTH*13/24, kSCREEN_WIDTH*2/3, kSCREEN_WIDTH/8)];
      self.lableYi.backgroundColor = [UIColor clearColor];
     self.lableYi.textColor = [UIColor blackColor];
     self.lableYi.numberOfLines=2;
     [self addSubview:self.lableYi];
- 
+    self.lableYi.adjustsFontSizeToFitWidth = YES;
     self.lableDes = [[UILabel alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH*5/24+20, kSCREEN_HEIGHT/6, kSCREEN_WIDTH*2/3, kSCREEN_WIDTH/8)];
     self.lableDes.backgroundColor = [UIColor clearColor];
     self.lableDes.textColor = [UIColor blackColor];
     self.lableDes.numberOfLines=2;
     [self addSubview:self.lableDes];
-    
+       self.lableDes.adjustsFontSizeToFitWidth = YES;
     
     for (TimeLuck *luck in _TimeArray) {
         
@@ -277,14 +367,14 @@ NSInteger  temp;
         //根据数组个数创建相应个数button
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         //先定frame.在设定中心
-        button.frame=CGRectMake(0, 0, 40, 40);
+        button.frame=CGRectMake(0, 0, kSCREEN_WIDTH/12, kSCREEN_WIDTH/12);
         
         button.center=self.center;
         //开始时候是透明的
         button.alpha=0;
         
         //圆型
-        button.layer.cornerRadius=20;
+        button.layer.cornerRadius=kSCREEN_WIDTH/24;
         button.layer.masksToBounds=YES;
         //设置tag
         button.tag=i;

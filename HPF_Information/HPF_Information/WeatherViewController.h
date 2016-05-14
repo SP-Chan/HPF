@@ -9,5 +9,5 @@
 #import "HPFBaseViewController.h"
 
 @interface WeatherViewController : HPFBaseViewController
-
+@property(nonatomic,strong)NSString *city;
 @end

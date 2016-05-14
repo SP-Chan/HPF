@@ -19,7 +19,36 @@
     //设定默认模式背景色
     [self setBackgroundViewColor];
     //接收通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeNightTheme:) name:nil object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeNightTheme:) name:kChangeTheme object:nil];
+}
+
+#pragma mark- 夜间模式设置
+//从 LeftViewController 接收通知
+-(void)changeNightTheme:(NSNotification *)notification
+{
+    //更新背景色
+    [self setBackgroundViewColor];
+}
+
+//设定背景色
+-(void)setBackgroundViewColor
+{
+    NSString *string = [[NSUserDefaults standardUserDefaults] stringForKey:kChangeTheme];
+    if ([string isEqualToString:@"night"]) {
+        self.view.backgroundColor = [UIColor colorWithRed:66/255.0 green:79/255.0 blue:105/255.0 alpha:1];
+    }else if ([string isEqualToString:@"深绯"]){
+        self.view.backgroundColor = [UIColor colorWithRed:209/255.0 green:135/255.0 blue:131/255.0 alpha:1];
+    }else if ([string isEqualToString:@"尼罗蓝"]){
+        self.view.backgroundColor = [UIColor colorWithRed:202/255.0 green:224/255.0 blue:169/255.0 alpha:1];
+    }else if ([string isEqualToString:@"热带橙"]){
+        self.view.backgroundColor = [UIColor colorWithRed:238/255.0 green:226/255.0 blue:180/255.0 alpha:1];
+    }else if ([string isEqualToString:@"月亮黄"]){
+        self.view.backgroundColor = [UIColor colorWithRed:230/255.0 green:172/255.0 blue:87/255.0 alpha:1];
+    }else if ([string isEqualToString:@"草坪色"]){
+        self.view.backgroundColor = [UIColor colorWithRed:91/255.0 green:194/255.0 blue:217/255.0 alpha:1];
+    }else{
+        self.view.backgroundColor = [UIColor whiteColor];
+    }
 }
 
 #pragma mark 创建新闻类tableview
@@ -65,29 +94,6 @@
 //{
 //    return 150;
 //}
-
-
-
-#pragma mark- 夜间模式设置
-//从 LeftViewController 接收通知
--(void)changeNightTheme:(NSNotification *)notification
-{
-    //更新背景色
-    [self setBackgroundViewColor];
-}
-
-//设定背景色
--(void)setBackgroundViewColor
-{
-    NSString *string = [[NSUserDefaults standardUserDefaults] stringForKey:kChangeTheme];
-    if ([string isEqualToString:@"night"]) {
-        self.view.backgroundColor = [UIColor colorWithRed:66/255.0 green:79/255.0 blue:105/255.0 alpha:1];
-    }else{
-        self.view.backgroundColor = [UIColor whiteColor];
-    }
-}
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

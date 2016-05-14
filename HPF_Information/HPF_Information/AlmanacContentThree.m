@@ -41,14 +41,14 @@
     self.leftLabel.font = [UIFont boldSystemFontOfSize:20];
     self.leftLabel.textAlignment=NSTextAlignmentCenter;
     self.leftLabel.textColor = [UIColor redColor];
-    
+    self.leftLabel.adjustsFontSizeToFitWidth = YES;
     
     
     self.rightLable.frame =CGRectMake(0, 0,Width/2,Height );
     self.rightLable.font = [UIFont boldSystemFontOfSize:20];
     self.rightLable.textAlignment=NSTextAlignmentCenter;
     self.rightLable.textColor = [UIColor redColor];
-   
+   self.rightLable.adjustsFontSizeToFitWidth = YES;
    
   
     self.RightView.frame = CGRectMake(Width/2, 0, Width/2, Height);

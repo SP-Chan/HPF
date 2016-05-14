@@ -36,4 +36,12 @@
  **/
 #define kBusCity @"kBusCity"
 
+/**
+ * 定位城市
+ **/
+#define kLocationCity @"lLocationCity"
+/**
+ * 当前温度
+ **/
+#define kCurrentWeather @"kCurrentWeather"
 #endif /* General_h */

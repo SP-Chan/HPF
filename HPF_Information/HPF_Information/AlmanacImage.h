@@ -10,4 +10,5 @@
 
 @interface AlmanacImage : UIView
 @property(nonatomic,strong)UIImageView *imageV;
+@property(nonatomic,strong)UILabel *lable;
 @end

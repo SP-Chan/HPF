@@ -7,7 +7,8 @@
 //
 
 #import "ConstellationViewController.h"
-
+#import "activityView.h"
+#import "Constellation.h"
 @interface ConstellationViewController ()
 @property(nonatomic,strong)UIActivityIndicatorView *activity;
 @end
@@ -19,46 +20,86 @@
     
     
     
-    _dataDic = [NSDictionary dictionary];
+ 
     
+ 
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(Back)];
     
+[self DataRequest];
+
     
-    for (UIView *view in self.view.subviews) {
-        
-        [view removeFromSuperview];
-    }
-    
-    
-    [self DataRequest];
-    
+}
+-(void)Back
+{
+
+    [self.navigationController popViewControllerAnimated:YES];
+
 }
 -(void)DataRequest
 {
     
-    _activity = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
-    _activity.layer.position=CGPointMake(kSCREEN_WIDTH/2, kSCREEN_HEIGHT/2-64);
-    [_activity setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [_activity setColor:[UIColor blackColor]];
-    [self.view addSubview:_activity];
-    [_activity startAnimating];
+    for (UIView *view in self.view.subviews) {
+        
+        [view removeFromSuperview];
+        
+    }
+    
+    
+    activityView *act = [[activityView alloc]init];
+    [self.view addSubview:act];
+    [act setActivityColor:[UIColor blackColor]];
     
     NSString *url = [NSString stringWithFormat:@"http://web.juhe.cn:8080/constellation/getAll?consName=%@&type=today&key=84e66b5d485806c4a747d360f5ab8b58",_Constellation];
     
     [NetworkRequestManager requestWithType:GET urlString:url ParDic:nil Header:nil finish:^(NSData *data) {
         
         
-        
+        _dataDic = [NSDictionary dictionary];
         NSError *error = nil;
        _dataDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
         
         
+        Constellation *con =[[Constellation alloc]init];
+        [con setValuesForKeysWithDictionary:_dataDic];
+//        NSLog(@"key=%@,values=%@",[_dataDic allKeys],[_dataDic allValues]);
         
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self addtodayView];
-            [_activity stopAnimating];
+        if (_dataDic.count>4) {
             
-        });
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self addtodayView];
+                [act removeFromSuperview];
+                
+            });
+        
+            
+        }else
+        {
+        
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"网络出现一点小问题" message:@"返回界面重试" preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *ale  =[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+            
+            [alert addAction:ale];
+            
+            
+         
+
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [self presentViewController:alert animated:YES completion:^{
+                        
+                    }];
+                });
+          
+            
+            
+           
+            
+            
+        }
+       
         
     } err:^(NSError *error) {
         

@@ -22,7 +22,10 @@
 @property(nonatomic,strong)UIActivityIndicatorView *activity;
 @property(nonatomic,strong)UILabel *lable;
 
++(instancetype)shareActivityView;
+
 //设置颜色
 -(void)setActivityColor:(UIColor *)color;
+-(void)removeActivityView;
 
 @end

@@ -12,7 +12,8 @@
 #import "Video.h"
 #import "activityView.h"
 #import "WJRefresh.h"
-
+#import "RecordDataBase.h"
+#import "VideoRecordViewController.h"
 @interface VideoViewController ()
 @property(nonatomic,strong)NSMutableArray *DataArray;
 @property(nonatomic,assign)NSInteger count;
@@ -28,6 +29,10 @@
     [super viewDidLoad];
     
    
+    
+    [[RecordDataBase shareRecordData]createTabe];
+    
+    
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(notification:) name:@"播放" object:nil];
     
     _count=10;
@@ -49,13 +54,31 @@
     
     
     
-    
-    
-  
-   
+    [self setRightBarButtonItem];
     
 }
+-(void)setRightBarButtonItem
+{
 
+    UIButton*rightButton = [[UIButton alloc]initWithFrame:CGRectMake(0,0,30,30)];
+    [rightButton setImage:[UIImage imageNamed:@"jilu.png"]forState:UIControlStateNormal];
+  
+    [rightButton addTarget:self action:@selector(record) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem*rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightButton];
+    
+    self.navigationItem.rightBarButtonItem= rightItem;
+    self.navigationItem.title=@"视频短片";
+
+}
+
+-(void)record
+{
+    VideoRecordViewController *video = [[VideoRecordViewController alloc]init];
+    [self.navigationController pushViewController:video animated:YES];
+    
+    
+}
 -(void)notification:(NSNotification *)action
 {
     
@@ -78,7 +101,7 @@
 {
 
     
-    NSString *url = [NSString stringWithFormat:@"http://napi.uc.cn/3/classes/topic/lists/发现视频列表?_app_id=hottopic&_size=%ld&_fetch=1",_count];
+    NSString *url = [NSString stringWithFormat:@"http://napi.uc.cn/3/classes/topic/lists/发现视频列表?_app_id=hottopic&_size=%d&_fetch=1",_count];
 
     
     [NetworkRequestManager requestWithType:GET urlString:url ParDic:nil Header:nil finish:^(NSData *data) {
@@ -118,6 +141,7 @@
 -(void)setTableView
 {
     self.tableView =[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+    self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     [self.view addSubview:_tableView];
@@ -170,7 +194,7 @@ static NSString *identifier=@"cell";
     if (cell==nil) {
         cell=[[VideoTableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
     }
-    
+    cell.backgroundColor = [UIColor clearColor];
     Video *vi = [_DataArray objectAtIndex:indexPath.row];
     
     
@@ -180,6 +204,11 @@ static NSString *identifier=@"cell";
     return cell;
     
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+
+}
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 10+(kSCREEN_WIDTH-20)/48 +(kSCREEN_WIDTH-60)/14 +20+((kSCREEN_WIDTH-60)*2/7+40+(kSCREEN_WIDTH-20)*2/3+10);
@@ -188,7 +217,8 @@ static NSString *identifier=@"cell";
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     ///配置 CATransform3D 动画内容
     CATransform3D  transform ;
-    transform.m11 = 1.0/-400;
+    transform= CATransform3DMakeScale(0.3, 0.5, 1);
+    
     //定义 Cell的初始化状态
     cell.layer.transform = transform;
     //定义Cell 最终状态 并且提交动画
@@ -197,18 +227,12 @@ static NSString *identifier=@"cell";
     cell.layer.transform = CATransform3DIdentity;
     cell.frame = CGRectMake(0, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height);
     [UIView commitAnimations];
+    
+    
+  
+    
 }
-//-(void)scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-//_mobileContentOffset =scrollView.contentOffset.y;
-//     CGFloat contentSizeH = scrollView.contentSize.height - self.tableView.frame.size.height;
-//    
-//    NSLog(@"SizeH ======>>> %f",contentSizeH);
-//    //上拉到底部的高度
-//    NSLog(@"contentSizeH = %f",scrollView.contentSize.height);
-//    //上拉到底部的高度
-//
-//}
+
 
 
 

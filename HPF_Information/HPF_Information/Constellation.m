@@ -9,5 +9,8 @@
 #import "Constellation.h"
 
 @implementation Constellation
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
 
+}
 @end

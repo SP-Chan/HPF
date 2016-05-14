@@ -49,7 +49,7 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    self.imageV.image = [UIImage imageNamed:@"dream.jpg"];
+    self.imageV.image = [UIImage imageNamed:@"meng"];
    
    
     
