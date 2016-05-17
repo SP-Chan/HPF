@@ -61,6 +61,7 @@
 //    _tabBarBackgroundImageView.backgroundColor = [UIColor yellowColor];
     [self setTabBarBackgroundImageColor];
     [self.tabBarView addSubview:_tabBarBackgroundImageView];
+    
     [self.view addSubview:self.tabBarView];
     [self createTabBarButton];
 }
@@ -70,6 +71,7 @@
 {
     //更新背景色
     [self setTabBarBackgroundImageColor];
+
 }
 //设定底部tabbar背景色
 -(void)setTabBarBackgroundImageColor
@@ -77,12 +79,20 @@
     NSString *string = [[NSUserDefaults standardUserDefaults] stringForKey:kChangeTheme];
     if ([string isEqualToString:@"night"]) {
         _tabBarBackgroundImageView.backgroundColor = [UIColor colorWithRed:81/255.0 green:77/255.0 blue:77/255.0 alpha:1];
+    }else if ([string isEqualToString:@"深绯"]){
+        _tabBarBackgroundImageView.backgroundColor = [UIColor colorWithRed:200/255.0 green:22/255.0 blue:29/255.0 alpha:1];
+    }else if ([string isEqualToString:@"尼罗蓝"]){
+        _tabBarBackgroundImageView.backgroundColor = [UIColor colorWithRed:82/255.0 green:170/255.0 blue:193/255.0 alpha:1];
+    }else if ([string isEqualToString:@"热带橙"]){
+        _tabBarBackgroundImageView.backgroundColor = [UIColor colorWithRed:243/255.0 green:152/255.0 blue:57/255.0 alpha:1];
+    }else if ([string isEqualToString:@"月亮黄"]){
+       _tabBarBackgroundImageView.backgroundColor = [UIColor colorWithRed:255/255.0 green:237/255.0 blue:97/255.0 alpha:1];
+    }else if ([string isEqualToString:@"草坪色"]){
+       _tabBarBackgroundImageView.backgroundColor = [UIColor colorWithRed:189/255.0 green:203/255.0 blue:77/255.0 alpha:1];
     }else{
         _tabBarBackgroundImageView.backgroundColor = [UIColor colorWithRed:146/255.0 green:115/255.0 blue:173/255.0 alpha:1];
     }
-}
-
-
+ }
 
 
 //创建底部tabBar的Button

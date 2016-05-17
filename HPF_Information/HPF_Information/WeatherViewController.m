@@ -19,6 +19,8 @@
 #import "LifeModel.h"
 #import "FiveDayWeatherModel.h"
 #import "PM25Model.h"
+#import "LocationViewController.h"
+#import "HPFBaseNavigationController.h"
 @interface WeatherViewController ()
 @property(nonatomic,strong)AirAndHumidity *airAndHumidity;
 @property(nonatomic,strong)CurrentWeather *currentWeather;
@@ -42,68 +44,119 @@
 @property(nonatomic,strong)HPFBaseView *dividerLine;
 @property(nonatomic,strong)HPFBaseImageView *backgroundImageView;
 @property(nonatomic,strong)HPFBaseView *grayBackgroundView;
+@property(nonatomic,strong)UIAlertController *alert;
 @end
 
 @implementation WeatherViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+   
     self.view.backgroundColor = [UIColor yellowColor];
     [self createNavgationLeftBarButton];
     
+//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updataCity:) name:kLocationCity object:nil];
     [self requestData];
 }
-//请求数据
+
+//-(void)updataCity:(NSNotification *)notification
+//{//    [self dismissViewControllerAnimated:YES completion:^{
+////        
+////    }];
+////    for (UIView *view in _weatherScrollView.subviews) {
+////        [view removeFromSuperview];
+////        
+////    }
+////    [_weatherScrollView removeFromSuperview];
+//
+//    [self requestData];
+//}
+#pragma mark- 数据请求
+
 -(void)requestData
 {
-    [NetworkRequestManager requestWithType:POST urlString:@"http://op.juhe.cn/onebox/weather/query" ParDic:@{@"cityname":@"广州",@"key":@"6f7d1010d25efb9ee9417c39e5f94581"} Header:nil finish:^(NSData *data) {
+    self.city = [[NSUserDefaults standardUserDefaults] stringForKey:kLocationCity];
+    if (self.city.length>0) {
+    }else{
+        self.city = @"广州";
+    }
+    [NetworkRequestManager requestWithType:POST urlString:@"http://op.juhe.cn/onebox/weather/query" ParDic:@{@"cityname":self.city,@"key":@"6f7d1010d25efb9ee9417c39e5f94581"} Header:nil finish:^(NSData *data) {
         NSError *error = nil;
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-        NSDictionary *dicResult = [dic objectForKey:@"result"];
-        NSDictionary *dicData = [dicResult objectForKey:@"data"];
-        //赋值 1
-        NSDictionary *dicRealtime = [dicData objectForKey:@"realtime"];
-        [self.currentStatus setValuesForKeysWithDictionary:dicRealtime];
-        [self.currentWindModel setValuesForKeysWithDictionary:self.currentStatus.wind];
-        [self.currentWeatherModel setValuesForKeysWithDictionary:self.currentStatus.weather];
-        //赋值 2
-        NSDictionary *dicLife = [dicData objectForKey:@"life"];
-        NSDictionary *dicInfo = [dicLife objectForKey:@"info"];
-        [self.lifeModel setValuesForKeysWithDictionary:dicInfo];
-      
-        //赋值 3
-        NSArray *weatherArray = [dicData objectForKey:@"weather"];
-        for (NSDictionary *fiveDayDic in weatherArray) {
-            FiveDayWeatherModel *fiveDayModel = [[FiveDayWeatherModel alloc] init];
-            [fiveDayModel setValuesForKeysWithDictionary:fiveDayDic];
-            [self.fiveDayModelArray addObject:fiveDayModel];
+       
+        if ([[dic objectForKey:@"reason"] isEqualToString:@"successed!"]) {
+            NSDictionary *dicResult = [dic objectForKey:@"result"];
+            NSDictionary *dicData = [dicResult objectForKey:@"data"];
+            //赋值 1
+            NSDictionary *dicRealtime = [dicData objectForKey:@"realtime"];
+            [self.currentStatus setValuesForKeysWithDictionary:dicRealtime];
+            [self.currentWindModel setValuesForKeysWithDictionary:self.currentStatus.wind];
+            [self.currentWeatherModel setValuesForKeysWithDictionary:self.currentStatus.weather];
+            //赋值 2
+            NSDictionary *dicLife = [dicData objectForKey:@"life"];
+            NSDictionary *dicInfo = [dicLife objectForKey:@"info"];
+            [self.lifeModel setValuesForKeysWithDictionary:dicInfo];
+            
+            //赋值 3
+            NSArray *weatherArray = [dicData objectForKey:@"weather"];
+            for (NSDictionary *fiveDayDic in weatherArray) {
+                FiveDayWeatherModel *fiveDayModel = [[FiveDayWeatherModel alloc] init];
+                [fiveDayModel setValuesForKeysWithDictionary:fiveDayDic];
+                [self.fiveDayModelArray addObject:fiveDayModel];
+            }
+            NSLog(@"%ld",self.fiveDayModelArray.count);
+            
+            //赋值 4
+            NSDictionary *pm25Dic = [dicData objectForKey:@"pm25"];
+            NSDictionary *pm25SecondDic = [pm25Dic objectForKey:@"pm25"];
+            [self.pm25Model setValuesForKeysWithDictionary:pm25SecondDic];
+            NSLog(@"%@",self.pm25Model.des);
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+//                for (UIView *view in _weatherScrollView.subviews) {
+//                    [view removeFromSuperview];
+//                }
+                [self.view addSubview:self.weatherScrollView];
+            });
+
+        }else{
+         
+            _alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"抱歉,暂无城市天气信息" preferredStyle:UIAlertControllerStyleAlert];
+            
+            [self presentViewController:_alert animated:YES completion:^{
+                [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(reBack) userInfo:nil repeats:NO];
+
+            
+            }];
         }
+
         NSLog(@"%ld",(unsigned long)self.fiveDayModelArray.count);
         
-        //赋值 4
-        NSDictionary *pm25Dic = [dicData objectForKey:@"pm25"];
-        NSDictionary *pm25SecondDic = [pm25Dic objectForKey:@"pm25"];
-        [self.pm25Model setValuesForKeysWithDictionary:pm25SecondDic];
-        NSLog(@"%@",self.pm25Model.des);
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.view addSubview:self.weatherScrollView];
         });
         
+
     } err:^(NSError *error) {
         
     }];
  
 }
+-(void)reBack
 
+{
+    [_alert dismissViewControllerAnimated:YES completion:^{
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+}
 
 #pragma mark- 懒加载
 //背景灰色图层
 -(HPFBaseView *)grayBackgroundView
 {
     if (!_grayBackgroundView) {
-        _grayBackgroundView = [[HPFBaseView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT*1.3)];
+        _grayBackgroundView = [[HPFBaseView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 950)];
         _grayBackgroundView.backgroundColor = [UIColor grayColor];
         _grayBackgroundView.alpha = 0.2;
     }
@@ -113,7 +166,7 @@
 -(HPFBaseImageView *)backgroundImageView
 {
     if (!_backgroundImageView) {
-        _backgroundImageView = [[HPFBaseImageView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT*1.3)];
+        _backgroundImageView = [[HPFBaseImageView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 950)];
         
         //当前天气状况
         NSString *weatherString = self.currentWeatherModel.info;
@@ -267,14 +320,23 @@
     }
     return _minStringYarray;
 }
-//当前天气view
+#pragma -mark 当前天气view
 -(CurrentWeather *)currentWeather
 {
     if (!_currentWeather) {
         _currentWeather = [[[NSBundle mainBundle] loadNibNamed:@"CurrentWeather" owner:self options:nil] lastObject];
         _currentWeather.frame = CGRectMake(0, 0, kSCREEN_WIDTH, 150);
         _currentWeather.currentDateLabel.text = self.currentStatus.date;
+        //当前温度
         _currentWeather.currentWeatherLabel.text = [NSString stringWithFormat:@"%@°",self.currentWeatherModel.temperature];
+        [[NSUserDefaults standardUserDefaults] setObject:self.currentWeatherModel.temperature forKey:kCurrentWeather];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kCurrentWeather object:nil];
+        
+        //当前城市
+        _currentWeather.currentCityLabel.text = [NSString stringWithFormat:@"当前城市:%@",self.city];
+        
+//        [_currentWeather.currentCityButton setTitle:[NSString stringWithFormat:@"[%@/切换]",self.city] forState:UIControlStateNormal];
+//        [_currentWeather.currentCityButton addTarget:self action:@selector(changeCityName:) forControlEvents:UIControlEventTouchUpInside];
         
         //取数据 "多云 23°/16°"
         //当前天气状况
@@ -285,7 +347,7 @@
         NSString *maxTemperature = [[dayModel.info objectForKey:@"day"] objectAtIndex:2];
         //拿到最低气温
         NSString *minTemperature = [[dayModel.info objectForKey:@"night"] objectAtIndex:2];
-        _currentWeather.currentMaxAndMinLabel.text = [NSString stringWithFormat:@"%@ %@/%@",currentInfo,maxTemperature,minTemperature];
+        _currentWeather.currentMaxAndMinLabel.text = [NSString stringWithFormat:@"%@ %@°/%@°",currentInfo,maxTemperature,minTemperature];
         
         _currentWeather.updateLabel.text = [NSString stringWithFormat:@"[%@]",[self getDateForHourAndMinute]];
         
@@ -375,7 +437,7 @@
     if (!_maxLineView) {
         _maxLineView = [[HPFBaseView alloc] initWithFrame:CGRectMake(0, 325, kSCREEN_WIDTH, 135)];
 //        _maxLineView.backgroundColor = [UIColor redColor];
-        XPChartAndLineView *max = [[XPChartAndLineView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 135) xValueArray:self.maxAndMinLineXArray yValueArray:self.maxLineYArray yStringArray:self.maxStringYArray maxY:40 viewHeight:135 lineIsCurve:YES];
+        XPChartAndLineView *max = [[XPChartAndLineView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 135) xValueArray:self.maxAndMinLineXArray yValueArray:self.maxLineYArray yStringArray:self.maxStringYArray maxY:40 viewHeight:135 lineIsCurve:NO];
         [max showLine];
         max.backgroundColor = [UIColor clearColor];
         [_maxLineView addSubview:max];
@@ -388,7 +450,7 @@
     if (!_minLineView) {
         _minLineView = [[HPFBaseView alloc] initWithFrame:CGRectMake(0, 465, kSCREEN_WIDTH, 135)];
 //        _minLineView.backgroundColor = [UIColor yellowColor];
-        XPChartAndLineView *min = [[XPChartAndLineView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 135) xValueArray:self.maxAndMinLineXArray yValueArray:self.minLineYArray yStringArray:self.minStringYarray maxY:40 viewHeight:135 lineIsCurve:YES];
+        XPChartAndLineView *min = [[XPChartAndLineView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 135) xValueArray:self.maxAndMinLineXArray yValueArray:self.minLineYArray yStringArray:self.minStringYarray maxY:40 viewHeight:135 lineIsCurve:NO];
         [min showLine];
         min.backgroundColor = [UIColor clearColor];
         
@@ -443,9 +505,7 @@
         ;
         _weatherScrollView.showsVerticalScrollIndicator = NO;
         _weatherScrollView.backgroundColor = [UIColor grayColor];
-        _weatherScrollView.contentSize = CGSizeMake(kSCREEN_WIDTH, kSCREEN_HEIGHT*1.3);
-        
-
+        _weatherScrollView.contentSize = CGSizeMake(kSCREEN_WIDTH, 950);
         
         [_weatherScrollView addSubview:self.backgroundImageView];
         [_weatherScrollView addSubview:self.grayBackgroundView];
@@ -483,6 +543,21 @@
         
     }];
 }
+#pragma mark- 切换城市按钮
+//-(void)changeCityName:(NSNotification *)notification
+//{
+//    NSString *string = [[NSUserDefaults standardUserDefaults] stringForKey:kLocationCity];
+//    LocationViewController *locationVC = [[LocationViewController alloc]init];
+//    HPFBaseNavigationController *navLocation = [[HPFBaseNavigationController alloc] initWithRootViewController:locationVC];
+//    if (string.length>0) {
+//        locationVC.city = string;
+//    }else{
+//        locationVC.city = @"广州";
+//    }
+//    
+//    [self presentViewController:navLocation animated:YES completion:NULL];
+//
+//}
 #pragma mark- 获取当前更新的时间
 -(NSString *)getDateForHourAndMinute
 {

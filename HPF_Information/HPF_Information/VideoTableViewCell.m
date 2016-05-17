@@ -9,6 +9,8 @@
 #import "VideoTableViewCell.h"
 #import "UIButton+WebCache.h"
 #import "UIImageView+WebCache.h"
+#import "RecordDataBase.h"
+
 #define  Uphight ((kSCREEN_WIDTH-60)*2/7+40+(kSCREEN_WIDTH-20)*2/3+10)
 #define   DowmWidth ((kSCREEN_WIDTH-20)/6+30+(kSCREEN_WIDTH-20)/12)
 #define   shareWidth  DowmWidth+(kSCREEN_WIDTH-20)/12+10
@@ -304,6 +306,17 @@
     
     
     [[NSNotificationCenter defaultCenter]postNotificationName:@"播放" object:nil userInfo:dic];
+    
+    
+    if ([[RecordDataBase shareRecordData]selectVideoWithTitle:self.video.title].count>0) {
+        
+    }else
+    {
+        [[RecordDataBase shareRecordData]insertVideo:self.video];
+    
+    }
+
+    
 
 }
 - (void)awakeFromNib {

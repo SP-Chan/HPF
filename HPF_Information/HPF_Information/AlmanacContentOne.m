@@ -68,7 +68,7 @@
     label.textColor = [UIColor redColor];
     label.textAlignment=NSTextAlignmentCenter;
     [self.LeftView addSubview:label];
-    
+      label.adjustsFontSizeToFitWidth = YES;
     
     //103.42.19
     self.luckyTime.frame = CGRectMake(0, self.LeftView.bounds.size.height/5, self.LeftView.bounds.size.width, self.LeftView.bounds.size.height*4/5);
@@ -77,7 +77,7 @@
     self.luckyTime.numberOfLines=5;
     self.luckyTime.textAlignment=NSTextAlignmentCenter;
     self.luckyTime.font = [UIFont systemFontOfSize:18];
-    
+       self.luckyTime.adjustsFontSizeToFitWidth = YES;
         self.CentreView.frame = CGRectMake(Width/4, 0, Width/2, Height*2/5);
         self.CentreView.layer.borderWidth=1;
         self.CentreView.layer.borderColor =[UIColor redColor].CGColor;
@@ -89,14 +89,14 @@
     labeC.textColor = [UIColor redColor];
     labeC.textAlignment=NSTextAlignmentCenter;
     [self.CentreView addSubview:labeC];
-    
+       labeC.adjustsFontSizeToFitWidth = YES;
     
     self.CentreLable.frame = CGRectMake(0, self.CentreView.bounds.size.height/2,  self.CentreView.bounds.size.width, self.CentreView.bounds.size.height/2);
     
     self.CentreLable.textColor = [UIColor colorWithRed:103/255.0 green:42/255.0 blue:19/255.0 alpha:1];
     self.CentreLable.textAlignment=NSTextAlignmentCenter;
     self.CentreLable.font = [UIFont systemFontOfSize:18];
-    
+       self.CentreLable.adjustsFontSizeToFitWidth = YES;
     
     
     
@@ -112,7 +112,7 @@
     self.CentreLeftLabel.textColor = [UIColor colorWithRed:103/255.0 green:42/255.0 blue:19/255.0 alpha:1];
     
     self.CentreLeftLabel.font = [UIFont systemFontOfSize:18];
-   
+      self.CentreLeftLabel.adjustsFontSizeToFitWidth = YES;
     
     self.CentreBelow.frame = CGRectMake(Width/4+Width/5, Height*2/5, Width/10, Height*3/5);
     self.CentreBelow.layer.borderWidth=1;
@@ -126,7 +126,7 @@
     below.textAlignment=NSTextAlignmentCenter;
     [self.CentreBelow addSubview:below];
     
-    
+       below.adjustsFontSizeToFitWidth = YES;
     
         self.CentreRight.frame = CGRectMake(Width/2+Width/20, Height*2/5, Width/5, Height*3/5);
         self.CentreRight.layer.borderWidth=1;
@@ -137,7 +137,7 @@
     
     self.CentreRightLabel.font = [UIFont systemFontOfSize:18];
        self.CentreRightLabel.numberOfLines=8;
-
+   self.CentreRightLabel.adjustsFontSizeToFitWidth = YES;
     
     
     
@@ -154,7 +154,7 @@
     labelR .textColor = [UIColor redColor];
     labelR .textAlignment=NSTextAlignmentCenter;
     [self.RightView addSubview:labelR];
-    
+       labelR.adjustsFontSizeToFitWidth = YES;
     
     //103.42.19
     self.fierceTime.frame = CGRectMake(0, self.LeftView.bounds.size.height/5, self.RightView.bounds.size.width, self.RightView.bounds.size.height*4/5);
@@ -164,7 +164,7 @@
     self.fierceTime.textAlignment=NSTextAlignmentCenter;
     self.fierceTime.font = [UIFont systemFontOfSize:18];
     
-    
+       self.fierceTime.adjustsFontSizeToFitWidth = YES;
     
     
 }

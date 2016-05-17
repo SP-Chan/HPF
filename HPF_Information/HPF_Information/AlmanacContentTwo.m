@@ -56,7 +56,7 @@
     labelL .textColor = [UIColor redColor];
     labelL .textAlignment=NSTextAlignmentCenter;
     [self.LeftOneView addSubview:labelL];
-    
+    labelL.adjustsFontSizeToFitWidth = YES;
     
     //103.42.19
     self.LeftLable.frame = CGRectMake(0, self.LeftOneView.bounds.size.height/5, self.LeftOneView.bounds.size.width, self.LeftOneView.bounds.size.height*4/5);
@@ -64,8 +64,8 @@
      self.LeftLable.textColor = [UIColor colorWithRed:103/255.0 green:42/255.0 blue:19/255.0 alpha:1];
      self.LeftLable.numberOfLines=5;
      self.LeftLable.textAlignment=NSTextAlignmentCenter;
-     self.LeftLable.font = [UIFont systemFontOfSize:18];
-    
+  
+    self.LeftLable.adjustsFontSizeToFitWidth = YES;
     
     
     
@@ -110,9 +110,9 @@
     self.RightLable.textColor = [UIColor colorWithRed:103/255.0 green:42/255.0 blue:19/255.0 alpha:1];
     self.RightLable.numberOfLines=5;
     self.RightLable.textAlignment=NSTextAlignmentCenter;
-    self.RightLable.font = [UIFont systemFontOfSize:18];
+       self.RightLable.adjustsFontSizeToFitWidth = YES;
     
-    
+    self.RightLable.adjustsFontSizeToFitWidth = YES;
     if ([CLLocationManager headingAvailable]) {
         //设置精度
         self.LocManager.desiredAccuracy = kCLLocationAccuracyBest;

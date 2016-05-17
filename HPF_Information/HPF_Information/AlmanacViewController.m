@@ -19,6 +19,7 @@
 #import "SolveLogo.h"
 #import "MarkViewController.h"
 #import "totalDataBaseUtil.h"
+#import "activityView.h"
 @interface AlmanacViewController ()<iCarouselDataSource,iCarouselDelegate,UISearchBarDelegate>
 @property(nonatomic,strong)UIScrollView *scrollView;
 @property(nonatomic,strong)NSDictionary *dataDic;
@@ -43,6 +44,7 @@
 {
     if ([super init]) {
          [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(timeActiom:) name:@"time" object:nil];
+       
     }
     return self;
     
@@ -55,7 +57,7 @@
     _scrollView.contentSize = CGSizeMake(0, kSCREEN_HEIGHT*2);
     _scrollView.bounces=NO;
     _scrollView.showsVerticalScrollIndicator=NO;
-    _scrollView.backgroundColor = [UIColor colorWithRed:146/255.0 green:185/255.0 blue:266/255.0 alpha:1];
+   
     [self.view addSubview:_scrollView];
     return _scrollView;
 
@@ -63,11 +65,62 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    /*
+     
+     春绿色 [UIColor colorWithRed:105/255.0 green:178/255.0 blue:115/255.0 alpha:1];
+      
+     [UIColor colorWithRed:249/255.0 green:191/255.0 blue:100/255.0 alpha:1];
+     */
+
+
+    NSDate *  senddate=[NSDate date];
+    
+    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+    
+    [dateformatter setDateFormat:@"YYYY-MM-dd"];
+    
+    _urlTime=[dateformatter stringFromDate:senddate];
+
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:_urlTime,@"dateTime", nil];
     
     
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"time"];
     
- 
-   
+    [[NSUserDefaults standardUserDefaults]setObject:dic forKey:@"time"];
+
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(Actiom:) name:@"标签" object:nil];
+
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(search:) name:@"搜索" object:nil];
+
+     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(yearBeyond) name:@"yearBeyond" object:nil];
+    
+
+     [self requestData];
+    
+     _constellationArray = [NSMutableArray array];
+    for (int i = 0; i<12; i++) {
+        NSString *str = [NSString stringWithFormat:@"xingzuo000%d.jpg",i+1];
+        UIImage *image = [UIImage imageNamed:str];
+        [_constellationArray addObject:image];
+    }
+
+    [self setRightNavigation];
+}
+-(void)setRightNavigation
+{
+  
+    UIButton*rightButton = [[UIButton alloc]initWithFrame:CGRectMake(0,0,30,30)];
+    [rightButton setImage:[UIImage imageNamed:@"jing.png"]forState:UIControlStateNormal];
+    
+    [rightButton addTarget:self action:@selector(Comeback) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem*rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightButton];
+    
+    self.navigationItem.rightBarButtonItem= rightItem;
+}
+
+-(void)Comeback
+{
 
     NSDate *  senddate=[NSDate date];
     
@@ -77,38 +130,15 @@
     
     _urlTime=[dateformatter stringFromDate:senddate];
     
- 
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:_urlTime,@"dateTime", nil];
     
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:_urlTime,@"dateTime", nil];
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"time" object:nil userInfo:dic];
     
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"time"];
     
     [[NSUserDefaults standardUserDefaults]setObject:dic forKey:@"time"];
-  
-
-   
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(Actiom:) name:@"标签" object:nil];
-
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(search:) name:@"搜索" object:nil];
-
-    
-    
-    
-
-    
-    
-     [self requestData];
-     [self setTimeTitle];
-     _constellationArray = [NSMutableArray array];
-    for (int i = 0; i<12; i++) {
-        NSString *str = [NSString stringWithFormat:@"xingzuo000%d.jpg",i+1];
-        UIImage *image = [UIImage imageNamed:str];
-        [_constellationArray addObject:image];
-    }
-    
-   
+ 
 }
-
 #pragma -mark 解梦通知
 -(void)Actiom:(NSNotification *)actiom
 {
@@ -138,6 +168,35 @@
     
 
 }
+#pragma -mark 年份超出通知
+-(void)yearBeyond
+{
+   
+    
+  UIAlertController *alert =  [UIAlertController alertControllerWithTitle:@"没有数据最多到2020年" message:@"请重新选择年份" preferredStyle:UIAlertControllerStyleAlert];
+    
+    
+    UIAlertAction *ale = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    
+    [alert addAction:ale];
+    
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self presentViewController:alert animated:YES completion:^{
+        
+    }];
+    });
+    
+
+
+
+
+}
+
+
 //设置iCarousel
 -(iCarousel *)iCarousel{
     
@@ -194,14 +253,9 @@
 }
 -(void)requestData
 {
-    _dataDic = [NSDictionary dictionary];
-   
-    _activity = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
-    _activity.layer.position=CGPointMake(kSCREEN_WIDTH/2, kSCREEN_HEIGHT/2-64);
-    [_activity setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [_activity setColor:[UIColor blackColor]];
-    [self.view addSubview:_activity];
-    [_activity startAnimating];
+    activityView *acti = [[activityView alloc]init];
+    [self.view addSubview:acti];
+    [acti setActivityColor:[UIColor blackColor]];
     
     
     NSString *url = [NSString stringWithFormat:@"http://v.juhe.cn/laohuangli/d?date=%@&key=b45f8bf8fd8c3132a47890b409ae984d",_urlTime];
@@ -223,9 +277,9 @@
            
             if (self.dataDic.count>0) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    
+                    [self setTimeTitle];
                     [self SetMainInterface];
-                    [_activity stopAnimating];
+                    [acti removeFromSuperview];
                     
                 });
                 
@@ -255,14 +309,14 @@
     AlmanacImage *imageV = [[AlmanacImage alloc]init];;
     imageV.frame =CGRectMake(0, 0, kSCREEN_WIDTH,kSCREEN_HEIGHT/3);
     
-  
+    imageV.backgroundColor = [UIColor clearColor];
 //
     imageV.layer.borderWidth = 1;
     imageV.layer.borderColor=[UIColor redColor].CGColor;
     imageV.layer.cornerRadius=5;
     imageV.layer.masksToBounds=YES;
     [self.scrollView addSubview:imageV];
-    imageV.imageV.image = [UIImage imageNamed:@"ZQJBC.jpg"];
+    imageV.imageV.image = [UIImage imageNamed:@"481757_12823573491"];
     
     AlmanacContentThree *three = [[AlmanacContentThree alloc]init];
     three.frame = CGRectMake(4, kSCREEN_HEIGHT/3, kSCREEN_WIDTH-8, kSCREEN_HEIGHT/9);
@@ -324,7 +378,14 @@
         for (UIView *view in self.scrollView.subviews) {
             
             [view removeFromSuperview];
+            
+            
         }
+    
+    
+    UIView *vi = [self.navigationController.view viewWithTag:10086];
+    
+    [vi removeFromSuperview];
         [self requestData];
         
 
@@ -342,7 +403,7 @@
      [[NSNotificationCenter defaultCenter]postNotificationName:@"animation" object:nil];
 
     
-    [_UserDdfaults setObject:_urlTime forKey:@"tite"];
+//    [_UserDdfaults setObject:_urlTime forKey:@"tite"];
 
 }
 
@@ -351,45 +412,186 @@
 -(void)setTimeTitle
 {
 
-    NSDate *  senddate=[NSDate date];
-    
-    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
-    
-    [dateformatter setDateFormat:@"YYYY年MM月"];
-    
-      NSString *time =[dateformatter stringFromDate:senddate];
-    
-    [dateformatter setDateFormat:@"EEEE"];
-    NSString *Week = [dateformatter stringFromDate:senddate];
+
    
     
-    _timeView =[[UIView alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH/3, 20, kSCREEN_WIDTH/3, 44)];
-  
+    NSArray *array = [_urlTime componentsSeparatedByString:@"-"];
+    NSString *y = [NSString stringWithFormat:@"%@年",array[0]];
+    NSString *m = [NSString stringWithFormat:@"%@月",array[1]];
+    NSString *time = [y stringByAppendingString:m];
+    
+    _timeView =[[UIView alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH*17/48, 20, kSCREEN_WIDTH*7/24, 44)];
+    _timeView.tag = 10086;
     [self.navigationController.view addSubview:_timeView];
+   
+    
+    
+    
+    NSString *centuryString =[array[0] substringWithRange:NSMakeRange(0, 2)];
+    NSString *yearString = [array[0] substringWithRange:NSMakeRange(2, 2)];
+    
+    NSString *monthString = array[1];
+    NSString *dayString = [array lastObject];
+    
+    NSInteger century = [centuryString integerValue];
+    NSInteger year = [yearString integerValue];
+    NSInteger month = [monthString integerValue];
+    NSInteger day = [dayString integerValue];
+    
+   
+    
+    
+    
+    NSInteger weekInt = [self AccordingToCentury:century Year:year Month:month Day:day];
+    
+    
+
+    UILabel *upLable = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.timeView.bounds.size.width- self.timeView.bounds.size.height/2, self.timeView.bounds.size.height/2)];
+    
+    [_timeView addSubview:upLable];
+    upLable.font= [UIFont systemFontOfSize:16];
+    upLable.textAlignment=NSTextAlignmentCenter;
+    upLable.text=time;
+     upLable.adjustsFontSizeToFitWidth = YES;
+    UIImageView *image = [[UIImageView alloc]initWithFrame:CGRectMake( self.timeView.bounds.size.width-self.timeView.bounds.size.height/2, 0, self.timeView.bounds.size.height/2, self.timeView.bounds.size.height/2)];
+    image.image = [UIImage imageNamed:@"time"];
+    [self.timeView addSubview:image];
+    
+    
+    image.contentMode = UIViewContentModeScaleAspectFill;
+   
+    
+    
+    UILabel *NextLable = [[UILabel alloc]initWithFrame:CGRectMake(0, _timeView.bounds.size.height/2, _timeView.bounds.size.width, _timeView.bounds.size.height/2)];
 
     
+    NextLable.text =[self ChangeWeek:weekInt];
+   
+    NextLable.textAlignment=NSTextAlignmentCenter;
+    NextLable.font = [UIFont systemFontOfSize:16];
+    NextLable.adjustsFontSizeToFitWidth = YES;
+    [self.timeView addSubview:NextLable];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    button.frame = CGRectMake(0, 0, _timeView.bounds.size.width, _timeView.bounds.size.height/2);
-    [_timeView addSubview:button];
-    [button setTitle:time forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    button.frame = CGRectMake(0, 0, _timeView.bounds.size.width, _timeView.bounds.size.height);
+    
+    
     [button addTarget:self action:@selector(titleTime) forControlEvents:UIControlEventTouchUpInside];
-    button.titleLabel.font = [UIFont systemFontOfSize:16];
-    button.titleLabel.numberOfLines=2;
-    [button setImage:[UIImage imageNamed:@"time"] forState:UIControlStateNormal];
-    [button setImageEdgeInsets:UIEdgeInsetsMake(0,100, 0, 0)];
-    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, -25, 0, 0)];
-    
-    
-    UILabel *lable = [[UILabel alloc]initWithFrame:CGRectMake(0, _timeView.bounds.size.height/2, _timeView.bounds.size.width, _timeView.bounds.size.height/2)];
-    lable.text =Week;
-   
-    lable.textAlignment=NSTextAlignmentCenter;
-    lable.font = [UIFont systemFontOfSize:15];
-    [_timeView addSubview:lable];
+    [self.timeView addSubview:button];
   
+}
+#pragma -mark 转换星期的方法
+-(NSString *)ChangeWeek:(NSInteger)week
+{
+
+    switch (week) {
+        case 0:
+            return @"星期日";
+            break;
+        case 1:
+            return @"星期一";
+            break;
+        case 2:
+            return @"星期二";
+            break;
+        case 3:
+            return @"星期三";
+            break;
+        case 4:
+            return @"星期四";
+            break;
+        case 5:
+            return @"星期五";
+            break;
+        case 6:
+            return @"星期六";
+            break;
+        
+        default:
+            break;
+    }
+    return @"不存在";
+
+}
+
+
+#pragma -mark 计算星期的方法
+-(NSInteger)AccordingToCentury:(NSInteger)century Year:(NSInteger)year Month:(NSInteger)month Day:(NSInteger)day
+
+{
+
+    if (month==1) {
+        
+       year = year-1;
+       month = month+12;
+        
+        
+     NSInteger weeks= year +year/4+century/4 -2*century+26*(month+1)/10+day-1;
+        if (weeks<0) {
+            
+            while (true) {
+               
+                if (weeks>0) {
+                    return weeks%7;
+                    break;
+                }
+             weeks =weeks + 7;
+            }
+            
+        }else
+        {
+            return weeks%7;
+        
+        }
+        
+    }else if (month==2)
+    {
+        
+        year = year -1;
+         month = month+12;
+        NSInteger weeks = (year +year/4+century/4 -2*century+26*(month+1)/10+day-1)%7;
+        if (weeks<0) {
+            
+            while (true) {
+                weeks =weeks + 7;
+                if (weeks>0) {
+                    return weeks%7;
+                    break;
+                }
+                
+            }
+            
+        }else
+        {
+            return weeks%7;
+            
+        }
+        
+    }else{
+        
+        NSInteger weeks = (year +year/4+century/4 -2*century+26*(month+1)/10+day-1)%7;
+        if (weeks<0) {
+            
+            while (true) {
+                weeks =weeks + 7;
+                if (weeks>0) {
+                    return weeks%7;
+                     break;
+                }
+               
+            }
+            
+        }else
+        {
+            return weeks%7;
+            
+        }
+    }
+
+
+
+
 }
 -(void)titleTime
 {
@@ -438,7 +640,7 @@
 -(void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index
 {
 
-    NSMutableArray *ConstellationArray =[NSMutableArray arrayWithObjects:@"白羊座",@"处女座",@"金牛座",@"巨蟹座",@"摩羯座",@"射手座",@"狮子座",@"双鱼座",@"双子座",@"水平座",@"天平座",@"天蝎座", nil];
+    NSMutableArray *ConstellationArray =[NSMutableArray arrayWithObjects:@"白羊座",@"处女座",@"金牛座",@"巨蟹座",@"摩羯座",@"射手座",@"狮子座",@"双鱼座",@"双子座",@"水瓶座",@"天平座",@"天蝎座", nil];
     NSMutableArray *imageArray = [NSMutableArray array];
     for (int i = 1; i<=12; i++) {
         NSString *str = [NSString stringWithFormat:@"xing%d",i];

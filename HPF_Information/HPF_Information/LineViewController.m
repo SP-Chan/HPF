@@ -77,6 +77,7 @@
         _tab.dataSource = self;
         //        _tab.bounces = NO;
         _tab.showsVerticalScrollIndicator = NO;
+        _tab.backgroundColor = [UIColor clearColor];
     }
     return _tab;
 }
@@ -94,6 +95,7 @@
     }
     NSArray *array = [[DataBaseUtil shareDataBaseUtil] seleteBusesWithTableName:@"Line"];
     cell.textLabel.text = [array objectAtIndex:array.count-1 - indexPath.row];
+    cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

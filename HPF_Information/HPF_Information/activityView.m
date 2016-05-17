@@ -8,23 +8,24 @@
 
 #import "activityView.h"
 
+static activityView *activity = nil;
+
 @implementation activityView
 
-//+(instancetype)shareSwitch
-//{
-//
-//    static activityView *activity = nil;
-//    
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        activity = [[activityView alloc]init];
-//    });
-//    return activity;
-//}
-
--(instancetype)initWithFrame:(CGRect)frame
++(instancetype)shareActivityView
 {
-    if ([super initWithFrame:frame]) {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if (activity == nil) {
+            activity = [[activityView alloc]init];
+        }
+    });
+    return activity;
+}
+
+-(instancetype)init
+{
+    if ([super init]) {
         _activity = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(0, 0,kSCREEN_WIDTH/10, kSCREEN_WIDTH/10)];
        
         _activity.layer.position =CGPointMake(kSCREEN_WIDTH*7/48,kSCREEN_WIDTH*7/48);
@@ -50,7 +51,11 @@
     return self;
 
 }
-
+-(void)removeActivityView
+{
+    [_activity stopAnimating];
+    [self removeFromSuperview];
+}
 //-(UIActivityIndicatorView *)activity
 //{
 //    if (!_activity) {

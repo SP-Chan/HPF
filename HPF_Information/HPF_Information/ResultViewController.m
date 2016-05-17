@@ -20,6 +20,7 @@
 @property(nonatomic,strong)UIAlertController *alert;
 @property(nonatomic,strong)TopView *topView;
 @property(nonatomic,strong)UITableView *tab;
+
 @end
 
 @implementation ResultViewController

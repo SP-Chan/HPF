@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>key</key>
+	<array>
+		<array>
+			<string>1. 为什么没有我所在的城市公交信息?</string>
+			<string>2. 为什么查询不到我的线路 ?</string>
+			<string>3. 公交信息不准确?</string>
+			<string>4. 点击没有反应?</string>
+		</array>
+		<array>
+			<string>1. 怎么更新速度这么慢?</string>
+			<string>2. 出现卡频?</string>
+		</array>
+		<array>
+			<string>1. 罗盘怎么使用?</string>
+			<string>2. 没有找到对应的梦境?</string>
+			<string>3. 消息不准确?</string>
+		</array>
+		<array>
+			<string>1. 天气的城市在哪选择?</string>
+			<string>2. 为什么会没有天气信息?</string>
+			<string>3. 想获取更多的天气信息?</string>
+		</array>
+		<array>
+			<string>1. 新闻内容里面为什么点不开?</string>
+			<string>2. 新闻信息更新不全?</string>
+		</array>
+	</array>
+</dict>
+</plist>

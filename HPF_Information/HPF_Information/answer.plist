@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>key</key>
+	<array>
+		<array>
+			<string>答: 您好,因为信息不全,所以只有部分城市的公交信息</string>
+			<string>答: 您好,这个问题由于我们额数据也在不停更新中,入发现问题,可以给我们发送邮件反馈意见</string>
+			<string>答: 您好,我们的数据来源于网络,与实际情况可能有出入,一切数据仅供参考作用</string>
+			<string>答: 您好,这个问题可能是后台没有该公车信息,对此表示万分抱歉.</string>
+		</array>
+		<array>
+			<string>答: 我们的视频都是源自网络的同步更新,如有问题可通过邮箱实际反馈</string>
+			<string>答: 您好,由于网络原因,可能会有部分卡频现象,视频浏览建议在WIFI环境下进行</string>
+		</array>
+		<array>
+			<string>答: 我们的罗盘具有指南针功能,与实际罗盘可能有出入,但具体用法一致</string>
+			<string>答: 您好,由于数据原因造您的不良体验,表示万分抱歉,请把实际情况转发给我们,我们会尽快处理</string>
+			<string>答: 您好,信息来源网络,一切仅供参考娱乐</string>
+		</array>
+		<array>
+			<string>答: 天气城市的选择在新闻首页</string>
+			<string>答: 有可能存在网络原因,也由可能是没有该城市的天气信息</string>
+			<string>答: 请把您的想法和建议通过邮件发送给我们,我们会尽快做改善与答复</string>
+		</array>
+		<array>
+			<string>答: 由于版权原因,新闻内容只做浏览</string>
+			<string>答: 新闻内容是实时更新的,对于部分不全内容我们会尽快解决</string>
+		</array>
+	</array>
+</dict>
+</plist>

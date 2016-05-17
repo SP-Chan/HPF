@@ -34,13 +34,13 @@
         self.pickerV.backgroundColor = [UIColor orangeColor];
         [self addSubview:self.PickView];
         
-        UIImageView *imageV = [[UIImageView alloc]initWithFrame:CGRectMake(0,0, kSCREEN_WIDTH,  (self.frame.size.width)*3/4)];
+        UIImageView *imageV = [[UIImageView alloc]initWithFrame:CGRectMake(0,0, kSCREEN_WIDTH,  (kSCREEN_WIDTH)*3/4)];
         imageV.image =[UIImage imageNamed:@"2008111385229728_2"];
-        imageV.backgroundColor = [UIColor clearColor];
+     
         [self.PickView addSubview:imageV];
         
         
-        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(280, 20, 50, 50)];
+        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH*80/100, kSCREEN_WIDTH/18, 50, 50)];
         button.backgroundColor = [UIColor clearColor];
         [button setImage:[UIImage imageNamed:@"queding"] forState:UIControlStateNormal];
         button.layer.cornerRadius=25;
@@ -52,9 +52,9 @@
         
         
         
-        self.pickerV = [[UIPickerView alloc]initWithFrame:CGRectMake(84,96, 236, 144)];
+        self.pickerV = [[UIPickerView alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH/5,kSCREEN_WIDTH*27/100, kSCREEN_WIDTH*67/100,kSCREEN_WIDTH*38/100)];
       
-        
+       
         
         [self.PickView addSubview:self.pickerV];
         self.pickerV.dataSource=self;

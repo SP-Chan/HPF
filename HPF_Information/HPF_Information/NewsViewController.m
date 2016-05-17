@@ -21,11 +21,12 @@
 #import "PhoneViewController.h"    //手机
 #import "EmotionViewController.h"  //情感
 #import "EducationViewController.h"//教育
-
-
+#import "LocationViewController.h"
+#import "HPFBaseNavigationController.h"
 @interface NewsViewController ()<UIScrollViewDelegate>
 
-@property(nonatomic,strong)HPFBaseButton *leftButton;
+@property(nonatomic,strong)HPFBaseButton *leftButton;//左上角抽屉按钮
+@property(nonatomic,strong)HPFBaseButton *rightButton;//右上角定位按钮
 @property(nonatomic,assign)BOOL isShowLeftView;
 @property(nonatomic,strong)UIScrollView *titleSc;
 @property(nonatomic,strong)UIScrollView *newsSc;
@@ -43,6 +44,7 @@
     
     self.navigationItem.title = @"首页";
     [self createLefBarButton];
+    [self createRightButton];
     [self createTitleScrollView];
     [self creareNewsScrollview];
     
@@ -184,8 +186,33 @@
          _newsSc.contentOffset = CGPointMake(button.tag*kSCREEN_WIDTH, 0);
     }
 }
-
-
+#pragma mark- 右上方的定位键
+-(void)createRightButton
+{
+    if (_rightButton == nil)
+    {
+        _rightButton = [HPFBaseButton buttonWithType:UIButtonTypeSystem];
+        _rightButton.frame = CGRectMake(kSCREEN_WIDTH - 37, kSCREEN_HEIGHT * 0.1 - 35, 30, 30);
+        [_rightButton setBackgroundImage:[UIImage imageNamed:@"location.png"] forState:UIControlStateNormal];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_rightButton];
+//        [_imageView addSubview:_searchButton];
+        [_rightButton addTarget:self action:@selector(searchButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+}
+//点击搜索 弹出搜索视图控制器
+-(void)searchButtonAction:(UIButton *)button
+{
+    NSString *string = [[NSUserDefaults standardUserDefaults] stringForKey:kLocationCity];
+    LocationViewController *locationVC = [[LocationViewController alloc]init];
+    HPFBaseNavigationController *navLocation = [[HPFBaseNavigationController alloc] initWithRootViewController:locationVC];
+    if (string.length>0) {
+        locationVC.city = string;
+    }else{
+        locationVC.city = @"广州";
+    }
+//    locationVC.city = self.titleArr[1];
+    [self presentViewController:navLocation animated:YES completion:NULL];
+}
 #pragma mark- 左上方的侧栏键
 -(void)createLefBarButton
 {

@@ -72,7 +72,7 @@
     label.textColor = [UIColor grayColor];
     label.text =self.dateStr;
     label.textAlignment=NSTextAlignmentCenter;
-    
+   label.adjustsFontSizeToFitWidth = YES;
     UILabel *l = [[UILabel alloc]initWithFrame:CGRectMake(self.titleColumn.bounds.size.width*5/12, self.titleColumn.bounds.size.height/4, 4, self.titleColumn.bounds.size.height*3/4-4)];
     l.backgroundColor = [UIColor colorWithRed:120/255.0 green:47/255.0 blue:170/255.0 alpha:1];
     [self.titleColumn addSubview:l];
@@ -93,7 +93,7 @@
     la.textColor = [UIColor grayColor];
     la.alpha=0.8;
     [self.rightView addSubview:la];
-    
+    la.adjustsFontSizeToFitWidth = YES;
     
     UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(5, self.rightView.bounds.size.height*3/4, self.rightView.bounds.size.width/3, self.rightView.bounds.size.height/4)];
     
@@ -102,7 +102,7 @@
     lab.textColor = [UIColor grayColor];
     lab.font=[UIFont systemFontOfSize:15];
     [self.rightView addSubview:lab];
-    
+    lab.adjustsFontSizeToFitWidth = YES;
     
     _date.frame=CGRectMake(self.rightView.bounds.size.width/3+5, self.rightView.bounds.size.height*3/4, self.rightView.bounds.size.width*2/3, self.rightView.bounds.size.height/4);
     
@@ -127,12 +127,13 @@
             if ((j+1)%2==1) {
                 UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(_contentColumn.bounds.size.width*j/4,_contentColumn.bounds.size.height*i/5, _contentColumn.bounds.size.width/6, _contentColumn.bounds.size.height/5-2)];
                 title.tag =a;
-                NSLog(@"奇数%ld",a);
+               
                 [self.contentColumn addSubview:title];
                 title.backgroundColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1];
                 title.textAlignment=NSTextAlignmentCenter;
                 title.textColor= [UIColor blackColor];
                 title.font=[UIFont systemFontOfSize:14];
+                title.adjustsFontSizeToFitWidth = YES;
             }else
             {
                 
@@ -141,13 +142,14 @@
                     
                     UILabel *contents = [[UILabel alloc]initWithFrame:CGRectMake(_contentColumn.bounds.size.width*(j-1)/4+_contentColumn.bounds.size.width/6,_contentColumn.bounds.size.height*i/5, _contentColumn.bounds.size.width*5/6, _contentColumn.bounds.size.height/5-2)];
                     contents.tag=a;
-                    NSLog(@"特殊%ld",a);
+                   
                     contents.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1];
                     
                     contents.font = [UIFont systemFontOfSize:13];
                     [self.contentColumn addSubview:contents];
                     contents.numberOfLines=4;
                     a=1;
+                    contents.adjustsFontSizeToFitWidth = YES;
                     break;
                     
                     
@@ -162,7 +164,7 @@
                 content.tag=a;
                 content.textAlignment=NSTextAlignmentCenter;
                 content.textColor= [UIColor grayColor];
-NSLog(@"偶数%ld",a);
+content.adjustsFontSizeToFitWidth = YES;
             
             }
         
@@ -186,7 +188,7 @@ NSArray *array = [NSArray arrayWithObjects:
     @"速配星座",[_Datadic objectForKey:@"QFriend"],
     @"今日解析",[_Datadic objectForKey:@"summary"],nil];
     
-    NSLog(@"==%ld",array.count);
+    NSLog(@"======%ld",array.count);
     
 
     for (int i = 0; i<array.count; i++) {
