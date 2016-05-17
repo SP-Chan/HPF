@@ -14,6 +14,7 @@
 #import "WeatherViewController.h"
 #import "SDImageCache.h"
 #import "SDWebImageManager.h"
+#import "ClearCacheViewController.h"
 
 @interface LeftViewController ()
 @property(nonatomic,strong)LeftViewTop *topView;
@@ -65,7 +66,7 @@
         [self.view addSubview:button];
         
         if ([button.titleLabel.text isEqualToString:@"清除缓存"]) {
-            [button addTarget:self action:@selector(clearCache:) forControlEvents:UIControlEventTouchUpInside];
+            [button addTarget:self action:@selector(clearCache) forControlEvents:UIControlEventTouchUpInside];
         }
         
         
@@ -86,8 +87,13 @@
 }
 
 
--(void)clearCache:(UIButton *)button
+-(void)clearCache
 {
+ 
+//    ClearCacheViewController *clear = [[ClearCacheViewController alloc]init];
+//    
+//    [self.navigationController pushViewController:clear animated:YES];
+    
     {
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)lastObject];
@@ -99,10 +105,7 @@
             NSString* fileAbsolutePath = [cachePath stringByAppendingPathComponent:fileName];
             Size += [[fileManager attributesOfItemAtPath:fileAbsolutePath error:nil] fileSize];
         }
-        
-        
-        NSString *cacheSize = [NSString stringWithFormat:@"缓存大小为%.2lldKB\n是否清除?",Size/ 1024 ];
-        
+        NSString *cacheSize = [NSString stringWithFormat:@"缓存大小为%lldM\n是否清除?",Size/ 1024000 ];
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:cacheSize preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [[SDImageCache sharedImageCache]clearDisk];
@@ -114,10 +117,7 @@
         [alertController addAction:action2];
         
         [self presentViewController:alertController animated:YES completion:NULL];
-        
-        
-    }
-
+        }
 }
 
 

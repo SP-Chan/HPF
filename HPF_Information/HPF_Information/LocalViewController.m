@@ -125,6 +125,7 @@
             _label = [[UILabel alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH/2.25, kSCREEN_HEIGHT/3.3, kSCREEN_WIDTH/3.3, kSCREEN_HEIGHT/6)];
             _label.text = @"加载中";
             _label.backgroundColor = [UIColor clearColor];
+            self.label.adjustsFontSizeToFitWidth = YES;
             [self.view addSubview:_label];
         }
         
