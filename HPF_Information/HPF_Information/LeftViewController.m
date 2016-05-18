@@ -159,14 +159,13 @@
             NSString* fileAbsolutePath = [cachePath stringByAppendingPathComponent:fileName];
             Size += [[fileManager attributesOfItemAtPath:fileAbsolutePath error:nil] fileSize];
         }
-<<<<<<< HEAD
+
         NSString *cacheSize = [NSString stringWithFormat:@"缓存大小为%lldM\n是否清除?",Size/ 1024000 ];
-=======
+
         
         
-        NSString *cacheSize = [NSString stringWithFormat:@"缓存大小为%lldM\n是否清除?",Size/ 1024000 ];
-        
->>>>>>> bd14bde9e6f1b0bd513f1a8c4bf48c57c074f4e8
+//        NSString *cacheSize = [NSString stringWithFormat:@"缓存大小为%lldM\n是否清除?",Size/ 1024000 ];
+
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:cacheSize preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [[SDImageCache sharedImageCache]clearDisk];

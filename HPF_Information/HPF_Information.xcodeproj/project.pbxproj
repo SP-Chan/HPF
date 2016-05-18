@@ -1219,15 +1219,15 @@
 				3F856AA51CE7201B00DAFB8A /* answer.plist */,
 				3F19A4671CD334BE00C3D532 /* LeftViewController.h */,
 				3F19A4681CD334BE00C3D532 /* LeftViewController.m */,
-<<<<<<< HEAD
+
 				9735C2091CE6F93C005D29A0 /* ClearCacheViewController.h */,
 				9735C20A1CE6F93C005D29A0 /* ClearCacheViewController.m */,
 				3F1D61B31CD8E068006D5A5C /* SettingViewController.h */,
 				3F1D61B41CD8E068006D5A5C /* SettingViewController.m */,
-=======
+
 				3F856A9B1CE7189400DAFB8A /* AnswerViewController.h */,
 				3F856A9C1CE7189400DAFB8A /* AnswerViewController.m */,
->>>>>>> bd14bde9e6f1b0bd513f1a8c4bf48c57c074f4e8
+
 				E11A05571CD971C600FA2559 /* WeatherViewController.h */,
 				E11A05581CD971C600FA2559 /* WeatherViewController.m */,
 				3FD0E8AC1CE5A940003B190D /* LocationViewController.h */,
