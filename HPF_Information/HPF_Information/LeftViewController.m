@@ -29,6 +29,7 @@
 @property(nonatomic,strong)UIAlertController *alert;
 @property(nonatomic,strong)UIAlertController *alertMe;
 @property(nonatomic,strong)UIAlertController *alertOpinion;
+@property(nonatomic,strong)NSMutableArray *imageArray;
 @end
 
 @implementation LeftViewController
@@ -70,7 +71,7 @@
 //        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [button setTitle:array[i] forState:UIControlStateNormal];
         [button setTitleEdgeInsets:UIEdgeInsetsMake(0, -button.bounds.size.width*1/5, 0, 0)];
-        [button setImage:[UIImage imageNamed:@"drawer.png"] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:self.imageArray[i]] forState:UIControlStateNormal];
         [button setImageEdgeInsets:UIEdgeInsetsMake(0, -button.bounds.size.width*2/5, 0, 0)];
         [button addTarget:self action:@selector(leftViewButtonMethod:) forControlEvents:UIControlEventTouchUpInside];
         [self.buttonArray addObject:button];
@@ -79,12 +80,18 @@
         if ([button.titleLabel.text isEqualToString:@"清除缓存"]) {
             [button addTarget:self action:@selector(clearCache:) forControlEvents:UIControlEventTouchUpInside];
         }
-        
-        
-        
-        
+    
     }
 }
+
+-(NSMutableArray *)imageArray
+{
+    if (!_imageArray) {
+        _imageArray = [NSMutableArray arrayWithObjects:@"PRO.png",@"U.png",@"P.png",@"D.png",@"M.png", nil];
+    }
+    return _imageArray;
+}
+
 -(void)leftViewButtonMethod:(UIButton *)button
 {
     if (button.tag == 0) {//疑难解答

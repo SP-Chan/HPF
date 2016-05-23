@@ -21,6 +21,7 @@
 #import "PM25Model.h"
 #import "LocationViewController.h"
 #import "HPFBaseNavigationController.h"
+#import "activityView.h"
 @interface WeatherViewController ()
 @property(nonatomic,strong)AirAndHumidity *airAndHumidity;
 @property(nonatomic,strong)CurrentWeather *currentWeather;
@@ -52,7 +53,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-    self.view.backgroundColor = [UIColor yellowColor];
+//    self.view.backgroundColor = [UIColor yellowColor];
     [self createNavgationLeftBarButton];
     
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updataCity:) name:kLocationCity object:nil];
@@ -75,6 +76,9 @@
 
 -(void)requestData
 {
+    activityView *acti = [[activityView alloc]init];
+    [self.view addSubview:acti];
+    [acti setActivityColor:[UIColor blackColor]];
     self.city = [[NSUserDefaults standardUserDefaults] stringForKey:kLocationCity];
     if (self.city.length>0) {
     }else{
@@ -104,33 +108,35 @@
                 [fiveDayModel setValuesForKeysWithDictionary:fiveDayDic];
                 [self.fiveDayModelArray addObject:fiveDayModel];
             }
-            NSLog(@"%ld",self.fiveDayModelArray.count);
+//            NSLog(@"%ld",self.fiveDayModelArray.count);
             
             //赋值 4
             NSDictionary *pm25Dic = [dicData objectForKey:@"pm25"];
             NSDictionary *pm25SecondDic = [pm25Dic objectForKey:@"pm25"];
             [self.pm25Model setValuesForKeysWithDictionary:pm25SecondDic];
-            NSLog(@"%@",self.pm25Model.des);
+//            NSLog(@"%@",self.pm25Model.des);
             
             dispatch_async(dispatch_get_main_queue(), ^{
 //                for (UIView *view in _weatherScrollView.subviews) {
 //                    [view removeFromSuperview];
 //                }
+                [acti removeFromSuperview];
                 [self.view addSubview:self.weatherScrollView];
             });
 
         }else{
          
+            [acti removeFromSuperview];
             _alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"抱歉,暂无城市天气信息" preferredStyle:UIAlertControllerStyleAlert];
             
             [self presentViewController:_alert animated:YES completion:^{
-                [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(reBack) userInfo:nil repeats:NO];
+                [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(reBack) userInfo:nil repeats:NO];
 
             
             }];
         }
 
-        NSLog(@"%ld",(unsigned long)self.fiveDayModelArray.count);
+//        NSLog(@"%ld",(unsigned long)self.fiveDayModelArray.count);
         
         
         dispatch_async(dispatch_get_main_queue(), ^{

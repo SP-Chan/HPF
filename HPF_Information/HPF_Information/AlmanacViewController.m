@@ -40,15 +40,7 @@
 @implementation AlmanacViewController
 
 
--(instancetype)init
-{
-    if ([super init]) {
-         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(timeActiom:) name:@"time" object:nil];
-       
-    }
-    return self;
-    
-}
+
 -(UIScrollView *)scrollView
 {
     if (!_scrollView) {
@@ -93,7 +85,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(search:) name:@"搜索" object:nil];
 
      [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(yearBeyond) name:@"yearBeyond" object:nil];
-    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(timeActiom:) name:@"time" object:nil];
 
      [self requestData];
     
@@ -207,7 +199,7 @@
         _iCarousel.bounces = NO;
         _iCarousel.pagingEnabled = NO;
         _iCarousel.type = iCarouselTypeCustom;
-        
+        _iCarousel.scrollEnabled=YES;
     }
     return _iCarousel;
 }
@@ -411,9 +403,9 @@
 #pragma -mark titleTime
 -(void)setTimeTitle
 {
-
-
-   
+    
+    
+    
     
     NSArray *array = [_urlTime componentsSeparatedByString:@"-"];
     NSString *y = [NSString stringWithFormat:@"%@年",array[0]];
@@ -423,7 +415,7 @@
     _timeView =[[UIView alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH*17/48, 20, kSCREEN_WIDTH*7/24, 44)];
     _timeView.tag = 10086;
     [self.navigationController.view addSubview:_timeView];
-   
+    
     
     
     
@@ -438,35 +430,36 @@
     NSInteger month = [monthString integerValue];
     NSInteger day = [dayString integerValue];
     
-   
+    
     
     
     
     NSInteger weekInt = [self AccordingToCentury:century Year:year Month:month Day:day];
     
     
-
+    
     UILabel *upLable = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.timeView.bounds.size.width- self.timeView.bounds.size.height/2, self.timeView.bounds.size.height/2)];
     
     [_timeView addSubview:upLable];
     upLable.font= [UIFont systemFontOfSize:16];
     upLable.textAlignment=NSTextAlignmentCenter;
     upLable.text=time;
-     upLable.adjustsFontSizeToFitWidth = YES;
-    UIImageView *image = [[UIImageView alloc]initWithFrame:CGRectMake( self.timeView.bounds.size.width-self.timeView.bounds.size.height/2, 0, self.timeView.bounds.size.height/2, self.timeView.bounds.size.height/2)];
+    upLable.adjustsFontSizeToFitWidth = YES;
+    UIImageView *image = [[UIImageView alloc]initWithFrame:CGRectMake( self.timeView.bounds.size.width-self.timeView.bounds.size.height/2, self.timeView.bounds.size.height/12, self.timeView.bounds.size.height/3, self.timeView.bounds.size.height/3)];
     image.image = [UIImage imageNamed:@"time"];
     [self.timeView addSubview:image];
     
     
+    
     image.contentMode = UIViewContentModeScaleAspectFill;
-   
+    
     
     
     UILabel *NextLable = [[UILabel alloc]initWithFrame:CGRectMake(0, _timeView.bounds.size.height/2, _timeView.bounds.size.width, _timeView.bounds.size.height/2)];
-
+    
     
     NextLable.text =[self ChangeWeek:weekInt];
-   
+    
     NextLable.textAlignment=NSTextAlignmentCenter;
     NextLable.font = [UIFont systemFontOfSize:16];
     NextLable.adjustsFontSizeToFitWidth = YES;
@@ -479,7 +472,7 @@
     
     [button addTarget:self action:@selector(titleTime) forControlEvents:UIControlEventTouchUpInside];
     [self.timeView addSubview:button];
-  
+    
 }
 #pragma -mark 转换星期的方法
 -(NSString *)ChangeWeek:(NSInteger)week

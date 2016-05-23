@@ -42,6 +42,7 @@
     centerCircle.backgroundColor = [UIColor yellowColor];
     centerCircle.layer.cornerRadius = 75;
     centerCircle.layer.masksToBounds = YES;
+    centerCircle.image = [UIImage imageNamed:@"HPFiocn.png"];
     [self.view addSubview:centerCircle];
 }
 -(void)createBottomButtonFirest

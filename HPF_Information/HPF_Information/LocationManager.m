@@ -67,9 +67,8 @@ static LocationManager *_manager = nil;
     BOOL isLocationEnabled = [CLLocationManager locationServicesEnabled];
     if (!isLocationEnabled)
     {
-        if (viewcontroller.view.window)
+               if (viewcontroller.view.window)
         {
-            
             UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:@"如果您想要定位，请开启导航" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:NULL];
             [alertVC addAction:action];

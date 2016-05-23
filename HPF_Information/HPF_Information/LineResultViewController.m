@@ -12,6 +12,7 @@
 #import "LineTopView.h"
 #import "LineStartTableViewCell.h"
 #import "LineStationTableViewCell.h"
+#import "activityView.h"
 @interface LineResultViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)BusesLine *forwardLine;
 @property(nonatomic,strong)BusesLine *reverseLine;
@@ -43,10 +44,15 @@
 
 -(void)requestData
 {
+    activityView *acti = [[activityView alloc]init];
+    [self.view addSubview:acti];
+    [acti setActivityColor:[UIColor blackColor]];
+    
     [self.forwardArray removeAllObjects];
     [self.reverseArray removeAllObjects];
     NSString *string = [[NSUserDefaults standardUserDefaults] stringForKey:kBusCity];
     [NetworkRequestManager requestWithType:POST urlString:@"http://op.juhe.cn/189/bus/busline" ParDic:@{@"city":string,@"bus":self.busNumber,@"key":kJuHeAPIKey} Header:nil finish:^(NSData *data) {
+        [acti removeFromSuperview];
         NSError *error = nil;
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
         NSArray *resultArray = [dic objectForKey:@"result"];

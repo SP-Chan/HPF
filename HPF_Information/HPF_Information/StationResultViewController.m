@@ -10,7 +10,7 @@
 #import "BusStation.h"
 #import "PassStationTableViewCell.h"
 #import "LineResultViewController.h"
-
+#import "activityView.h"
 @interface StationResultViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 @property(nonatomic,strong)NSMutableArray *stationArray;
 @property(nonatomic,strong)UITableView *tab;
@@ -27,10 +27,17 @@
 
 -(void)requestData
 {
+    activityView *acti = [[activityView alloc]init];
+    [self.view addSubview:acti];
+    [acti setActivityColor:[UIColor blackColor]];
+    
     NSString *string = [[NSUserDefaults standardUserDefaults] stringForKey:kBusCity];
     [NetworkRequestManager requestWithType:POST urlString:@"http://op.juhe.cn/189/bus/station" ParDic:@{@"city":string,@"station":self.busName,@"key":kJuHeAPIKey} Header:nil finish:^(NSData *data) {
         NSError *error = nil;
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+        
+        [acti removeFromSuperview];
+        
         //判断请求数据是否成功
         if ([[dic objectForKey:@"reason"] isEqualToString:@"success"]) {
             NSArray *array = [dic objectForKey:@"result"];

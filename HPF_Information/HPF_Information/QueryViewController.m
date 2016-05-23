@@ -38,7 +38,7 @@
 -(HPFBaseLabel *)historyLabel
 {
     if (!_historyLabel) {
-        _historyLabel = [[HPFBaseLabel alloc] initWithFrame:CGRectMake(10, 110, kSCREEN_WIDTH/4, 30)];
+        _historyLabel = [[HPFBaseLabel alloc] initWithFrame:CGRectMake(10, 110, kSCREEN_WIDTH/3, 30)];
         _historyLabel.text = @"历史记录";
 //        _historyLabel.font = [UIFont systemFontOfSize:20];
         _historyLabel.font = [UIFont boldSystemFontOfSize:22];
@@ -50,7 +50,7 @@
 {
     if (!_historyButton) {
         _historyButton = [HPFBaseButton buttonWithType:UIButtonTypeSystem];
-        _historyButton.frame = CGRectMake(kSCREEN_WIDTH-kSCREEN_WIDTH/4-10, 110, kSCREEN_WIDTH/4, 30);
+        _historyButton.frame = CGRectMake(kSCREEN_WIDTH-kSCREEN_WIDTH/4-20, 110, kSCREEN_WIDTH/3, 30);
 //        _historyButton.backgroundColor = [UIColor yellowColor];
 //        _historyButton.layer.borderWidth = 1;
 //        _historyButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -115,7 +115,7 @@
     [self.view addSubview:self.tab];
     [self.view addSubview:self.historyLabel];
     [self.view addSubview:self.historyButton];
-    [self.view addSubview:self.lineLabel];
+//    [self.view addSubview:self.lineLabel];
 }
 -(HPFBaseButton *)selectButton
 {

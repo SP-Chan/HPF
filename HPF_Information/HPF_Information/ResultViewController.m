@@ -13,6 +13,7 @@
 #import "Station.h"
 #import "StationTableViewCell.h"
 #import "FirstStationTableViewCell.h"
+#import "activityView.h"
 @interface ResultViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)NSMutableArray *busesArray;
 @property(nonatomic,strong)NSMutableArray *stationArray;
@@ -38,6 +39,9 @@
 -(void)selectResult
 {
     NSString *string = [[NSUserDefaults standardUserDefaults] stringForKey:kBusCity];
+    activityView *acti = [[activityView alloc]init];
+    [self.view addSubview:acti];
+    [acti setActivityColor:[UIColor blackColor]];
     [NetworkRequestManager requestWithType:POST urlString:@"http://apis.baidu.com/xiaota/bus_lines/buses_lines" ParDic:@{@"city":string,@"bus":self.busNumber,@"direction":@"0"} Header:kBaiDuAPIKey finish:^(NSData *data) {
         
         [self.busesArray removeAllObjects];
@@ -69,9 +73,10 @@
             [self.stationArray addObject:station];
             
         }
-        NSLog(@"------->%ld",_stationArray.count);
+//        NSLog(@"------->%ld",(unsigned long)_stationArray.count);
             //回归主线程
             dispatch_async(dispatch_get_main_queue(), ^{
+                [acti removeFromSuperview];
                 //数组判断,当数据错误,时候执行提示
                 if (_stationArray.count == 0) {
                     _alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"抱歉,暂无该车信息" preferredStyle:UIAlertControllerStyleAlert];
@@ -90,6 +95,7 @@
         }
         else{
             dispatch_async(dispatch_get_main_queue(), ^{
+                [acti removeFromSuperview];
                 _alert = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"抱歉,暂无该车信息" preferredStyle:UIAlertControllerStyleAlert];
                 
                 [self presentViewController:_alert animated:YES completion:^{

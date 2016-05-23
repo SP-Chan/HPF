@@ -88,7 +88,7 @@
         NSMutableArray *monthArray = [NSMutableArray array];
         for (NSInteger i = 0; i<12; i++) {
             
-            [monthArray addObject:[NSString stringWithFormat:@"%d月",i+1]];
+            [monthArray addObject:[NSString stringWithFormat:@"%ld月",i+1]];
         }
         
         

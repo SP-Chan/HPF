@@ -119,7 +119,7 @@ NSInteger  temp;
     
     NSInteger yearI = [[array firstObject] integerValue];
     
-    NSLog(@"%ld",yearI);
+    NSLog(@"%ld",(long)yearI);
    
     
     if (1999<yearI &&yearI<2021) {

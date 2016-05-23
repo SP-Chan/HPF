@@ -36,16 +36,16 @@
  
         if (currentHour<24) {
             if (currentHour<10) {
-                hour.twenty_fourLabel.text = [NSString stringWithFormat:@"0%ld:00",currentHour];
+                hour.twenty_fourLabel.text = [NSString stringWithFormat:@"0%ld:00",(long)currentHour];
                 currentHour++;
             }else{
-                hour.twenty_fourLabel.text = [NSString stringWithFormat:@"%ld:00",currentHour];
+                hour.twenty_fourLabel.text = [NSString stringWithFormat:@"%ld:00",(long)currentHour];
                 currentHour++;
             }
         }
         else{
             currentHour = 0;
-            hour.twenty_fourLabel.text = [NSString stringWithFormat:@"0%ld:00",currentHour];
+            hour.twenty_fourLabel.text = [NSString stringWithFormat:@"0%ld:00",(long)currentHour];
         }
         [self.twenty_fourScroll addSubview:hour];
     }
@@ -64,7 +64,7 @@
     NSString *dateString = [dateFormatter stringFromDate:currentDate];
     NSLog(@"%@",dateString);
     NSInteger currentFlag = [dateString integerValue];
-    NSLog(@"%ld",currentFlag);
+    NSLog(@"%ld",(long)currentFlag);
     return currentFlag;
 }
 

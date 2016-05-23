@@ -20,6 +20,8 @@
 @property(nonatomic,strong)VideoViewController *video;
 @property(nonatomic,strong)HPFBaseView *tabBarView;
 @property(nonatomic,strong)HPFBaseImageView *tabBarBackgroundImageView;
+@property(nonatomic,strong)NSMutableArray *touchImageArray;
+@property(nonatomic,strong)NSMutableArray *imageArray;
 @end
 
 @implementation HPFBaseTabBarController
@@ -90,22 +92,40 @@
     }else if ([string isEqualToString:@"草坪色"]){
        _tabBarBackgroundImageView.backgroundColor = [UIColor colorWithRed:189/255.0 green:203/255.0 blue:77/255.0 alpha:1];
     }else{
-        _tabBarBackgroundImageView.backgroundColor = [UIColor colorWithRed:146/255.0 green:115/255.0 blue:173/255.0 alpha:1];
+        _tabBarBackgroundImageView.backgroundColor = [UIColor colorWithRed:178/255.0 green:32/255.0 blue:114/255.0 alpha:1];
     }
  }
+-(NSMutableArray *)imageArray
+{
+    if (!_imageArray) {
+        _imageArray = [NSMutableArray arrayWithObjects:@"news_1.png",@"almanac_1.png",@"video_1.png",@"trip_1.png" ,nil];
 
-
+    }
+    return _imageArray;
+}
+-(NSMutableArray *)touchImageArray
+{
+    if (!_touchImageArray) {
+        _touchImageArray = [NSMutableArray arrayWithObjects:@"news.png",@"almanac.png",@"video.png",@"trip.png" ,nil];
+    }
+    return _touchImageArray;
+}
 //创建底部tabBar的Button
 -(void)createTabBarButton
 {
-    NSArray *imageArray = [NSArray arrayWithObjects:@"news.png",@"almanac.png",@"video.png",@"trip.png" ,nil];
+//    NSArray *imageArray = [NSArray arrayWithObjects:@"news.png",@"almanac.png",@"video.png",@"trip.png" ,nil];
     NSArray *titleArray = [NSArray arrayWithObjects:@"新闻",@"黄历",@"视频",@"出行", nil];
-    for (int i = 0; i<imageArray.count; i++) {
+    for (int i = 0; i<self.touchImageArray.count; i++) {
         HPFBaseButton *button = [HPFBaseButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake((kSCREEN_WIDTH/4-40)/2+(kSCREEN_WIDTH/4)*i, (self.tabBarView.bounds.size.height-40)/2, 40, 40);
         button.tag = i + 1;
         //tabbar的图片
-        [button setImage:[UIImage imageNamed:imageArray[i]] forState:UIControlStateNormal];
+        if (i == 0) {
+            [button setImage:[UIImage imageNamed:self.touchImageArray[i]] forState:UIControlStateNormal];
+        }else{
+            [button setImage:[UIImage imageNamed:self.imageArray[i]] forState:UIControlStateNormal];
+        }
+        
         [button setImageEdgeInsets:UIEdgeInsetsMake(-15, 0, 0, 0)];
         //tabbar的标题
         [button setTitle:titleArray[i] forState:UIControlStateNormal];
@@ -121,13 +141,80 @@
 -(void)changeController:(HPFBaseButton *)button
 {
     if (button.tag == 1) {
+        for (int i = 0; i<4; i++) {
+            if (button.tag == i+1) {
+                [button setImage:[UIImage imageNamed:@"news.png"] forState:UIControlStateNormal];
+            }else{
+                UIButton *button = (UIButton *)[self.tabBarView viewWithTag:i+1];
+                [button setImage:[UIImage imageNamed:self.imageArray[i]] forState:UIControlStateNormal];
+            }
+        }
+
         self.selectedViewController = self.viewControllers[0];
+//        [button setImage:[UIImage imageNamed:@"news.png"] forState:UIControlStateNormal];
     }else if (button.tag == 2){
+        
+        
+        NSDate *  senddate=[NSDate date];
+        
+        NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+        
+        [dateformatter setDateFormat:@"YYYY-MM-dd"];
+        
+        NSString *urltime=[dateformatter stringFromDate:senddate];
+        
+        
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:urltime,@"dateTime", nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"time" object:nil userInfo:dic];
+        
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"time"];
+        
+        [[NSUserDefaults standardUserDefaults]setObject:dic forKey:@"time"];
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         self.selectedViewController = self.viewControllers[1];
+        for (int i = 0; i<4; i++) {
+            if (button.tag == i+1) {
+                [button setImage:[UIImage imageNamed:@"almanac.png"] forState:UIControlStateNormal];
+            }else{
+                UIButton *button = (UIButton *)[self.tabBarView viewWithTag:i+1];
+                [button setImage:[UIImage imageNamed:self.imageArray[i]] forState:UIControlStateNormal];
+            }
+        }
+
     }else if (button.tag == 3){
         self.selectedViewController = self.viewControllers[2];
+        for (int i = 0; i<4; i++) {
+            if (button.tag == i+1) {
+                [button setImage:[UIImage imageNamed:@"video.png"] forState:UIControlStateNormal];
+            }else{
+                UIButton *button = (UIButton *)[self.tabBarView viewWithTag:i+1];
+                [button setImage:[UIImage imageNamed:self.imageArray[i]] forState:UIControlStateNormal];
+            }
+        }
+
     }else{
         self.selectedViewController = self.viewControllers[3];
+        for (int i = 0; i<4; i++) {
+            if (button.tag == i+1) {
+                [button setImage:[UIImage imageNamed:@"trip.png"] forState:UIControlStateNormal];
+            }else{
+                UIButton *button = (UIButton *)[self.tabBarView viewWithTag:i+1];
+                [button setImage:[UIImage imageNamed:self.imageArray[i]] forState:UIControlStateNormal];
+            }
+        }
+
     }
 }
 - (void)didReceiveMemoryWarning {

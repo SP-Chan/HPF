@@ -52,7 +52,7 @@
     startNum = 0;
     countNum = 20;
     
-    NSString *str = [NSString stringWithFormat:@"%ld-%ld",(long)startNum,countNum];
+    NSString *str = [NSString stringWithFormat:@"%ld-%ld",(long)startNum,(long)countNum];
     
     NSString *urlStr = [NSString stringWithFormat:@"http://c.m.163.com/nc/article/house/广州/%@.html",str];
     
@@ -242,7 +242,7 @@
     //  http://c.3g.163.com/nc/article/local/广州/0-20.html
     
     startNum = startNum +19;
-    NSString *str = [NSString stringWithFormat:@"%ld-%ld",(long)startNum,countNum];
+    NSString *str = [NSString stringWithFormat:@"%ld-%ld",(long)startNum,(long)countNum];
     
     NSString *urlStr = [NSString stringWithFormat:@"http://c.m.163.com/nc/article/house/广州/%@.html",str];
     

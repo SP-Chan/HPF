@@ -188,7 +188,7 @@ NSArray *array = [NSArray arrayWithObjects:
     @"速配星座",[_Datadic objectForKey:@"QFriend"],
     @"今日解析",[_Datadic objectForKey:@"summary"],nil];
     
-    NSLog(@"======%ld",array.count);
+    NSLog(@"======%ld",(unsigned long)array.count);
     
 
     for (int i = 0; i<array.count; i++) {

@@ -60,7 +60,7 @@
     startNum = 0;
     countNum = 20;
     
-    NSString *str = [NSString stringWithFormat:@"%ld-%ld",(long)startNum,countNum];
+    NSString *str = [NSString stringWithFormat:@"%ld-%ld",(long)startNum,(long)countNum];
     
     NSString *urlStr = [NSString stringWithFormat:@"http://c.3g.163.com/nc/article/local/广州/%@.html",str];
     

@@ -214,24 +214,22 @@ static NSString *identifier=@"cell";
     return 10+(kSCREEN_WIDTH-20)/48 +(kSCREEN_WIDTH-60)/14 +20+((kSCREEN_WIDTH-60)*2/7+40+(kSCREEN_WIDTH-20)*2/3+10);
 
 }
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    ///配置 CATransform3D 动画内容
-    CATransform3D  transform ;
-    transform= CATransform3DMakeScale(0.3, 0.5, 1);
-    
-    //定义 Cell的初始化状态
-    cell.layer.transform = transform;
-    //定义Cell 最终状态 并且提交动画
-    [UIView beginAnimations:@"transform" context:NULL];
-    [UIView setAnimationDuration:1];
-    cell.layer.transform = CATransform3DIdentity;
-    cell.frame = CGRectMake(0, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height);
-    [UIView commitAnimations];
-    
-    
-  
-    
-}
+
+//-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+//    [UIView animateWithDuration:0.5 animations:^{
+//        
+//        [UIView animateWithDuration:0.5 animations:^{
+//            cell.layer.transform =CATransform3DRotate(cell.layer.transform, M_PI, 0, 0, 1);
+//        }];
+//    } completion:^(BOOL finished) {
+//        
+//        [UIView animateWithDuration:0.5 animations:^{
+//        cell.layer.transform =CATransform3DRotate(cell.layer.transform, M_PI, 0, 0, 1);
+//            
+//        }];
+//   
+//    }];
+//}
 
 
 

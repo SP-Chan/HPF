@@ -63,7 +63,7 @@
         }else if ([string isEqualToString:@"草坪色"]){
             self.navigationBar.barTintColor = [UIColor colorWithRed:189/255.0 green:203/255.0 blue:77/255.0 alpha:1];
         }else{
-            self.navigationBar.barTintColor = [UIColor colorWithRed:146/255.0 green:115/255.0 blue:173/255.0 alpha:1];
+            self.navigationBar.barTintColor = [UIColor colorWithRed:178/255.0 green:32/255.0 blue:114/255.0 alpha:1];
         }
 
 }

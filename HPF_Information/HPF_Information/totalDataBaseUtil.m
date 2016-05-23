@@ -65,7 +65,7 @@ static totalDataBaseUtil *totalDataBase = nil;
     NSInteger  inte= [parentld  integerValue];
     NSMutableArray *array = [NSMutableArray array];
     if ([_db open]) {
-        NSString *sql = [NSString stringWithFormat:@"select * from archives where parentId like '%%%ld%%'",inte];
+        NSString *sql = [NSString stringWithFormat:@"select * from archives where parentId like '%%%ld%%'",(long)inte];
         FMResultSet *set = [_db executeQuery:sql];
         while ([set next]) {
             

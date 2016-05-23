@@ -93,6 +93,7 @@
         self.time.font = [UIFont systemFontOfSize:16];
     
         self.time.textColor = [UIColor colorWithRed:120/255.0 green:47/255.0 blue:170/255.0 alpha:1];
+         self.time.adjustsFontSizeToFitWidth = YES;
        
     }
     return _time;

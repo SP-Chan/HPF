@@ -322,8 +322,8 @@
 
     UIButton *startButton = [UIButton buttonWithType:UIButtonTypeCustom];
     startButton.frame = CGRectMake(15, SCREEN_HEIGHT - 40, 35, 35);
-    [startButton setBackgroundImage:[UIImage imageNamed:@"bof.png"] forState:UIControlStateNormal];
-    [startButton setBackgroundImage:[UIImage imageNamed:@"zant.png"] forState:UIControlStateSelected];
+    [startButton setBackgroundImage:[UIImage imageNamed:@"zant.png"] forState:UIControlStateNormal];
+    [startButton setBackgroundImage:[UIImage imageNamed:@"bof.png"] forState:UIControlStateSelected];
     [self.background addSubview:startButton];
     
     [startButton addTarget:self action:@selector(startAction:) forControlEvents:UIControlEventTouchUpInside];

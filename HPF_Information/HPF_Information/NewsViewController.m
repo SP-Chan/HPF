@@ -39,7 +39,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"首页";
+    self.navigationItem.title = @"新闻";
     [self createLefBarButton];
     [self createRightButton];
     [self createTitleScrollView];
