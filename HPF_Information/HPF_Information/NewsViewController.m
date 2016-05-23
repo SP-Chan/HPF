@@ -36,6 +36,9 @@
 
 @implementation NewsViewController
 
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -44,6 +47,7 @@
     [self createRightButton];
     [self createTitleScrollView];
     [self creareNewsScrollview];
+    
     
       
     
